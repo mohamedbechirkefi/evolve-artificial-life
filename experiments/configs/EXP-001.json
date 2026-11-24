@@ -1,0 +1,91 @@
+{
+ "root_seed": 20261124,
+ "env": {
+  "grid_size": 16,
+  "n_food": 24,
+  "generator": "clustered",
+  "n_clusters": 3,
+  "cluster_spread": 2.0,
+  "episode_steps": 100
+ },
+ "shift_env": {
+  "grid_size": 16,
+  "n_food": 16,
+  "generator": "uniform",
+  "n_clusters": 1,
+  "cluster_spread": 2.0,
+  "episode_steps": 100
+ },
+ "policy": {
+  "hidden_units": 8,
+  "init_std": 1.0
+ },
+ "evaluation": {
+  "train_episodes_per_eval": 5,
+  "train_fixed": false,
+  "n_test": 200,
+  "n_shift": 200,
+  "n_train_fresh": 200,
+  "n_probe": 20
+ },
+ "analysis_seed": 0,
+ "bootstrap_resamples": 10000,
+ "experiment_id": "EXP-001",
+ "label": "confirmatory",
+ "test_pool": "confirmatory",
+ "run_seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19
+ ],
+ "description": "DRAFT v0.1 configuration for EXP-001 (protocol not frozen). RS vs NOSEL vs EVO at E=2000.",
+ "conditions": [
+  {
+   "name": "main",
+   "arms": [
+    {
+     "name": "RS",
+     "kind": "random_search",
+     "evaluations": 2000,
+     "population_size": 50
+    },
+    {
+     "name": "NOSEL",
+     "kind": "population",
+     "population_size": 50,
+     "generations": 40,
+     "sigma": 0.1,
+     "selection": "uniform",
+     "elitism": 1
+    },
+    {
+     "name": "EVO",
+     "kind": "population",
+     "population_size": 50,
+     "generations": 40,
+     "sigma": 0.1,
+     "selection": "truncation",
+     "elitism": 1,
+     "truncation_fraction": 0.2
+    }
+   ]
+  }
+ ]
+}

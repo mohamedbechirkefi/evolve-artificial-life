@@ -1,0 +1,6 @@
+#!/bin/sh
+# SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0
+# Wrapper for the EVOLVE CLI: ./scripts/evolve {smoke|run|report|test} ...
+here="$(cd "$(dirname "$0")/.." && pwd)"
+UV="${UV:-/Users/bechir/research/labs/.tools/py/bin/uv}"
+cd "$here" && PYTHONPATH="$here/src${PYTHONPATH:+:$PYTHONPATH}" exec "$UV" run python -m evolve "$@"

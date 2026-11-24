@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evolve.run_result/1.0.0",
+  "title": "EVOLVE run result, schema version 1.0.0",
+  "description": "One run = one (experiment, condition, arm, run seed). Simulation output only. Units: food items per episode unless stated.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "label",
+    "experiment_id",
+    "condition",
+    "arm",
+    "run_id",
+    "run_seed",
+    "config",
+    "config_hash",
+    "status",
+    "failure",
+    "metrics",
+    "episodes",
+    "trace",
+    "manifest"
+  ],
+  "properties": {
+    "schema": {
+      "const": "evolve.run_result"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "label": {
+      "enum": [
+        "exploratory",
+        "confirmatory"
+      ]
+    },
+    "experiment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "condition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "arm": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "config": {
+      "type": "object"
+    },
+    "config_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "failed"
+      ]
+    },
+    "failure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metrics": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "f_test",
+        "f_train_fresh",
+        "f_shift",
+        "generalisation_gap",
+        "adaptation_auc",
+        "best_train_fitness",
+        "genotypic_diversity",
+        "behavioural_diversity",
+        "n_evaluations",
+        "exploit"
+      ],
+      "properties": {
+        "f_test": {
+          "type": "number",
+          "minimum": 0
+        },
+        "f_train_fresh": {
+          "type": "number",
+          "minimum": 0
+        },
+        "f_shift": {
+          "type": "number",
+          "minimum": 0
+        },
+        "generalisation_gap": {
+          "type": "number"
+        },
+        "adaptation_auc": {
+          "type": "number",
+          "minimum": 0
+        },
+        "best_train_fitness": {
+          "type": "number",
+          "minimum": 0
+        },
+        "genotypic_diversity": {
+          "type": "number",
+          "minimum": 0
+        },
+        "behavioural_diversity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "n_evaluations": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "exploit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "forward_fraction",
+            "stay_fraction",
+            "turn_fraction",
+            "replay_check_passed"
+          ],
+          "properties": {
+            "forward_fraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "stay_fraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "turn_fraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "replay_check_passed": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "episodes": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "test",
+        "shift",
+        "train_fresh"
+      ],
+      "properties": {
+        "test": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "shift": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "train_fresh": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "trace": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "train_fitness",
+        "parent_index",
+        "returned_index",
+        "final_population"
+      ],
+      "properties": {
+        "train_fitness": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "parent_index": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -1
+          }
+        },
+        "returned_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "final_population": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "manifest": {
+      "$ref": "#/$defs/manifest"
+    }
+  },
+  "$defs": {
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "schema_version",
+        "run_id",
+        "label",
+        "config_hash",
+        "root_seed",
+        "run_seed",
+        "git_revision",
+        "git_dirty",
+        "engine_version",
+        "python_version",
+        "numpy_version",
+        "os",
+        "machine",
+        "cpu",
+        "started_utc",
+        "finished_utc",
+        "attempts",
+        "wall_seconds",
+        "cpu_seconds",
+        "peak_rss_bytes",
+        "peak_rss_note"
+      ],
+      "properties": {
+        "schema": {
+          "const": "evolve.run_manifest"
+        },
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "label": {
+          "enum": [
+            "exploratory",
+            "confirmatory"
+          ]
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "root_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "run_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "git_revision": {
+          "type": "string"
+        },
+        "git_dirty": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "engine_version": {
+          "type": "string"
+        },
+        "python_version": {
+          "type": "string"
+        },
+        "numpy_version": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "machine": {
+          "type": "string"
+        },
+        "cpu": {
+          "type": "string"
+        },
+        "started_utc": {
+          "type": "string"
+        },
+        "finished_utc": {
+          "type": "string"
+        },
+        "attempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "wall_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cpu_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "peak_rss_bytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "peak_rss_note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
