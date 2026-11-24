@@ -121,3 +121,61 @@ def test_planning_formulas_golden():
     assert required_pairs(2.0, 0.5) == 62
     with pytest.raises(ConfigError):
         required_pairs(1.0, 0.0)
+
+
+# ------------------------------------------- K = 1 overfitting measure (amendment)
+
+from evolve.config import parse_config  # noqa: E402
+from evolve.runner import run_one  # noqa: E402
+
+
+def _fixed_cfg(tiny_raw):
+    tiny_raw["conditions"][0]["evaluation"] = {"train_episodes_per_eval": 1, "train_fixed": True}
+    tiny_raw["conditions"][0]["arms"][0]["evaluations"] = 12
+    tiny_raw["conditions"][0]["arms"][1]["generations"] = 2
+    tiny_raw["conditions"][0]["arms"][2]["generations"] = 2
+    return parse_config(tiny_raw)
+
+
+def test_overfit_drop_for_fixed_training_environment(tiny_raw):
+    from evolve.runner import LayoutCache, _score
+
+    cfg = _fixed_cfg(tiny_raw)
+    for arm in ("RS", "EVO"):
+        d = run_one(cfg, "main", arm, 1000)
+        m = d["metrics"]
+        # Deterministic policy and environment: the fixed-environment score equals
+        # the training fitness of the returned policy, re-measured independently.
+        assert m["f_train_fixed"] == m["best_train_fitness"]
+        assert m["overfit_drop"] == m["f_train_fixed"] - m["f_test"]
+        lay = LayoutCache(cfg, 1000).get("train", 0)
+        assert m["f_train_fixed"] == float(_score(_returned_theta(cfg, arm), [lay], cfg.env.episode_steps, cfg.policy.hidden_units).eaten[0])
+
+
+def _returned_theta(cfg, arm):
+    from evolve.runner import LayoutCache, search_for
+
+    cond = cfg.condition("main")
+    tr = search_for(cfg, cond, cond.arm(arm), 1000, LayoutCache(cfg, 1000))
+    return tr.thetas[tr.returned_index]
+
+
+def test_overfit_fields_null_for_resampled_training(tiny_cfg):
+    m = run_one(tiny_cfg, "main", "EVO", 1000)["metrics"]
+    assert m["f_train_fixed"] is None and m["overfit_drop"] is None
+
+
+def test_report_shows_overfit_drop_for_fixed_condition(tiny_raw, tmp_path):
+    from evolve.report import build_report
+    from evolve.runner import run_matrix
+
+    cfg = _fixed_cfg(tiny_raw)
+    run_matrix(cfg, tmp_path / "r", workers=0)
+    build_report(tmp_path / "r")
+    text = (tmp_path / "r" / "report" / "report.md").read_text()
+    assert "K = 1 overfitting measure" in text and "F_train_fixed - F_test" in text
+    import csv
+
+    with (tmp_path / "r" / "report" / "summary.csv").open() as fh:
+        rows = list(csv.DictReader(fh))
+    assert all(r["overfit_drop_mean"] not in ("", None) for r in rows)

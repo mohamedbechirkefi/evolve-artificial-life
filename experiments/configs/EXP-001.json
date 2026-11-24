@@ -53,9 +53,19 @@
   16,
   17,
   18,
-  19
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29
  ],
- "description": "DRAFT v0.1 configuration for EXP-001 (protocol not frozen). RS vs NOSEL vs EVO at E=2000.",
+ "description": "FROZEN v1.0 configuration for EXP-001 (owner-approved 2026-11-24, research/freeze.json). RS vs NOSEL vs EVO at E=2000, 30 run seeds.",
  "conditions": [
   {
    "name": "main",

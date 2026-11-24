@@ -22,9 +22,9 @@ def test_repository_configs_parse_and_have_equal_budgets():
             assert len({a.total_evaluations for a in c.arms}) == 1
 
 
-def test_confirmatory_configs_match_protocol_draft():
+def test_confirmatory_configs_match_frozen_protocol():
     c1 = load_config(REPO / "experiments/configs/EXP-001.json")
-    assert c1.label == "confirmatory" and c1.test_pool == "confirmatory" and c1.run_seeds == tuple(range(20))
+    assert c1.label == "confirmatory" and c1.test_pool == "confirmatory" and c1.run_seeds == tuple(range(30))
     main = c1.condition("main")
     assert main.evaluations == 2000 and main.evaluation.train_episodes_per_eval == 5 and main.evaluation.n_test == 200
     evo = main.arm("EVO")
@@ -33,6 +33,17 @@ def test_confirmatory_configs_match_protocol_draft():
     c3 = load_config(REPO / "experiments/configs/EXP-003.json")
     assert c3.condition("K1").evaluation.train_fixed and c3.condition("K1").evaluation.train_episodes_per_eval == 1
     assert c3.condition("E8000").arm("EVO").n_parents == 20
+
+
+def test_amendment_30_seeds_and_sigma_kept():
+    # Owner-approved amendments of 2026-11-24: 30 paired run seeds (0 to 29) in
+    # every confirmatory config; the primary mutation sigma stays 0.1.
+    for name in ("EXP-001", "EXP-002", "EXP-003"):
+        cfg = load_config(REPO / "experiments/configs" / f"{name}.json")
+        assert cfg.run_seeds == tuple(range(30)), name
+        for c in cfg.conditions:
+            if "EVO" in [a.name for a in c.arms]:
+                assert c.arm("EVO").sigma == 0.1, (name, c.name)
 
 
 def test_unequal_budget_rejected(tiny_raw):
@@ -100,6 +111,8 @@ def test_result_validates(good_doc):
     lambda d: d["manifest"].update(run_id="other"),
     lambda d: d["episodes"]["test"].append(-1),
     lambda d: d["trace"]["train_fitness"].pop(),
+    lambda d: d["metrics"].pop("overfit_drop"),
+    lambda d: d["metrics"].update(f_train_fixed=-1.0),
 ])
 def test_malformed_results_rejected(good_doc, mutator):
     d = copy.deepcopy(good_doc)
@@ -122,3 +135,16 @@ def test_dump_refuses_invalid_and_load_fails_closed(good_doc, tmp_path):
     (tmp_path / "broken.json").write_text("{")
     with pytest.raises(SchemaError):
         load_result(tmp_path / "broken.json")
+
+
+def test_schema_1_0_0_results_remain_readable(good_doc):
+    # The M2 exploratory results were written with schema 1.0.0, before the
+    # K = 1 overfitting fields existed; they must still validate.
+    old = copy.deepcopy(good_doc)
+    old["schema_version"] = old["manifest"]["schema_version"] = "1.0.0"
+    for k in ("f_train_fixed", "overfit_drop"):
+        old["metrics"].pop(k)
+    validate_result(old)
+    old["metrics"]["overfit_drop"] = 1.0
+    with pytest.raises(SchemaError):
+        validate_result(old)

@@ -130,12 +130,24 @@ def _compute(cfg: ExperimentConfig, condition: Condition, arm: ArmSpec, run_seed
     turn = float(test.n_turn.sum() / total_steps)
     f_test = float(test.eaten.mean())
     f_fresh = float(fresh.eaten.mean())
+    # K = 1 overfitting measure (owner-approved amendment, 2026-11-24): the
+    # deterministic score of the returned policy on the single fixed training
+    # environment (training-pool index 0), and its drop to held-out fitness.
+    # Null for resampled training designs, where no fixed environment exists.
+    if ev.train_fixed:
+        fixed = _score(theta, [cache.get("train", 0)], steps, h)
+        f_fixed = float(fixed.eaten.mean())
+        overfit_drop = f_fixed - f_test
+    else:
+        f_fixed, overfit_drop = None, None
     return {
         "metrics": {
             "f_test": f_test,
             "f_train_fresh": f_fresh,
             "f_shift": float(shift.eaten.mean()),
             "generalisation_gap": f_fresh - f_test,
+            "f_train_fixed": f_fixed,
+            "overfit_drop": overfit_drop,
             "adaptation_auc": adaptation_auc(trace.train_fitness),
             "best_train_fitness": float(trace.train_fitness[trace.returned_index]),
             "genotypic_diversity": genotypic_diversity(pop),

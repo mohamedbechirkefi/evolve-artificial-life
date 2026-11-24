@@ -20,7 +20,7 @@ from pathlib import Path
 
 from .config import load_config
 from .errors import EvolveError, ProtocolNotFrozenError
-from .freeze import freeze_status
+from .freeze import check_config_frozen
 from .manifest import REPO_ROOT
 
 EXIT_REFUSED = 3
@@ -38,10 +38,11 @@ def _default_out(cfg) -> Path:
 
 
 def check_runnable(cfg, repo_root: Path = REPO_ROOT) -> None:
-    """Raise ProtocolNotFrozenError for a confirmatory config whose protocol is not frozen."""
+    """Raise ProtocolNotFrozenError for a confirmatory config whose protocol is not
+    frozen, or whose content differs from the frozen config (research/freeze.json)."""
     if cfg.label != "confirmatory":
         return
-    frozen, reason = freeze_status(cfg.experiment_id, repo_root)
+    frozen, reason = check_config_frozen(cfg, repo_root)
     if not frozen:
         raise ProtocolNotFrozenError(
             f"refusing confirmatory run: {reason}. Freezing is the owner's decision (G-FREEZE)."

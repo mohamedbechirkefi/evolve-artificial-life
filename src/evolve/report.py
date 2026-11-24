@@ -36,6 +36,8 @@ METRICS = [
     ("generalisation_gap", "F_train_fresh - F_test (items/episode)"),
     ("adaptation_auc", "adaptation AUC (items/episode)"),
     ("best_train_fitness", "training fitness of returned policy (items/episode)"),
+    ("f_train_fixed", "fitness on the fixed training environment, K = 1 only (items/episode)"),
+    ("overfit_drop", "F_train_fixed - F_test, K = 1 only (items/episode)"),
     ("genotypic_diversity", "genotypic diversity (parameter units)"),
     ("behavioural_diversity", "behavioural diversity (fraction of steps)"),
 ]
@@ -104,7 +106,9 @@ def summary_rows(docs: list[dict]) -> list[dict]:
         ok = [d for d in ds if d["status"] == "ok"]
         row = {"condition": cond, "arm": arm, "n_ok": len(ok), "n_failed": len(ds) - len(ok)}
         for k, _ in METRICS:
-            v = np.array([d["metrics"][k] for d in ok], dtype=float)
+            # Metrics absent from older schema versions or null for the design
+            # (f_train_fixed and overfit_drop outside K = 1) are skipped.
+            v = np.array([d["metrics"][k] for d in ok if d["metrics"].get(k) is not None], dtype=float)
             row[f"{k}_mean"] = float(v.mean()) if v.size else None
             row[f"{k}_sd"] = float(v.std(ddof=1)) if v.size > 1 else None
             row[f"{k}_min"] = float(v.min()) if v.size else None
@@ -331,6 +335,16 @@ def build_report(results_dir: str | Path, out_dir: str | Path | None = None, pdf
         "",
         "Units: fitness in food items per episode; gap = F_train_fresh - F_test; s/run = wall-clock seconds.",
         "",
+        *([
+            "K = 1 overfitting measure (fixed training environment only): "
+            + "; ".join(
+                f"{r['condition']} {r['arm']}: F_train_fixed {_fmt(r['f_train_fixed_mean'])}, "
+                f"F_train_fixed - F_test {_fmt(r['overfit_drop_mean'])} (sd {_fmt(r['overfit_drop_sd'])})"
+                for r in summ if r.get("overfit_drop_mean") is not None
+            )
+            + " (items per episode, mean over run seeds).",
+            "",
+        ] if any(r.get("overfit_drop_mean") is not None for r in summ) else []),
         "## TAB-2. Paired contrasts on F_test (unit: run seed)",
         "",
         "Mean paired difference with a 95 percent percentile bootstrap interval over run seeds "

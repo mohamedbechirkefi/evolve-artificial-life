@@ -11,9 +11,9 @@ import numpy as np
 import pytest
 
 from evolve.cli import EXIT_REFUSED, check_runnable, main
-from evolve.config import load_config, parse_config
+from evolve.config import config_hash, load_config, parse_config
 from evolve.errors import ProtocolNotFrozenError
-from evolve.freeze import freeze_status, sha256_file
+from evolve.freeze import check_config_frozen, freeze_status, sha256_file
 from evolve.report import build_report, load_results
 from evolve.runner import run_matrix, run_one
 from evolve.schema import load_result
@@ -72,7 +72,7 @@ def test_report_from_results(matrix_dir, tmp_path):
     assert evo_rs["n_pairs"] == 3
     assert np.isclose(evo_rs["mean_diff"], np.mean(evo_rs["diffs"]))
     assert {a["id"] for a in m["artifacts"]} >= {"TAB-1", "TAB-2", "FIG-1", "FIG-2"}
-    assert m["runtime_projection"]["total_runs"] == 60
+    assert m["runtime_projection"]["total_runs"] == 90  # 3 arms x 30 seeds
 
 
 def test_report_fails_closed_on_corrupt_result(matrix_dir, tmp_path):
@@ -118,39 +118,106 @@ def test_retry_then_failure_is_recorded(tiny_cfg, monkeypatch):
 
 # ---------------------------------------------------------------- freeze gate
 
-def test_current_protocols_are_not_frozen():
-    for exp in ("EXP-001", "EXP-002", "EXP-003"):
-        frozen, reason = freeze_status(exp)
-        assert not frozen, reason
+def _fake_repo(tmp_path, status, hash_value=None, edit_after=None, record=True, record_status="frozen"):
+    """A minimal repository with one frozen experiment.
 
-
-def test_run_refuses_confirmatory_config():
-    cfg = load_config(REPO / "experiments/configs/EXP-001.json")
-    with pytest.raises(ProtocolNotFrozenError):
-        check_runnable(cfg)
-    assert main(["run", "--config", str(REPO / "experiments/configs/EXP-001.json"), "--out", "/nonexistent/never"]) == EXIT_REFUSED
-
-
-def _fake_repo(tmp_path, status, hash_value=None, edit_after=False):
+    edit_after: None, or one of "protocol", "main", "config" (edited after the
+    freeze record was written).
+    """
     (tmp_path / "research/experiments/EXP-001").mkdir(parents=True)
+    (tmp_path / "experiments/configs").mkdir(parents=True)
     proto = tmp_path / "research/experiments/EXP-001/protocol.md"
     proto.write_text("frozen protocol text\n")
+    main_p = tmp_path / "research/protocol.md"
+    main_p.write_text("main protocol text\n")
+    cfg_raw = json.loads((REPO / "experiments/configs/EXP-001.json").read_text())
+    cfgp = tmp_path / "experiments/configs/EXP-001.json"
+    cfgp.write_text(json.dumps(cfg_raw, indent=1) + "\n")
     h = hash_value or sha256_file(proto)
     (tmp_path / "research/experiment_registry.csv").write_text(
         "experiment_id,protocol_path,protocol_hash,status\n"
         f"EXP-001,research/experiments/EXP-001/protocol.md,{h},{status}\n"
     )
-    if edit_after:
+    if record:
+        rec = {
+            "schema": "evolve.freeze_record",
+            "status": record_status,
+            "files": {
+                "research/protocol.md": sha256_file(main_p),
+                "research/experiments/EXP-001/protocol.md": sha256_file(proto),
+                "experiments/configs/EXP-001.json": sha256_file(cfgp),
+            },
+            "experiments": {
+                "EXP-001": {
+                    "protocol": "research/experiments/EXP-001/protocol.md",
+                    "config": "experiments/configs/EXP-001.json",
+                    "config_canonical_hash": config_hash(parse_config(cfg_raw)),
+                }
+            },
+        }
+        (tmp_path / "research/freeze.json").write_text(json.dumps(rec))
+    if edit_after == "protocol":
         proto.write_text("edited after freeze\n")
+    elif edit_after == "main":
+        main_p.write_text("main protocol edited after freeze\n")
+    elif edit_after == "config":
+        cfg_raw["run_seeds"] = list(range(20))
+        cfgp.write_text(json.dumps(cfg_raw, indent=1) + "\n")
     return tmp_path
 
 
 def test_freeze_detected_only_with_matching_hash(tmp_path):
     assert freeze_status("EXP-001", _fake_repo(tmp_path / "a", "frozen v1.0"))[0]
-    assert not freeze_status("EXP-001", _fake_repo(tmp_path / "b", "frozen v1.0", edit_after=True))[0]
+    assert not freeze_status("EXP-001", _fake_repo(tmp_path / "b", "frozen v1.0", edit_after="protocol"))[0]
     assert not freeze_status("EXP-001", _fake_repo(tmp_path / "c", "planned (awaiting owner freeze)"))[0]
     assert not freeze_status("EXP-001", _fake_repo(tmp_path / "d", "frozen", hash_value="not assigned"))[0]
     assert not freeze_status("EXP-404", _fake_repo(tmp_path / "e", "frozen"))[0]
+
+
+def test_freeze_requires_record_and_unchanged_main_protocol_and_configs(tmp_path):
+    # Amendment 2026-11-24: the main protocol and the configs are hashed at freeze.
+    ok, why = freeze_status("EXP-001", _fake_repo(tmp_path / "a", "frozen", record=False))
+    assert not ok and "freeze record not found" in why
+    ok, why = freeze_status("EXP-001", _fake_repo(tmp_path / "b", "frozen", edit_after="main"))
+    assert not ok and "research/protocol.md changed" in why
+    ok, why = freeze_status("EXP-001", _fake_repo(tmp_path / "c", "frozen", edit_after="config"))
+    assert not ok and "EXP-001.json changed" in why
+    ok, why = freeze_status("EXP-001", _fake_repo(tmp_path / "d", "frozen", record_status="draft"))
+    assert not ok
+
+
+def test_check_config_frozen_compares_canonical_config(tmp_path):
+    repo = _fake_repo(tmp_path / "a", "frozen v1.0")
+    raw = json.loads((repo / "experiments/configs/EXP-001.json").read_text())
+    assert check_config_frozen(parse_config(raw), repo)[0]
+    raw["conditions"][0]["arms"][2]["sigma"] = 0.5
+    ok, why = check_config_frozen(parse_config(raw), repo)
+    assert not ok and "differs from the frozen config" in why
+
+
+# The repository itself (after the owner-approved freeze of 2026-11-24).
+
+def test_repository_protocols_are_frozen():
+    for exp in ("EXP-001", "EXP-002", "EXP-003"):
+        frozen, reason = freeze_status(exp)
+        assert frozen, reason
+
+
+def test_run_accepts_frozen_confirmatory_configs():
+    # Only the gate is exercised; no confirmatory run is started.
+    for exp in ("EXP-001", "EXP-002", "EXP-003"):
+        check_runnable(load_config(REPO / f"experiments/configs/{exp}.json"))
+
+
+def test_run_refuses_changed_confirmatory_config(tmp_path):
+    raw = json.loads((REPO / "experiments/configs/EXP-001.json").read_text())
+    raw["run_seeds"] = list(range(20))
+    with pytest.raises(ProtocolNotFrozenError, match="differs from the frozen config"):
+        check_runnable(parse_config(raw))
+    cfgp = tmp_path / "EXP-001-edited.json"
+    cfgp.write_text(json.dumps(raw))
+    assert main(["run", "--config", str(cfgp), "--out", str(tmp_path / "never")]) == EXIT_REFUSED
+    assert not (tmp_path / "never").exists()
 
 
 def test_smoke_refuses_confirmatory_config(capsys):

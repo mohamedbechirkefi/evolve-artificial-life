@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0 -->
 # EVOLVE research protocol
 
-**Status: DRAFT v0.1 (2026-11-24). NOT FROZEN.** Freezing is the owner's decision (gate G-FREEZE). Until the owner records approval in `research/decision_log.md` with the protocol SHA-256, every run is exploratory. Numbers below that describe compute, power or runtime are planning estimates, not measurements.
+**Status: FROZEN v1.0 (owner-approved 2026-11-24).** Version 1.0 is draft v0.1 with the owner-approved amendments listed in Part C applied. The SHA-256 of this file, of the three EXP protocols and of the three confirmatory configs is recorded in `research/freeze.json` and `research/decision_log.md` (D-010); this file cannot contain its own hash. Any later change is a dated amendment analysed separately (B.13). Numbers in Part A that describe compute, power or runtime are planning estimates, not measurements.
 
 ## Part A. Feasibility audit (M0, 2026-11-24)
 
@@ -92,6 +92,8 @@ Let `d_s = F_test(EVO, s) - F_test(RS, s)` be the paired difference in held-out 
 
 RS is the simplest baseline and is the primary comparator. Generation 0 of NOSEL and EVO uses the same 50 draws as the first 50 RS samples for the same run seed (matched starts).
 
+**Predeclared expectation for NOSEL (amendment C.3).** NOSEL is expected to score below RS on held-out test fitness: it spends the budget as a neutral random walk around 50 starting points, which explores parameter space less than 2000 independent draws. NOSEL is a control for selection (the EVO minus NOSEL contrast), not a competitor to RS, so NOSEL below RS is not evidence against the design. This expectation is stated before any confirmatory run and was informed by the exploratory pilot (J-0004, exploratory pool), as disclosed in Part C.
+
 ### B.5 Secondary metrics
 
 1. **Adaptation:** best-so-far training fitness as a function of evaluations; area under that curve normalised by E.
@@ -99,12 +101,13 @@ RS is the simplest baseline and is the primary comparator. Generation 0 of NOSEL
 3. **Shifted-distribution fitness:** `F_shift` on 200 environments from a different generator (uniform food placement, `n_food = 16`), never used for any choice.
 4. **Diversity:** mean pairwise Euclidean distance of parameter vectors in the final population (genotypic), and mean pairwise Hamming distance of action sequences on a fixed probe set of 20 training environments (behavioural). RS diversity uses its last 50 samples.
 5. **Exploit audit:** fraction of steps spent on `stay`, number of turns in place, and a replay check that consumed count equals the decrease in food on the grid.
+6. **Overfitting under K = 1 (amendment C.2; EXP-003 K1 condition only):** `F_train_fixed` is the deterministic score (items) of the returned policy on the single fixed training environment, and the held-out drop is `overfit_drop = F_train_fixed - F_test` (items per episode). It is the overfitting measure of the K1 condition. The fresh-environment gap of item 2 is still reported, but under K = 1 it does not measure overfitting, because fresh training-pool environments are not the fixed environment. Both fields are null in resampled-training conditions.
 
 ### B.6 Experimental unit, seeds and sample size
 
 - **Experimental unit:** one independent run, identified by a run seed. Episodes within a run are not independent units and are averaged before analysis.
-- **Seeds:** 20 run seeds per arm (`s = 0..19`), at least the 5 required. Run seeds are paired across arms. Seed derivation uses `numpy.random.SeedSequence` with separate spawn keys for search, training environments, test environments and shifted environments; a test asserts that the training, test and shifted environment seed sets are disjoint and that no test-environment layout hash appears among training layouts.
-- **Sample-size rationale (planning approximation):** for a paired two-sided test at alpha 0.05 with 80 percent power, `n = 20` pairs detects a standardised paired effect of about `d_z = (1.96 + 0.84) / sqrt(20) = 0.63` (normal approximation; the t correction raises it to about 0.66). This is a cost-driven choice: runs are cheap, and n will be raised to 30 at freeze if the smoke measurement shows the full matrix fits in under 4 hours.
+- **Seeds:** 30 run seeds per arm (`s = 0..29`, amendment C.1), at least the 5 required. Run seeds are paired across arms. Seed derivation uses `numpy.random.SeedSequence` with separate spawn keys for search, training environments, test environments and shifted environments; a test asserts that the training, test and shifted environment seed sets are disjoint and that no test-environment layout hash appears among training layouts.
+- **Sample-size rationale (planning approximation):** for a paired two-sided test at alpha 0.05 with 80 percent power, `n = 30` pairs detects a standardised paired effect of about `d_z = (1.96 + 0.84) / sqrt(30) = 0.51` (normal approximation; the t correction with 29 degrees of freedom raises it to about 0.53). The draft rule was to raise n from 20 to 30 if the full matrix fits in under 4 hours; the exploratory pilot (J-0004) projected 0.53 serial hours for the 20-seed matrix, so n = 30 was adopted at freeze (amendment C.1). The pilot's SD of paired F_test differences (1.85 to 3.7 items, exploratory pool) gives a normal-approximation minimum detectable mean difference of about 0.9 to 1.9 items at n = 30 (planning quantity, not a finding).
 
 ### B.7 Uncertainty and analysis
 
@@ -123,15 +126,15 @@ RS is the simplest baseline and is the primary comparator. Generation 0 of NOSEL
 
 - **Smoke matrix (exploratory, M3 first step):** arms RS, NOSEL, EVO; 2 run seeds; E = 200 (P = 10, G = 20); M = 20 test environments. Purpose: runtime measurement, metric validation, schema validation. Results are never pooled with confirmatory results.
 - **Full matrix (after freeze):**
-  - EXP-001: RS, NOSEL, EVO x 20 seeds x E = 2000. 60 runs.
-  - EXP-002: SELONLY, EVO-sigma0.02, EVO-sigma0.5 x 20 seeds x E = 2000 (EVO sigma 0.1 and NOSEL reused from EXP-001 at the same code revision). 60 runs.
-  - EXP-003: RS and EVO at E = 500 and E = 8000 (4 x 20 = 80 runs), and RS and EVO at E = 2000 with K = 1 fixed training environment (2 x 20 = 40 runs). 120 runs.
+  - EXP-001: RS, NOSEL, EVO x 30 seeds x E = 2000. 90 runs.
+  - EXP-002: SELONLY, EVO-sigma0.02, EVO-sigma0.5 x 30 seeds x E = 2000 (EVO sigma 0.1 and NOSEL reused from EXP-001 at the same code revision). 90 new runs. The config `experiments/configs/EXP-002.json` also lists EVO and NOSEL, so running it as committed executes 150 runs, the 60 shared ones being bit-identical to EXP-001 at the same code revision.
+  - EXP-003: RS and EVO at E = 500 and E = 8000 (4 x 30 = 120 runs), and RS and EVO at E = 2000 with K = 1 fixed training environment (2 x 30 = 60 runs). 180 runs.
 
 ### B.10 Sensitivity analyses that could invalidate the main interpretation
 
 1. **Budget (EXP-003).** If the EVO advantage disappears or reverses at E = 500 or E = 8000, the primary result is budget-specific and the claim is restricted to E = 2000.
-2. **Training-set size (EXP-003).** With K = 1 fixed training environment, selection may overfit. If EVO beats RS on training fitness but not on test fitness in that condition, the main interpretation ("selection improves held-out performance") depends on the training design rather than on selection as such.
-3. **Selection versus drift (EXP-002 and EXP-001 secondary).** If NOSEL matches EVO, the improvement is attributable to local mutation search from good starts, not to selection.
+2. **Training-set size (EXP-003).** With K = 1 fixed training environment, selection may overfit. If EVO beats RS on training fitness but not on test fitness in that condition, the main interpretation ("selection improves held-out performance") depends on the training design rather than on selection as such. Overfitting in this condition is measured by `overfit_drop = F_train_fixed - F_test` (B.5 item 6), reported per arm with the EVO minus RS paired difference of `overfit_drop`.
+3. **Selection versus drift (EXP-002 and EXP-001 secondary).** If NOSEL matches EVO, the improvement is attributable to local mutation search from good starts, not to selection. NOSEL scoring below RS is the predeclared expectation (B.4) and does not by itself bear on this item.
 4. **Exploit audit.** If high-fitness policies rely on a behaviour that the audit flags as a scoring artefact (Lehman et al. 2018; Krakovna et al. 2020), the result is reported as an exploit, not an improvement.
 
 ### B.11 Confounders and controls
@@ -144,4 +147,17 @@ If compute exceeds the budget, cut EXP-003's E = 8000 condition first, then redu
 
 ### B.13 Freeze procedure (owner)
 
-The owner reviews this file and the three `research/experiments/EXP-NNN/protocol.md` files, records approval and the SHA-256 of each frozen file in `research/decision_log.md`, and updates the registry status. Any later amendment is dated, justified and analysed separately.
+The owner reviews this file and the three `research/experiments/EXP-NNN/protocol.md` files, records approval and the SHA-256 of each frozen file in `research/decision_log.md`, and updates the registry status. Any later amendment is dated, justified and analysed separately. At freeze, the SHA-256 of this file, of each EXP protocol and of each confirmatory config `experiments/configs/EXP-NNN.json` is written to `research/freeze.json` (amendment C.5). `./scripts/evolve run` checks every recorded hash and the canonical hash of the config being run, and refuses a confirmatory run if any differs.
+
+## Part C. Amendments before freeze (owner-approved 2026-11-24)
+
+The owner approved the following amendments on 2026-11-24, in answer to the proposals of D-009 (exploratory pilot J-0004). They were applied to draft v0.1 to give v1.0, before any confirmatory run and before any policy was evaluated on the confirmatory test or shifted pools. Decision record: `research/decision_log.md` D-010.
+
+- **C.1 Seeds.** 30 paired run seeds (0 to 29) for every experiment, instead of 20. Changed: B.6, B.9, EXP-001 to EXP-003 sections 10 to 12, `run_seeds` in `experiments/configs/EXP-00{1,2,3}.json`.
+- **C.2 Overfitting measure for K = 1.** Added `F_train_fixed` and `overfit_drop = F_train_fixed - F_test` (B.5 item 6, B.10 item 2, EXP-003 sections 6, 8 and 13). Code: `src/evolve/runner.py`; result schema `evolve.run_result` 1.1.0 (`src/evolve/schemas/run_result-1.1.0.json`); report generator `src/evolve/report.py`; tests in `tests/test_metrics_stats.py` and `tests/test_config_schema.py`.
+- **C.3 NOSEL expectation.** Predeclared that NOSEL is expected below RS (B.4, B.10 item 3, EXP-001 sections 4 and 5).
+- **C.4 Mutation sigma kept at 0.1.** The primary sigma is unchanged. The pilot observation that sigma 0.5 exceeded sigma 0.1 on the exploratory pool did not change it; EXP-002 reports the sigma sweep as planned. No text change was needed beyond this record.
+- **C.5 Hashes of the main protocol and configs.** The freeze record hashes this file and the confirmatory configs as well as the EXP protocols (B.13). Code: `src/evolve/freeze.py`, `src/evolve/cli.py`; tests in `tests/test_integration_cli.py`.
+- **C.6 Reproduction commands.** EXP protocol section 18 now cites the implemented commands, `./scripts/evolve run --config experiments/configs/EXP-NNN.json` and `./scripts/evolve report --results results/confirmatory/EXP-NNN`.
+
+Nothing else in Part B changed. The implementation choices of D-007 and the elitism and parent counts of the E500 and E8000 conditions (D-009 item 5) stand as implemented and pinned by tests; they were not separately amended.

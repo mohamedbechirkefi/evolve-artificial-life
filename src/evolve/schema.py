@@ -1,11 +1,16 @@
 # SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0
 """Versioned JSON result schema, validated at export and at import.
 
-The schema document is `schemas/run_result-1.0.0.json` (a JSON Schema 2020-12
+The current schema document is `schemas/run_result-1.1.0.json` (a JSON Schema 2020-12
 subset). This module implements the subset it uses (type, const, enum,
 required, properties, additionalProperties false, items, minimum, maximum,
 minLength, pattern, local $ref) so that no extra dependency is needed.
 Non-finite numbers are always rejected. Validation fails closed.
+
+Version 1.1.0 (owner-approved amendment before the freeze, 2026-11-24) adds
+the K = 1 overfitting measure (`f_train_fixed`, `overfit_drop`). Files of
+version 1.0.0 (the M2 exploratory smoke and pilot runs) remain readable and
+are validated against their own schema.
 """
 
 from __future__ import annotations
@@ -20,7 +25,7 @@ from typing import Any
 from .errors import SchemaError
 
 SCHEMA_NAME = "evolve.run_result"
-SCHEMA_VERSION = "1.0.0"
+SCHEMA_VERSION = "1.1.0"
 _SCHEMA_DIR = Path(__file__).parent / "schemas"
 
 
