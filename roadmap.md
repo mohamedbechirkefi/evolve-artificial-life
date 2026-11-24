@@ -8,7 +8,7 @@ Effort is a planning estimate in focused development days (five-day target). Sta
 | M0 | Bootstrap and feasibility | none | P0 | 0.5 d | done (2026-11-24), pending owner review of scope and cost | none |
 | M1 | Research and preregistration | M0 | P0 | 0.5 d | done (2026-11-24): gate passed, protocol v1.0 frozen by the owner (D-010, `research/freeze.json`) | none |
 | M2 | Core implementation | M1 drafts (freeze not required to implement) | P0 | 1 d | done (2026-11-24); amended for the freeze (schema 1.1.0, freeze guard); 131 tests pass | none |
-| M3 | Experiments | M2, M1 freeze | P0 | 1 d | not started; protocols frozen, not yet run (exploratory smoke and pilot done in M2, J-0003, J-0004) | coordinator schedules the confirmatory runs on a quiet machine |
+| M3 | Experiments | M2, M1 freeze | P0 | 1 d | in progress (2026-11-25): smoke and metric validation done (J-0007, J-0008); frozen matrices complete, 420/420 runs ok (J-0009 to J-0011); analysis, figures, claims C-001 to C-010 done; 11.3 reports not written | 11.3 experiment reports owed (file tool refused the report file; coordinator: do not work around, D-011); owner reading of the EXP-002 sigma clause (D-011) |
 | M4 | Interpretation | M3 | P0 | 0.75 d | not started | none |
 | M5 | Interactive experience | M3 results (M4 for labels) | P1 | 0.75 d | not started | none |
 | M6 | Release candidate | M4, M5 | P0 | 0.5 d | not started | owner approval for any publication (G-PUBLIC) |
@@ -28,6 +28,8 @@ M2 acceptance check (2026-11-24): environment, policy, mutation, selection, RS, 
 
 ## M3. Experiments
 Acceptance: exploratory smoke matrix run and runtime measured; metrics validated; frozen full matrix run; every arm, seed, config, metric and failure exported; plots with uncertainty. 11.6: individual reports generated as experiments finish; failures and deviations recorded; provenance captured at run time. Gate: complete planned matrix or documented failure; no silently dropped runs.
+
+M3 gate check (2026-11-25): the planned matrix is complete with no failed or dropped runs (gate condition met). M3 is not marked done because the 11.6 requirement "individual reports generated as experiments finish" is not yet met (D-011).
 
 ## M4. Interpretation
 Acceptance: confounders inspected; sensitivity analyses (EXP-003, exploit audit) reported; expected versus observed compared; claims register and limitations completed. 11.6: experiment reports and evidence audit finished; cross-experiment synthesis in the manuscript, including contradictory results. Gate: each numerical claim maps to result ID, config and figure; each external claim to a verified source.

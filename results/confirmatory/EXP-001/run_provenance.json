@@ -1,0 +1,22 @@
+{
+ "schema": "evolve.run_provenance",
+ "schema_version": "1.0.0",
+ "experiment_id": "EXP-001",
+ "command": "PYTHONPATH=src nice -n 10 .venv/bin/python -m evolve run --config experiments/configs/EXP-001.json --out results/confirmatory/EXP-001 --workers 2",
+ "git_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+ "tracked_files_modified_at_start": 0,
+ "config_path": "experiments/configs/EXP-001.json",
+ "config_file_sha256": "aaaf6e09d7dbe223ae29e890f4ec74ec0d50219608594ce3b5aa78634999fdae",
+ "freeze_record_sha256": "9d8dfd0650a16d72f4c2437e63ebac9c4ca589719636c6d6a689e39d571350b1",
+ "data_manifest_path": "data/manifest.json",
+ "data_manifest_sha256": "0d1dad1989d1a6d8013a974902d831b570e9f121a622acd782367d501a230f99",
+ "data_note": "synthetic environments generated from recorded seeds; no external data (D-002)",
+ "hardware": "Apple M1 Pro",
+ "workers": 2,
+ "nice": 10,
+ "load_average_start": "6.19 3.55 2.37",
+ "load_average_end": "37.57 12.59 5.87",
+ "started_utc": "2026-11-24T23:33:18Z",
+ "finished_utc": "2026-11-24T23:35:03Z",
+ "exit_status": 0
+}

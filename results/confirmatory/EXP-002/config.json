@@ -1,0 +1,125 @@
+{
+ "analysis_seed": 0,
+ "bootstrap_resamples": 10000,
+ "conditions": [
+  {
+   "arms": [
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "EVO",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.1,
+     "truncation_fraction": 0.2
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "NOSEL",
+     "population_size": 50,
+     "selection": "uniform",
+     "sigma": 0.1
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "SELONLY",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.0,
+     "truncation_fraction": 0.2
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "EVO-sigma0.02",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.02,
+     "truncation_fraction": 0.2
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "EVO-sigma0.5",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.5,
+     "truncation_fraction": 0.2
+    }
+   ],
+   "name": "main"
+  }
+ ],
+ "description": "FROZEN v1.0 configuration for EXP-002 (owner-approved 2026-11-24, research/freeze.json). EVO and NOSEL are identical to EXP-001 runs at the same code revision (same seeds and streams). 30 run seeds.",
+ "env": {
+  "cluster_spread": 2.0,
+  "episode_steps": 100,
+  "generator": "clustered",
+  "grid_size": 16,
+  "n_clusters": 3,
+  "n_food": 24
+ },
+ "evaluation": {
+  "n_probe": 20,
+  "n_shift": 200,
+  "n_test": 200,
+  "n_train_fresh": 200,
+  "train_episodes_per_eval": 5,
+  "train_fixed": false
+ },
+ "experiment_id": "EXP-002",
+ "label": "confirmatory",
+ "policy": {
+  "hidden_units": 8,
+  "init_std": 1.0
+ },
+ "root_seed": 20261124,
+ "run_seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29
+ ],
+ "shift_env": {
+  "cluster_spread": 2.0,
+  "episode_steps": 100,
+  "generator": "uniform",
+  "grid_size": 16,
+  "n_clusters": 1,
+  "n_food": 16
+ },
+ "test_pool": "confirmatory"
+}
