@@ -1,0 +1,28 @@
+{
+ "config_hash": "5cfe2e87c5ec43584b2eea04d7d875384799e59d027496c2eb88a280d2d1c377",
+ "cpu": "Apple M1 Pro",
+ "engine_version": "evolve-engine/0.2.0",
+ "experiment_id": "SMOKE",
+ "finished_utc": "2026-11-24T16:05:58.462871Z",
+ "git_dirty": false,
+ "git_revision": "d06c290d8c64430144d1eb7879710ba96dea20ed",
+ "label": "exploratory",
+ "machine": "arm64",
+ "n_runs": 6,
+ "numpy_version": "2.5.4",
+ "os": "Darwin 24.3.0 (macOS-15.3.1-arm64-arm-64bit)",
+ "python_version": "3.12.1",
+ "runs": [
+  "runs/SMOKE.main.RS.s1000.json",
+  "runs/SMOKE.main.RS.s1001.json",
+  "runs/SMOKE.main.NOSEL.s1000.json",
+  "runs/SMOKE.main.NOSEL.s1001.json",
+  "runs/SMOKE.main.EVO.s1000.json",
+  "runs/SMOKE.main.EVO.s1001.json"
+ ],
+ "schema": "evolve.matrix_manifest",
+ "schema_version": "1.0.0",
+ "started_utc": "2026-11-24T16:05:53.177409Z",
+ "wall_seconds_total": 5.2848823750009615,
+ "workers": 0
+}

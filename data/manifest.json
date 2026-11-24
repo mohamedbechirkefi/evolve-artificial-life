@@ -17,10 +17,10 @@
   "synthetic_generators": [
     {
       "name": "evolve foraging grid generator",
-      "status": "not implemented (planned for M2)",
-      "generator_version": null,
-      "parameters": "see research/protocol.md B.3",
-      "seed_policy": "numpy SeedSequence, separate spawn keys for training, test and shifted pools",
+      "status": "implemented (M2, 2026-11-24): src/evolve/env.py generate_layout",
+      "generator_version": "evolve-engine/0.2.0",
+      "parameters": "research/protocol.md B.3; resolved values in experiments/configs/*.json (env, shift_env)",
+      "seed_policy": "numpy SeedSequence(entropy=root_seed, spawn_key=...), streams documented in src/evolve/seeds.py; confirmatory and exploratory test pools disjoint (D-006)",
       "redistributable": "yes, project-generated (LicenseRef-EVOLVE-NC-Research-1.0)"
     }
   ],

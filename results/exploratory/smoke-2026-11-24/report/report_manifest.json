@@ -1,0 +1,103 @@
+{
+ "schema": "evolve.report_manifest",
+ "schema_version": "1.0.0",
+ "generated_utc": "2026-11-24T16:10:19.200578Z",
+ "generator": "src/evolve/report.py",
+ "results_dir": "results/exploratory/smoke-2026-11-24",
+ "labels": [
+  "exploratory"
+ ],
+ "code_revision_report": "c84a46a013865e50b50bad7a8388f5d8bd38aa2b",
+ "code_revision_runs": [
+  "d06c290d8c64430144d1eb7879710ba96dea20ed"
+ ],
+ "config_hashes": [
+  "6a23c4c9f085265911979ba4df76d788df58dc00f45fa8fa4f8d4b3e1187b041",
+  "7201a982875a16c11898ea3879fff2d27f1f6277324f5baf03e46d72cecd6793",
+  "74752e7f9db6900b2a2ab24f53a10859afbd2336927bc4fe681bde82ca296d01",
+  "ba46a43d1fe6ed83e4bd6dbd5e609f909f176583078e1da27f619e488e4da221",
+  "e9261d6a3eef4be972c79293e9dad1b8b1dead5c6bee26667deac9d3fe9f04d6",
+  "eeb7f3aaa1eb5b04afdfa123611026080c858f9a80247a74ec55262649565df6"
+ ],
+ "artifacts": [
+  {
+   "id": "TAB-1",
+   "path": "summary.csv",
+   "metric": "all METRICS, mean/sd/min/max per condition x arm",
+   "run_ids": [
+    "SMOKE.main.EVO.s1000",
+    "SMOKE.main.EVO.s1001",
+    "SMOKE.main.NOSEL.s1000",
+    "SMOKE.main.NOSEL.s1001",
+    "SMOKE.main.RS.s1000",
+    "SMOKE.main.RS.s1001"
+   ]
+  },
+  {
+   "id": "TAB-2",
+   "path": "contrasts_f_test.json",
+   "metric": "f_test paired differences",
+   "run_ids": [
+    "SMOKE.main.EVO.s1000",
+    "SMOKE.main.EVO.s1001",
+    "SMOKE.main.NOSEL.s1000",
+    "SMOKE.main.NOSEL.s1001",
+    "SMOKE.main.RS.s1000",
+    "SMOKE.main.RS.s1001"
+   ]
+  },
+  {
+   "id": "metrics",
+   "path": "metrics.csv",
+   "metric": "per-run metrics",
+   "run_ids": [
+    "SMOKE.main.EVO.s1000",
+    "SMOKE.main.EVO.s1001",
+    "SMOKE.main.NOSEL.s1000",
+    "SMOKE.main.NOSEL.s1001",
+    "SMOKE.main.RS.s1000",
+    "SMOKE.main.RS.s1001"
+   ]
+  },
+  {
+   "id": "FIG-1",
+   "path": "figures/FIG-1_f_test_by_arm.png",
+   "metric": "f_test",
+   "run_ids": [
+    "SMOKE.main.EVO.s1000",
+    "SMOKE.main.EVO.s1001",
+    "SMOKE.main.NOSEL.s1000",
+    "SMOKE.main.NOSEL.s1001",
+    "SMOKE.main.RS.s1000",
+    "SMOKE.main.RS.s1001"
+   ],
+   "caption": "Held-out test fitness of the returned policy, one point per run seed, per arm and condition. Red bar: mean over seeds. Unit: food items per episode.",
+   "alt": "Strip plot of held-out test fitness per run seed for each search arm, one panel per condition."
+  },
+  {
+   "id": "FIG-2",
+   "path": "figures/FIG-2_adaptation.png",
+   "metric": "best-so-far training fitness",
+   "run_ids": [
+    "SMOKE.main.EVO.s1000",
+    "SMOKE.main.EVO.s1001",
+    "SMOKE.main.NOSEL.s1000",
+    "SMOKE.main.NOSEL.s1001",
+    "SMOKE.main.RS.s1000",
+    "SMOKE.main.RS.s1001"
+   ],
+   "caption": "Best-so-far training fitness (mean of K training episodes) against the number of evaluations. Thin lines: individual run seeds; thick lines: mean over seeds. Training fitness of the best of many noisy evaluations is biased upwards (winner's curse); held-out fitness is in FIG-1.",
+   "alt": "Line chart of best-so-far training fitness against evaluations for each arm."
+  }
+ ],
+ "result_paths": [
+  "results/exploratory/smoke-2026-11-24/runs/SMOKE.main.EVO.s1000.json",
+  "results/exploratory/smoke-2026-11-24/runs/SMOKE.main.EVO.s1001.json",
+  "results/exploratory/smoke-2026-11-24/runs/SMOKE.main.NOSEL.s1000.json",
+  "results/exploratory/smoke-2026-11-24/runs/SMOKE.main.NOSEL.s1001.json",
+  "results/exploratory/smoke-2026-11-24/runs/SMOKE.main.RS.s1000.json",
+  "results/exploratory/smoke-2026-11-24/runs/SMOKE.main.RS.s1001.json"
+ ],
+ "runtime_projection": null,
+ "pdf": "results/exploratory/smoke-2026-11-24/report/report.pdf"
+}

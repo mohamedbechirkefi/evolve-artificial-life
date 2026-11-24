@@ -42,3 +42,4 @@ Never commit an e-mail address, a name or any other personal identifier in code,
 - Create the environment: `uv sync`.
 - Run tests (from milestone M2): `uv run pytest`.
 - Generate the manuscript LaTeX source: `pandoc research/paper/manuscript.md -s -o research/paper/manuscript.tex`.
+- Research CLI (from milestone M2): `./scripts/evolve test`, `./scripts/evolve smoke`, `./scripts/evolve run --config <config>`, `./scripts/evolve report --results <dir> [--pdf]`. `run` refuses confirmatory configs until the protocol is frozen.

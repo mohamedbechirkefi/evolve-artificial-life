@@ -3,7 +3,7 @@
 
 **Question.** Can simple inherited policies improve performance under selection, and how robust is that improvement?
 
-**Status: M0 (bootstrap and feasibility), 2026-11-24.** No code, experiment or finding exists yet. The protocol is a draft awaiting the owner's freeze. All future results will be simulations in a synthetic grid world; improved task fitness is not general intelligence and not evidence about biological evolution.
+**Status: M2 (core implementation), 2026-11-24.** The simulation engine, search arms, metrics, result schema, runner, report generator and tests exist. Only exploratory smoke and pilot runs have been executed (on a separate exploratory test pool); no finding exists. The protocol is a draft awaiting the owner's freeze. All future results will be simulations in a synthetic grid world; improved task fitness is not general intelligence and not evidence about biological evolution.
 
 ## What is planned
 
@@ -21,9 +21,14 @@ A small foraging grid world, agents with a small neural policy, and a paired com
 
 `master_prompt.md` (authority), `CLAUDE.md` (session rules), `roadmap.md`, `progress.md`, `research/` (protocol, registry, claims, literature, limitations, paper, experiments, publication checklists), `data/manifest.json`.
 
-## Quick start (environment only; nothing to run yet)
+## Quick start
 
     uv sync
+    ./scripts/evolve test            # pytest suite
+    ./scripts/evolve smoke           # exploratory smoke matrix and report (results/exploratory/)
+    ./scripts/evolve report --results <dir> [--pdf]
+
+`./scripts/evolve run --config experiments/configs/EXP-001.json` refuses to run until the owner freezes the protocol.
 
 ## Data
 

@@ -1,0 +1,178 @@
+{
+ "analysis_seed": 0,
+ "bootstrap_resamples": 10000,
+ "conditions": [
+  {
+   "arms": [
+    {
+     "evaluations": 2000,
+     "kind": "random_search",
+     "name": "RS",
+     "population_size": 50
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "NOSEL",
+     "population_size": 50,
+     "selection": "uniform",
+     "sigma": 0.1
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "EVO",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.1,
+     "truncation_fraction": 0.2
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "SELONLY",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.0,
+     "truncation_fraction": 0.2
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "EVO-sigma0.02",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.02,
+     "truncation_fraction": 0.2
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "EVO-sigma0.5",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.5,
+     "truncation_fraction": 0.2
+    }
+   ],
+   "name": "main"
+  },
+  {
+   "arms": [
+    {
+     "evaluations": 500,
+     "kind": "random_search",
+     "name": "RS",
+     "population_size": 25
+    },
+    {
+     "elitism": 1,
+     "generations": 20,
+     "kind": "population",
+     "name": "EVO",
+     "population_size": 25,
+     "selection": "truncation",
+     "sigma": 0.1,
+     "truncation_fraction": 0.2
+    }
+   ],
+   "name": "E500"
+  },
+  {
+   "arms": [
+    {
+     "evaluations": 8000,
+     "kind": "random_search",
+     "name": "RS",
+     "population_size": 100
+    },
+    {
+     "elitism": 1,
+     "generations": 80,
+     "kind": "population",
+     "name": "EVO",
+     "population_size": 100,
+     "selection": "truncation",
+     "sigma": 0.1,
+     "truncation_fraction": 0.2
+    }
+   ],
+   "name": "E8000"
+  },
+  {
+   "arms": [
+    {
+     "evaluations": 2000,
+     "kind": "random_search",
+     "name": "RS",
+     "population_size": 50
+    },
+    {
+     "elitism": 1,
+     "generations": 40,
+     "kind": "population",
+     "name": "EVO",
+     "population_size": 50,
+     "selection": "truncation",
+     "sigma": 0.1,
+     "truncation_fraction": 0.2
+    }
+   ],
+   "evaluation": {
+    "train_episodes_per_eval": 1,
+    "train_fixed": true
+   },
+   "name": "K1"
+  }
+ ],
+ "description": "Exploratory pilot at the planned full-matrix settings, on the exploratory test pool and exploratory run seeds (D-006). Purpose: runtime per run, seed spread, degenerate cells. Not a finding.",
+ "env": {
+  "cluster_spread": 2.0,
+  "episode_steps": 100,
+  "generator": "clustered",
+  "grid_size": 16,
+  "n_clusters": 3,
+  "n_food": 24
+ },
+ "evaluation": {
+  "n_probe": 20,
+  "n_shift": 200,
+  "n_test": 200,
+  "n_train_fresh": 200,
+  "train_episodes_per_eval": 5,
+  "train_fixed": false
+ },
+ "experiment_id": "PILOT",
+ "label": "exploratory",
+ "policy": {
+  "hidden_units": 8,
+  "init_std": 1.0
+ },
+ "root_seed": 20261124,
+ "run_seeds": [
+  1000,
+  1001,
+  1002,
+  1003,
+  1004,
+  1005,
+  1006,
+  1007,
+  1008,
+  1009
+ ],
+ "shift_env": {
+  "cluster_spread": 2.0,
+  "episode_steps": 100,
+  "generator": "uniform",
+  "grid_size": 16,
+  "n_clusters": 1,
+  "n_food": 16
+ },
+ "test_pool": "exploratory"
+}

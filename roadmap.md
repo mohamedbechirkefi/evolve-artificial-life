@@ -7,8 +7,8 @@ Effort is a planning estimate in focused development days (five-day target). Sta
 |---|---|---|---|---|---|---|
 | M0 | Bootstrap and feasibility | none | P0 | 0.5 d | done (2026-11-24), pending owner review of scope and cost | none |
 | M1 | Research and preregistration | M0 | P0 | 0.5 d | in progress: drafts written, freeze pending | owner freeze of protocols (G-FREEZE) |
-| M2 | Core implementation | M1 drafts (freeze not required to implement) | P0 | 1 d | not started | none |
-| M3 | Experiments | M2, M1 freeze | P0 | 1 d | not started | owner freeze |
+| M2 | Core implementation | M1 drafts (freeze not required to implement) | P0 | 1 d | done (2026-11-24), pending owner review; 121 tests pass | none |
+| M3 | Experiments | M2, M1 freeze | P0 | 1 d | not started (exploratory smoke and pilot done in M2, J-0003, J-0004) | owner freeze; amendment proposals D-009 |
 | M4 | Interpretation | M3 | P0 | 0.75 d | not started | none |
 | M5 | Interactive experience | M3 results (M4 for labels) | P1 | 0.75 d | not started | none |
 | M6 | Release candidate | M4, M5 | P0 | 0.5 d | not started | owner approval for any publication (G-PUBLIC) |
@@ -21,6 +21,8 @@ Acceptance: evidence review of verified sources; formal model; baselines; draft 
 
 ## M2. Core implementation
 Acceptance: environment, policy, mutation, selection, RS, NOSEL, EVO, metrics and runner implemented as pure seeded functions; tests for mutation bounds, fitness scoring, environment determinism, train/test seed isolation, invalid inputs, golden fixtures and an integration test from config to results, all actually run. 11.6: versioned output schemas, reproducibility manifests and report generators built alongside the core. Gate: correctness before UI polish.
+
+M2 acceptance check (2026-11-24): environment, policy, mutation, selection, RS, NOSEL, EVO, SELONLY, metrics and runner implemented as seeded functions in `src/evolve/`; tests for mutation bounds, fitness scoring, environment determinism (in-process and across processes), train/test seed isolation, invalid inputs, golden examples, a differential test against a scalar reference engine and an integration test from config to report: 121 passed, 0 failed. 11.6: result schema `evolve.run_result` 1.0.0 validated at export and import, per-run and per-matrix manifests, report generator with PDF (pandoc to Typst), CLI `smoke`/`run`/`report`/`test` with the freeze gate on `run`. Not done in M2: per-experiment report templates with the twelve 11.3 sections (M3, once confirmatory runs exist).
 
 ## M3. Experiments
 Acceptance: exploratory smoke matrix run and runtime measured; metrics validated; frozen full matrix run; every arm, seed, config, metric and failure exported; plots with uncertainty. 11.6: individual reports generated as experiments finish; failures and deviations recorded; provenance captured at run time. Gate: complete planned matrix or documented failure; no silently dropped runs.
