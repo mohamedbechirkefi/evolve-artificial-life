@@ -1,7 +1,7 @@
 ---
 title: "Can useful behaviour emerge without hand-coding it? (working title)"
 subtitle: "Independent research manuscript, preprint draft, not peer-reviewed. Skeleton only: no results exist."
-author: "Author metadata pending owner approval"
+author: "Mohamed Bechir Kefi"
 date: "Draft, 2026-11-24"
 ---
 
@@ -52,6 +52,8 @@ date: "Draft, 2026-11-24"
 # 10. Data and code availability
 
 # 11. Funding, competing interests and AI assistance
+
+AI assistance: an AI system (Claude, Anthropic) was used as a research and development assistant for code, tests, protocol drafting and document preparation, under the author's direction and review. It is not an author. The author is responsible for the content. Funding and competing interests: to be completed before release.
 
 # References
 

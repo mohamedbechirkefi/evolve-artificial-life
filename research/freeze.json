@@ -1,0 +1,167 @@
+{
+ "schema": "evolve.freeze_record",
+ "schema_version": "1.0.0",
+ "status": "frozen",
+ "protocol_version": "1.0",
+ "approved_by": "the owner",
+ "approval_date": "2026-11-24",
+ "approval_source": "labs/_shared/owner-approvals-2026-11-24.md (coordinator file outside this repository), EVOLVE section",
+ "approval_quote": {
+  "owner_answers": "The owner answered the M2 decision list in this session. Quoted answers: \"2. yes 3. yes 4. yes\", \"yes for all others\"",
+  "evolve_amendments": [
+   "30 seeds.",
+   "Add an overfitting measure for the K=1 condition: held-out drop against training fitness.",
+   "Predeclare that NOSEL is expected below RS.",
+   "Keep mutation sigma = 0.1.",
+   "Also hash the main protocol and the configs at freeze.",
+   "Fix the reproduction commands."
+  ],
+  "freeze": "G-FREEZE, owner-approved 2026-11-24 (session brief: apply the owner's amendments and freeze the protocol)"
+ },
+ "common_decisions": {
+  "C1_data": "Synthetic data only.",
+  "C2_pdfs": "Built with pandoc and Typst (-V mainfont=\"Libertinus Serif\"); there is no LaTeX on the machine.",
+  "C3_authorship": "\"Mohamed Bechir Kefi\", no affiliation. The AI is disclosed as a research and development assistant, not as an author.",
+  "C4_disclosure": "Where exploratory values of the primary contrast were seen before the freeze, the freeze record says so, with the values and where they are stored."
+ },
+ "c4_disclosure": {
+  "statement": "Exploratory values of the primary contrast (EVO minus RS in F_test) and of other contrasts were seen before the freeze. They were computed on the exploratory test and shifted pools (spawn pool 1) with exploratory run seeds 1000 and above (D-006). No policy has been evaluated on the confirmatory test or shifted pools (spawn pool 0) and no confirmatory run seed (0 to 29) has been run. The amendments C.1 (seed count), C.2 (K = 1 overfitting measure) and C.3 (NOSEL expectation) were informed by these exploratory values; C.4 kept sigma at 0.1 despite them.",
+  "values_seen": [
+   {
+    "run": "J-0004 exploratory pilot",
+    "condition": "main (E = 2000, K = 5)",
+    "contrast": "EVO - RS",
+    "n_pairs": 10,
+    "mean_diff_items": 7.923,
+    "ci95": [
+     6.462,
+     9.529
+    ],
+    "path": "results/exploratory/pilot-2026-11-24/report/report.md (TAB-2); results/exploratory/pilot-2026-11-24/report/contrasts_f_test.json"
+   },
+   {
+    "run": "J-0003 exploratory smoke",
+    "condition": "main (E = 200, P = 10, G = 20, M = 20)",
+    "contrast": "EVO - RS",
+    "n_pairs": 2,
+    "mean_diff_items": 1.6,
+    "ci95": [
+     -0.4,
+     3.6
+    ],
+    "path": "results/exploratory/smoke-2026-11-24/report/report.md (TAB-2); results/exploratory/smoke-2026-11-24/report/contrasts_f_test.json"
+   },
+   {
+    "run": "J-0004 exploratory pilot",
+    "condition": "main",
+    "contrast": "NOSEL - RS",
+    "n_pairs": 10,
+    "mean_diff_items": -1.121,
+    "ci95": [
+     -2.179,
+     0.034
+    ],
+    "path": "results/exploratory/pilot-2026-11-24/report/report.md (TAB-2)",
+    "informed": "C.3"
+   },
+   {
+    "run": "J-0004 exploratory pilot",
+    "condition": "main",
+    "contrast": "EVO - EVO-sigma0.5",
+    "n_pairs": 10,
+    "mean_diff_items": -1.255,
+    "ci95": [
+     -2.325,
+     -0.128
+    ],
+    "path": "results/exploratory/pilot-2026-11-24/report/report.md (TAB-2)",
+    "informed": "C.4 (sigma kept at 0.1)"
+   },
+   {
+    "run": "J-0004 exploratory pilot",
+    "condition": "E500, E8000, K1",
+    "contrast": "EVO - RS",
+    "mean_diff_items": {
+     "E500": 4.361,
+     "E8000": 8.801,
+     "K1": 2.497
+    },
+    "n_pairs": 10,
+    "path": "results/exploratory/pilot-2026-11-24/report/report.md (TAB-2)"
+   },
+   {
+    "run": "J-0004 exploratory pilot",
+    "condition": "K1",
+    "quantity": "EVO returned policy: mean training fitness on the fixed environment 19.4 items vs F_test 5.4 items; fresh-environment gap 0.13",
+    "path": "progress.md (2026-11-24 M2 entry); research/decision_log.md D-009 item 2; per-run files results/exploratory/pilot-2026-11-24/runs/ (git-ignored, regenerated deterministically)",
+    "informed": "C.2"
+   }
+  ]
+ },
+ "amendments": "research/protocol.md Part C; each EXP protocol, section 'Amendments before freeze (owner-approved 2026-11-24)'; research/decision_log.md D-010",
+ "git_revision": "ae69f92eb852f37d095e1b67dc27a926caf4c2a5",
+ "git_revision_note": "Commit at which every hashed file below has the recorded SHA-256. This record itself is committed in the following commit.",
+ "hash_algorithm": "SHA-256 of the file bytes",
+ "files": {
+  "research/protocol.md": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85",
+  "research/experiments/EXP-001/protocol.md": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+  "experiments/configs/EXP-001.json": "aaaf6e09d7dbe223ae29e890f4ec74ec0d50219608594ce3b5aa78634999fdae",
+  "research/experiments/EXP-002/protocol.md": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+  "experiments/configs/EXP-002.json": "21c40e42e10e6fd482dfb813f65fbe1e3cdb6aa5492752005cdbaeb8e54d9248",
+  "research/experiments/EXP-003/protocol.md": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+  "experiments/configs/EXP-003.json": "5ed71f8434acaefd82a8bfe8e414d84782e3b87771bee3946d464075aca253b8"
+ },
+ "experiments": {
+  "EXP-001": {
+   "protocol": "research/experiments/EXP-001/protocol.md",
+   "config": "experiments/configs/EXP-001.json",
+   "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+   "protocol_version": "1.0"
+  },
+  "EXP-002": {
+   "protocol": "research/experiments/EXP-002/protocol.md",
+   "config": "experiments/configs/EXP-002.json",
+   "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+   "protocol_version": "1.0"
+  },
+  "EXP-003": {
+   "protocol": "research/experiments/EXP-003/protocol.md",
+   "config": "experiments/configs/EXP-003.json",
+   "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "protocol_version": "1.0"
+  }
+ },
+ "run_seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29
+ ],
+ "guard": "src/evolve/freeze.py (freeze_status, check_config_frozen), called by ./scripts/evolve run"
+}

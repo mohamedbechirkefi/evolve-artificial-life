@@ -6,9 +6,9 @@ Effort is a planning estimate in focused development days (five-day target). Sta
 | ID | Milestone | Depends on | Priority | Effort | Status | Blockers |
 |---|---|---|---|---|---|---|
 | M0 | Bootstrap and feasibility | none | P0 | 0.5 d | done (2026-11-24), pending owner review of scope and cost | none |
-| M1 | Research and preregistration | M0 | P0 | 0.5 d | in progress: drafts written, freeze pending | owner freeze of protocols (G-FREEZE) |
-| M2 | Core implementation | M1 drafts (freeze not required to implement) | P0 | 1 d | done (2026-11-24), pending owner review; 121 tests pass | none |
-| M3 | Experiments | M2, M1 freeze | P0 | 1 d | not started (exploratory smoke and pilot done in M2, J-0003, J-0004) | owner freeze; amendment proposals D-009 |
+| M1 | Research and preregistration | M0 | P0 | 0.5 d | done (2026-11-24): gate passed, protocol v1.0 frozen by the owner (D-010, `research/freeze.json`) | none |
+| M2 | Core implementation | M1 drafts (freeze not required to implement) | P0 | 1 d | done (2026-11-24); amended for the freeze (schema 1.1.0, freeze guard); 131 tests pass | none |
+| M3 | Experiments | M2, M1 freeze | P0 | 1 d | not started; protocols frozen, not yet run (exploratory smoke and pilot done in M2, J-0003, J-0004) | coordinator schedules the confirmatory runs on a quiet machine |
 | M4 | Interpretation | M3 | P0 | 0.75 d | not started | none |
 | M5 | Interactive experience | M3 results (M4 for labels) | P1 | 0.75 d | not started | none |
 | M6 | Release candidate | M4, M5 | P0 | 0.5 d | not started | owner approval for any publication (G-PUBLIC) |
@@ -18,6 +18,8 @@ Acceptance: control files of master prompt section 2 exist; hardware, tools, bud
 
 ## M1. Research and preregistration
 Acceptance: evidence review of verified sources; formal model; baselines; draft protocol (H0/H1, primary metric, unit, seeds, sample size, uncertainty, exclusion and stopping rules, smoke and full matrices, invalidating sensitivity analysis); EXP-001 to EXP-003 protocols; fixture manifest. 11.6: freeze confirmatory protocols before execution, with SHA-256 recorded by the owner. Gate: protocol frozen before confirmatory runs; exploratory results visibly separated.
+
+M1 gate check (2026-11-24): passed. The owner approved the amendments of D-009 and the freeze (G-FREEZE). Protocol v1.0, the three EXP protocols and the three confirmatory configs are hashed in `research/freeze.json` at git revision ae69f92; the registry shows "frozen (owner-approved 2026-11-24), not yet run" (D-010). Exploratory values seen before the freeze are disclosed there (C4).
 
 ## M2. Core implementation
 Acceptance: environment, policy, mutation, selection, RS, NOSEL, EVO, metrics and runner implemented as pure seeded functions; tests for mutation bounds, fitness scoring, environment determinism, train/test seed isolation, invalid inputs, golden fixtures and an integration test from config to results, all actually run. 11.6: versioned output schemas, reproducibility manifests and report generators built alongside the core. Gate: correctness before UI polish.

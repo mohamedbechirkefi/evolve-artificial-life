@@ -3,7 +3,7 @@
 
 **Question.** Can simple inherited policies improve performance under selection, and how robust is that improvement?
 
-**Status: M2 (core implementation), 2026-11-24.** The simulation engine, search arms, metrics, result schema, runner, report generator and tests exist. Only exploratory smoke and pilot runs have been executed (on a separate exploratory test pool); no finding exists. The protocol is a draft awaiting the owner's freeze. All future results will be simulations in a synthetic grid world; improved task fitness is not general intelligence and not evidence about biological evolution.
+**Status: M2 (core implementation), 2026-11-24.** The simulation engine, search arms, metrics, result schema, runner, report generator and tests exist. Only exploratory smoke and pilot runs have been executed (on a separate exploratory test pool); no finding exists. The protocol v1.0 was frozen by the owner on 2026-11-24 (`research/freeze.json`); no confirmatory run has been executed yet. All future results will be simulations in a synthetic grid world; improved task fitness is not general intelligence and not evidence about biological evolution.
 
 ## What is planned
 
@@ -13,9 +13,9 @@ A small foraging grid world, agents with a small neural policy, and a paired com
 
 | ID | Title | Status |
 |---|---|---|
-| EXP-001 | Evolutionary selection vs random search at equal evaluations | planned (protocol draft, awaiting owner freeze) |
-| EXP-002 | Ablations of mutation and selection | planned (protocol draft, awaiting owner freeze) |
-| EXP-003 | Robustness to budget and training-set size | planned (protocol draft, awaiting owner freeze) |
+| EXP-001 | Evolutionary selection vs random search at equal evaluations | frozen (owner-approved 2026-11-24), not yet run |
+| EXP-002 | Ablations of mutation and selection | frozen (owner-approved 2026-11-24), not yet run |
+| EXP-003 | Robustness to budget and training-set size | frozen (owner-approved 2026-11-24), not yet run |
 
 ## Navigation
 
@@ -28,7 +28,7 @@ A small foraging grid world, agents with a small neural policy, and a paired com
     ./scripts/evolve smoke           # exploratory smoke matrix and report (results/exploratory/)
     ./scripts/evolve report --results <dir> [--pdf]
 
-`./scripts/evolve run --config experiments/configs/EXP-001.json` refuses to run until the owner freezes the protocol.
+`./scripts/evolve run --config experiments/configs/EXP-001.json` runs only while every hash in `research/freeze.json` matches; it refuses an edited protocol or config.
 
 ## Data
 

@@ -91,3 +91,39 @@ Timings were measured on a heavily loaded machine; the projection is still two o
 
 ### Next action
 Owner: review D-007 and D-009, amend if wished, then freeze `research/protocol.md`, the EXP protocols and the configs, recording hashes in the registry and decision log. Assistant (after freeze): M3, run EXP-001..003 with `./scripts/evolve run`, and write the 11.3 reports.
+
+## 2026-11-24: Session freeze (owner-approved amendments and protocol freeze, G-FREEZE)
+
+**Milestone:** M1 gate. **Next bounded task at start:** apply exactly the owner's approved EVOLVE amendments, update code, configs and tests, write the freeze record, update the records. Authority: the coordinator's approvals file of 2026-11-24 (EVOLVE section) and the session brief.
+
+### Starting state
+`git status`: on branch main, clean, HEAD c2c013d. `.venv/bin/python -m pytest -q`: 121 passed.
+
+### Amendments applied (D-010; `research/protocol.md` Part C)
+- C.1 30 run seeds (0 to 29) in every confirmatory config and protocol (B.6, B.9, EXP sections 10 to 12). Full matrix 420 runs as configured (EXP-001 90, EXP-002 150 including 60 shared with EXP-001, EXP-003 180).
+- C.2 K = 1 overfitting measure `overfit_drop = F_train_fixed - F_test`: runner, result schema `evolve.run_result` 1.1.0 (1.0.0 still readable for the M2 exploratory runs), report generator, protocol B.5 item 6, B.10 item 2, EXP-003 sections 6, 8, 13.
+- C.3 NOSEL predeclared below RS (B.4, B.10 item 3, EXP-001 sections 4 and 5).
+- C.4 sigma kept at 0.1 (no change).
+- C.5 freeze guard hashes the main protocol and the confirmatory configs; `run` also compares the canonical hash of the config being run (`src/evolve/freeze.py`, `src/evolve/cli.py`).
+- C.6 EXP protocol section 18 cites the implemented commands.
+- Not amended (not in the approved list): D-009 item 5 and the D-007 implementation choices; they stand as implemented and tested.
+
+### Commands and actual outputs
+- After the code changes, before the freeze record: `.venv/bin/python -m pytest -q`: `3 failed, 128 passed` (the three repository-state tests that require `research/freeze.json`; expected at that point).
+- Commit ae69f92 (amendments, code, tests). SHA-256 of the frozen files computed at that revision and written to `research/freeze.json` and D-010. `research/protocol.md`: 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85.
+- After the freeze record and registry update: `.venv/bin/python -m pytest -q`: `131 passed`.
+- Run gate: `check_runnable` accepted EXP-001, EXP-002 and EXP-003 (no run started). `./scripts/evolve run --config <EXP-001 copy with run_seeds 0..19> --out <scratch>`: refused, exit 3, "configuration differs from the frozen config"; no output directory created (J-0006).
+- Manuscript metadata set to C3 authorship with the AI-assistance disclosure; `manuscript.tex` regenerated with pandoc 3.6.3. CITATION.cff already listed the approved author with no affiliation and was not changed.
+
+### Not done, and why
+- No confirmatory run (M3 is scheduled by the coordinator on a quiet machine). No exploratory rerun. Nothing pushed.
+- Manuscript PDF not rebuilt (skeleton only, no content change beyond metadata).
+
+### Changed files
+`research/protocol.md`, `research/experiments/EXP-00{1,2,3}/protocol.md`, `experiments/configs/EXP-00{1,2,3}.json`, `experiments/README.md`, `src/evolve/{runner,schema,report,freeze,cli}.py`, `src/evolve/schemas/run_result-1.1.0.json` (new), `src/README.md`, `results/README.md`, `tests/test_{config_schema,integration_cli,metrics_stats}.py`, `research/freeze.json` (new), `research/experiment_registry.csv`, `research/decision_log.md`, `research/experiment_journal.jsonl`, `research/paper/manuscript.{md,tex}`, `research/publication/author_review.md`, `roadmap.md`, `progress.md`.
+
+### Outstanding risks
+The direction of the primary contrast was seen on the exploratory pool before the freeze (disclosed under C4). Timings remain contended-machine planning figures until M3.
+
+### Next action
+Coordinator: schedule M3 on a quiet machine. Assistant (M3): `./scripts/evolve run --config experiments/configs/EXP-00N.json --workers 8` for N = 1, 2, 3, then reports.
