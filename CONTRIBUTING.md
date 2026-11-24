@@ -35,3 +35,10 @@ Mohamed Bechir Kefi is the project owner and lead maintainer, and the only perso
 ## 5. Privacy and disclosure
 
 Never commit an e-mail address, a name or any other personal identifier in code, logs, fixtures or results. Report security issues privately through GitHub's private vulnerability reporting.
+
+## 6. Development commands
+
+- Lock dependencies: `uv lock` (the lockfile only resolves releases published before the `exclude-newer` date in `pyproject.toml`).
+- Create the environment: `uv sync`.
+- Run tests (from milestone M2): `uv run pytest`.
+- Generate the manuscript LaTeX source: `pandoc research/paper/manuscript.md -s -o research/paper/manuscript.tex`.

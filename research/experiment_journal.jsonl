@@ -1,0 +1,1 @@
+{"id":"J-0001","date":"2026-11-24","type":"toolchain-smoke","label":"exploratory","experiment_id":null,"description":"M0 toolchain smoke check: uv lock and manuscript skeleton build (pandoc to LaTeX, pandoc to Typst, typst compile to a scratch PDF). Not an experiment; no research data.","outputs_recorded_in":"progress.md"}

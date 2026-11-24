@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0
+# Licence: EVOLVE Source-Available Non-Commercial Research License v1.0 (custom, see LICENSE).
+# No SPDX license field is given because the licence is not on the SPDX list.
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below. Status: research in progress, not peer-reviewed."
+title: "EVOLVE: inherited policies under selection in a grid world"
+type: software
+authors:
+  - family-names: Kefi
+    given-names: Mohamed Bechir
+version: 0.0.0

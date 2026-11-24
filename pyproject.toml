@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0
+[project]
+name = "evolve-research"
+version = "0.0.0"
+description = "EVOLVE: inherited policies under selection in a grid world (research code, M0 scaffold)"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+# Custom licence; see LICENSE and NOTICE.md. Not an OSI licence, so no SPDX expression is declared here.
+dependencies = [
+    "numpy>=2.1,<3",
+    "matplotlib>=3.9,<4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3,<10",
+    "hypothesis>=6.100,<7",
+]
+
+[tool.uv]
+# Only resolve releases published at least two weeks before the M0 session (2026-11-24).
+exclude-newer = "2026-11-09T00:00:00Z"
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

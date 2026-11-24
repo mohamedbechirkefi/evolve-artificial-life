@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1",
+  "updated": "2026-11-24",
+  "license_note": "Covered by NOTICE.md (LicenseRef-EVOLVE-NC-Research-1.0) for project-generated data. Third-party entries keep their own licences.",
+  "external_datasets": [],
+  "considered_not_used": [
+    {
+      "name": "Farama Minigrid",
+      "url": "https://github.com/Farama-Foundation/Minigrid",
+      "license": "Apache-2.0",
+      "license_verified": "2026-11-24, LICENSE file opened",
+      "redistributable": "yes, with licence notice",
+      "downloaded": false,
+      "reason_not_used": "Master prompt asks to build the grid environment; custom generator keeps determinism and seed-isolation tests under project control (D-002)."
+    }
+  ],
+  "synthetic_generators": [
+    {
+      "name": "evolve foraging grid generator",
+      "status": "not implemented (planned for M2)",
+      "generator_version": null,
+      "parameters": "see research/protocol.md B.3",
+      "seed_policy": "numpy SeedSequence, separate spawn keys for training, test and shifted pools",
+      "redistributable": "yes, project-generated (LicenseRef-EVOLVE-NC-Research-1.0)"
+    }
+  ],
+  "downloaded_files": []
+}
