@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0
 [project]
-name = "evolve-research"
+name = "evolve-artificial-life"
 version = "0.0.0"
 description = "EVOLVE: inherited policies under selection in a grid world (research code, M0 scaffold)"
 readme = "README.md"

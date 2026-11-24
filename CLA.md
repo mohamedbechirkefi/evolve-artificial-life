@@ -14,9 +14,9 @@ and
 **Contributor:** The individual accepting this Agreement.
 
 The Agreement concerns contributions intentionally submitted
-for inclusion in EVOLVE (research repository), planned at:
+for inclusion in EVOLVE (research repository), at:
 
-https://github.com/mohamedbechirkefi/evolve-research
+https://github.com/mohamedbechirkefi/evolve-artificial-life
 
 ## 1. Ownership of contributions
 

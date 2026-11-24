@@ -46,7 +46,7 @@ wheels = [
 ]
 
 [[package]]
-name = "evolve-research"
+name = "evolve-artificial-life"
 version = "0.0.0"
 source = { virtual = "." }
 dependencies = [
