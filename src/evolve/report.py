@@ -169,7 +169,9 @@ def _figures(docs: list[dict], fig_dir: Path, prefix: str) -> list[dict]:
     figs = []
 
     # FIG-1: per-seed held-out test fitness by arm and condition.
-    fig, axes = plt.subplots(1, len(conds), figsize=(4.2 * len(conds), 3.6), squeeze=False)
+    widths = [max(2, len({d["arm"] for d in ok if d["condition"] == c})) for c in conds]
+    fig, axes = plt.subplots(1, len(conds), figsize=(1.3 * sum(widths) + 1.5, 4.2), squeeze=False,
+                             gridspec_kw={"width_ratios": widths})
     for ax, cond in zip(axes[0], conds):
         ds = [d for d in ok if d["condition"] == cond]
         arms = sorted({d["arm"] for d in ds}, key=lambda a: (a != "RS", a))
@@ -178,7 +180,8 @@ def _figures(docs: list[dict], fig_dir: Path, prefix: str) -> list[dict]:
             jitter = np.linspace(-0.12, 0.12, len(v)) if len(v) > 1 else [0.0]
             ax.scatter(np.full(len(v), i) + jitter, v, s=18, color="0.25", zorder=3)
             ax.hlines(np.mean(v), i - 0.25, i + 0.25, color="tab:red", lw=2, zorder=4)
-        ax.set_xticks(range(len(arms)), arms)
+        ax.set_xticks(range(len(arms)), arms, rotation=30, ha="right", fontsize=8)
+        ax.set_xlim(-0.6, len(arms) - 0.4)
         ax.set_title(f"condition: {cond}", fontsize=10)
         ax.set_ylabel("F_test (food items per episode)")
         ax.grid(axis="y", alpha=0.3)
