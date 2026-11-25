@@ -3,7 +3,7 @@
  "updated": "2026-11-25",
  "status": "M4: every table, figure and claim of the manuscript, supplementary file and experiment reports is mapped",
  "generator": "scripts/build_artifact_manifest.py",
- "repository_head_when_built": "52f67335efdacaf34474cc15fae768a6957e7b4d",
+ "repository_head_when_built": "720d5f064c5b09dd3444f4b21dafc86e350f8e02",
  "number_audit": "research/publication/number_audit.json (scripts/audit_numbers.py)",
  "fields_per_entry": [
   "artifact_id",
@@ -719,93 +719,93 @@
   },
   {
    "claim_id": "C-020",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "such2017deep, arXiv:1712.06567; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Such et al. full text: competitive GA, pp. 1-2 (abstract, introduction); operators (truncation selection, additive Gaussian mutation, one elite, no crossover), Section 3, p. 3"
   },
   {
    "claim_id": "C-021",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "salimans2017evolution, arXiv:1703.03864; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Salimans et al. full text: alternative to MDP-based RL that scales with the number of CPUs, p. 1 (abstract, introduction)"
   },
   {
    "claim_id": "C-022",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "bergstra2012random, JMLR 13(10):281-305; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Bergstra and Bengio full text: random search proposed as a substitute and baseline, p. 3 (introduction) and conclusion, p. 23"
   },
   {
    "claim_id": "C-023",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "mania2018simple, arXiv:1803.07055; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Mania et al. full text: static linear policies in continuous control and high variability across seeds and hyperparameters, pp. 1-2; method takes steps along random directions, Algorithm 1, p. 5"
   },
   {
    "claim_id": "C-024",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "henderson2017matters, arXiv:1709.06560; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Henderson et al. full text: environment randomness and intrinsic variance, call for significance metrics and stricter reporting, p. 1; random seeds and trials, p. 3"
   },
   {
    "claim_id": "C-025",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "colas2018seeds, arXiv:1806.08295; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Colas et al. full text: seed count and error rates for the t-test and the bootstrap confidence interval test, p. 1 and Sections 3.1-3.2, pp. 7-9"
   },
   {
    "claim_id": "C-026",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "agarwal2021precipice, arXiv:2108.13264; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Agarwal et al. full text: interval estimates via stratified bootstrap rather than point estimates, p. 2 and p. 5; few runs, p. 5"
   },
   {
    "claim_id": "C-027",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "cobbe2019procgen, arXiv:1912.01588; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Cobbe et al. full text: procedurally generated environments for generalisation; training on a finite set of levels and testing on held-out levels, pp. 1, 3-5"
   },
   {
    "claim_id": "C-028",
-   "type": "external (abstract-level)",
+   "type": "external (full text consulted)",
    "result_id": "n/a",
    "config_hash": "n/a",
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "lehman2018surprising, arXiv:1803.03453; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "abstract re-opened 2026-11-25 (M4); free full text consulted 2026-11-25 (M6): Lehman et al. full text: evolution thwarting researchers' intentions and exploiting bugs, pp. 2-3"
   },
   {
    "claim_id": "C-029",
@@ -815,7 +815,7 @@
    "figure_or_table": "n/a",
    "section": "Manuscript 1; 2; 6; 8",
    "evidence_path_or_source": "krakovna2020specification, DeepMind blog 21 April 2020; research/literature_review.md",
-   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+   "status": "blog post re-opened and read in full 2026-11-25 (M4 evidence audit)"
   }
  ]
 }

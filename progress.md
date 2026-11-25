@@ -290,3 +290,38 @@ New: `scripts/export_demo_data.py`, `scripts/export_sandbox_fixture.py`, `tests/
 ### Next action
 
 M6 (release candidate), after the owner's answers to the items above. No push.
+
+## 2026-11-25: Session M6 (release candidate)
+
+Authority: owner, 2026-11-25, "Next" (second) (`labs/_shared/owner-approvals-2026-11-25e.md`). Brief: `labs/_shared/M6-brief.md`. Decision D-016.
+
+### Starting state
+
+HEAD 720d5f0, clean tree; M5 done; 146 pytest tests and 20 demo tests passing.
+
+### Commands and actual outputs
+
+- Clean clone (`git clone -q <repository> <scratch>/clone`, HEAD 720d5f0): `uv sync --frozen --all-groups --all-extras` installed 17 packages; `.venv/bin/python -m pytest -q`: "146 passed in 42.96s".
+- Smoke reproduction in the clone: `PYTHONPATH=src .venv/bin/python -m evolve smoke --out <scratch>/smoke --workers 2`: "6 runs written". Compared with `results/exploratory/smoke-2026-11-25/report/`: `contrasts_f_test.json` byte-identical; `metrics.csv` and `summary.csv` differ only in wall time, peak RSS, git revision and result path.
+- In the clone: `validate_results.py`: 0 failures on 90, 150 and 180 runs; `audit_numbers.py`: 0 sha mismatches, 0 raw problems, unmatched only 98.33 and 98.75 (documented Bonferroni levels).
+- Demo in the clone: `npm ci --prefer-offline` "added 53 packages"; `npm test` "Tests 20 passed (20)"; `npm run build` ok (JS 262.90 kB); `node tools/a11y_check.mjs dist`: 15 PASS lines and "A11Y-CHECK PASS" (Chrome available).
+- Export determinism in the clone: both export scripts rewrote their files; `git status --short` printed nothing.
+- PDFs: first `build_pdf` on the manuscript failed (`typst.compile` exit status 1; figures outside the Typst root). Fixed (D-016). `.venv/bin/python scripts/build_pdfs.py`: manuscript 17 pages, supplementary 4, EXP-001 10, EXP-002 8, EXP-003 8, each under 0.5 MB. Every page rendered at 60 ppi and inspected; fixes after inspection: table layout and caption placement in the builder, supplementary S1 and S3 restructured, stale S5 sentence. pypdf: title set on all five, 0 e-mail addresses, 0 local paths.
+- `manuscript.tex` regenerated with pandoc (not compiled, D-003).
+- References: 10 citations resolved to 10 bib entries; 9 free full texts (arXiv, JMLR open access) consulted for the cited passages; wording updated for Such et al. and Cobbe et al. (D-016).
+- `scripts/check_links.py`: "29 relative links checked; 0 broken". `scripts/build_artifact_manifest.py`: "27 artifacts; 27 claims"; all 27 result hashes match; confirmatory sha256 manifests 0 mismatches over 852 files; `data/manifest.json` SHA-256 matches the quoted value.
+- Scan of 1206 tracked files: 0 tokens or keys, 0 private-key headers, 0 `.env` files, 1 e-mail address (commit-trailer address in `CLAUDE.md`), 19 lines with home-directory paths in 9 files, of which 6 removed (code and reproduction files). Note: the two such lines in earlier entries of this file and one in the decision log are left as written (append-only).
+- `scripts/export_demo_data.py` re-run after the text changes: "wrote demo/public/data/results.json (1040940 bytes)" (three source hashes and the literature limitation changed).
+- Working repository: `.venv/bin/python -m pytest -q`: "158 passed"; `npm test` "Tests 20 passed (20)"; `npm run build` ok; `node tools/a11y_check.mjs dist`: "A11Y-CHECK PASS".
+
+### Changed files
+
+New: `scripts/build_pdfs.py`, `scripts/check_links.py`, `tests/test_check_links.py`, `tests/test_text_numbers.py`, `tests/test_citation_cff.py`, `tests/test_pdf_builder.py`, `research/publication/dependency_licences.md`, five PDFs. Changed: `src/evolve/report.py`, `scripts/evolve`, `research/paper/manuscript.md` and `.tex`, `research/paper/supplementary.md`, three reports (version 1.2), three `reproduction.md`, `research/limitations.md`, `research/literature_review.md`, `research/claims_register.csv`, `research/publication/` (artifact manifest, claims audit, author review, release checklist, reproducibility report), `demo/public/data/results.json`, `demo/.npmrc` (SPDX header), `CITATION.cff`, `README.md`, `roadmap.md`, `research/decision_log.md`, `research/experiment_journal.jsonl` (J-0016), this file.
+
+### Owner items
+
+See `research/publication/author_review.md`, section "Prepared for the owner (M6, 2026-11-25)": manuscript title, CITATION title and version, funding and competing-interest facts, author line, repository and demo URLs, `date-released` at publication, the M6 citation wording, the PDF layout, and any publication (G-PUBLIC).
+
+### Next action
+
+The owner's review and sign-off. No push.

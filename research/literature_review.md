@@ -40,3 +40,22 @@ Every verified source above was re-opened on 2026-11-25 (arXiv abstract pages, t
 | salimans2017evolution, bergstra2012random, lehman2018surprising, krakovna2020specification, colas2018seeds, agarwal2021precipice | as in the table above | none needed |
 
 The frozen EXP protocols (sections 3) keep their original wording, which cannot change after the freeze; the corrections are recorded here and in `research/publication/claims_audit.md`.
+
+## M6 full-text check (2026-11-25)
+
+For each cited paper, the free full text was retrieved from arXiv (`https://arxiv.org/pdf/<id>`) or from the JMLR open-access PDF (`https://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf`). No paid access, login or shadow library was used. The text was extracted with pypdf and the passage supporting each citing sentence was located and read. The papers were not read cover to cover; the label below is "full text consulted for the cited passage". The DeepMind blog post was read in full in M4.
+
+| Key | Label | Passage checked | Outcome |
+|---|---|---|---|
+| such2017deep | full text consulted | pp. 1-2 (abstract, introduction); Section 3, p. 3 | Supports the citing sentence. Section 3 describes truncation selection of the top T individuals, additive Gaussian mutation, one elite (with extra re-evaluation episodes for the top 10) and no crossover. The M4 wording "the abstract does not name the operators" is superseded: the manuscript and the EXP-001 and EXP-002 reports now say that the EVO arm uses the same kinds of operators with its own settings. |
+| salimans2017evolution | full text consulted | p. 1 (abstract, introduction) | Supports "alternative to MDP-based RL that scales with the number of CPUs". |
+| bergstra2012random | full text consulted | p. 3 (introduction); p. 23 (conclusion) | Supports "random search as a natural baseline for adaptive hyperparameter optimisation". |
+| mania2018simple | full text consulted | pp. 1-2; Algorithm 1, p. 5 | Supports the citing sentence. The method takes update steps along random directions; the manuscript discussion now states this to explain why the RS arm (independent sampling) is not a replication. |
+| henderson2017matters | full text consulted | p. 1 (abstract, introduction); "Random Seeds and Trials", p. 3 | Supports the citing sentence, including variation with random seeds. |
+| colas2018seeds | full text consulted | p. 1; Sections 3.1 and 3.2, pp. 7-9 | Supports "seed count and error rates for the t-test and the bootstrap confidence interval test". |
+| agarwal2021precipice | full text consulted | p. 2; p. 5 | Supports "interval estimates via stratified bootstrap rather than point estimates, with few runs". |
+| cobbe2019procgen | full text consulted | pp. 1, 3-5 | Supports the citing sentence. The paper trains on a finite set of levels and evaluates on held-out levels; the EXP-003 report now says so. The manuscript wording (disjoint pools follow that general idea) is unchanged. |
+| lehman2018surprising | full text consulted | pp. 2-3 | Supports "evolution thwarting designers' intentions and exploiting bugs". |
+| krakovna2020specification | read in full (M4) | whole post | Unchanged. |
+
+Unverified sources (Stanley and Miikkulainen 2002; Lehman and Stanley 2011) remain uncited.

@@ -8,7 +8,7 @@
 | Experiment | EXP-002 |
 | Status | **Confirmatory (secondary, estimation-focused), complete** (150 of 150 runs as committed, 0 failed, 0 retried). Contains a contradicting result under the protocol's rule (owner's classification, D-012). |
 | Date of runs | 2026-11-24T23:35:03Z to 2026-11-24T23:40:48Z (UTC; 2026-11-25 local time) |
-| Report version | 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
+| Report version | 1.2 (M6, 2026-11-25: section 3 citation wording updated after the full texts were consulted; no number changed). 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
 | Authorship | Mohamed Bechir Kefi (approved C3, no affiliation). An AI system was used as a research and development assistant; it is not an author. |
 | Protocol | `research/experiments/EXP-002/protocol.md` v1.0, SHA-256 40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4; main protocol SHA-256 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85 |
 | Config | `experiments/configs/EXP-002.json`, file SHA-256 21c40e42e10e6fd482dfb813f65fbe1e3cdb6aa5492752005cdbaeb8e54d9248, canonical hash e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4 |
@@ -27,7 +27,7 @@
 
 ## 3. Rationale and literature
 
-Ablating variation and selection is required by the master prompt (section 10). A simple population-based genetic algorithm on network weights is the reference design of Such et al. (2017, arXiv:1712.06567); its abstract, the only part read, does not specify the mutation or selection operators, so Gaussian mutation with truncation selection is this project's choice (wording corrected in the M4 evidence audit, 2026-11-25). Results of simple search methods vary with hyperparameters and seeds (Mania et al. 2018, arXiv:1803.07055), and reported results in deep reinforcement learning are hard to reproduce because of variance intrinsic to the methods (Henderson et al. 2017, arXiv:1709.06560), which motivates the sigma sweep. Gap: separating the contributions of mutation and selection at equal evaluations, on held-out environments, with paired seeds.
+Ablating variation and selection is required by the master prompt (section 10). A simple population-based genetic algorithm on network weights is the reference design of Such et al. (2017, arXiv:1712.06567); its full text (Section 3, consulted in M6) describes truncation selection, additive Gaussian mutation and one elite, and the EVO arm uses the same kinds of operators with this project's own settings (the M4 wording, based on the abstract only, was updated in M6, 2026-11-25). Results of simple search methods vary with hyperparameters and seeds (Mania et al. 2018, arXiv:1803.07055), and reported results in deep reinforcement learning are hard to reproduce because of variance intrinsic to the methods (Henderson et al. 2017, arXiv:1709.06560), which motivates the sigma sweep. Gap: separating the contributions of mutation and selection at equal evaluations, on held-out environments, with paired seeds.
 
 ## 4. Hypotheses and operational definitions
 

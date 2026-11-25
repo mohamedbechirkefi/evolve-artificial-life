@@ -1,11 +1,14 @@
 <!-- SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0 -->
-# Release checklist (not started)
+# Release checklist
 
-- [ ] Every registered experiment has a truthful standalone report (and PDF if built and inspected).
-- [ ] Integrated manuscript complete; PDF built and pages inspected.
-- [ ] Artifact manifest complete; claims audit passed.
-- [ ] README: question, status, experiments table, findings only after verification, quick start, reproduction, data licences, limitations, citation.
-- [ ] Demo offline after load, keyboard usable, reduced motion, mobile layout, no runtime service.
-- [ ] Medium and LinkedIn drafts match verified results and scope.
-- [ ] No secrets, e-mail addresses or personal identifiers in committed files.
-- [ ] Owner approval for any push or publication recorded (G-PUBLIC).
+**Status (2026-11-25, M6).** Release candidate 0.1.0-rc1 prepared for the owner's review. The items below marked [x] were verified in the M6 session, with the evidence named. The two owner items are open. Nothing is pushed, tagged, released or published (G-PUBLIC).
+
+- [x] Every registered experiment has a truthful standalone report (and PDF if built and inspected). Evidence: `research/experiment_registry.csv` lists EXP-001 to EXP-003; each `research/experiments/EXP-00N/report.md` has the twelve numbered sections (grep count 12, 12, 12); `report.pdf` built by `scripts/build_pdfs.py` (10, 8 and 8 pages) and every first page, table page and figure page inspected as PNG; `scripts/audit_numbers.py` leaves only the documented Bonferroni levels unmatched.
+- [x] Integrated manuscript complete; PDF built and pages inspected. Evidence: `research/paper/manuscript.pdf`, 17 pages, every page inspected; title metadata set, no e-mail address or local path (pypdf); `supplementary.pdf`, 4 pages, every page inspected.
+- [x] Artifact manifest complete; claims audit passed. Evidence: `scripts/build_artifact_manifest.py` "27 artifacts; 27 claims"; every path in `artifact_manifest.json` exists and its 27 `result_sha256` values match; `results/confirmatory/EXP-00N/sha256_manifest.json` 0 mismatches over 852 files; `claims_audit.md` M6 reference check (10 citations resolved, 9 full texts consulted, 1 read in full).
+- [x] README: question, status, experiments table, findings only after verification, quick start, reproduction, data licences, limitations, citation. Evidence: `README.md` sections "Key findings (verified ...)", "Experiments", "Navigation", "Demo quick start", "Quick start (research code)", "Full reproduction", "Data", "Licence", "Citation", a limitations paragraph pointing to `research/limitations.md`; status updated to M6; `tests/test_text_numbers.py` passes for the README.
+- [x] Demo offline after load, keyboard usable, reduced motion, mobile layout, no runtime service. Evidence: in a clean clone and again in the working repository, `node tools/a11y_check.mjs dist` printed "A11Y-CHECK PASS" (27 of 27 focusable elements, reduced motion 0 running animations, no horizontal scroll at 360 px, no request leaves the local origin, offline after first load); `npm test` 20 passed.
+- [x] Medium and LinkedIn drafts match verified results and scope. Evidence: `tests/test_text_numbers.py` (every decimal in `articles/medium.md`, `articles/linkedin.md` and `articles/README.md` appears in the manuscript); both drafts say "not published" and carry placeholders for the links.
+- [x] No secrets, e-mail addresses or personal identifiers in committed files. Evidence: scan of 1206 tracked files: 0 tokens or keys, 0 private-key headers, 0 `.env` files, 1 e-mail address (the co-author commit-trailer address in `CLAUDE.md`, an instruction); absolute home-directory paths removed from code and reproduction files, kept only in the frozen protocol, `CLAUDE.md` and the append-only journals (`reproducibility_report.md` section 5). The author's name appears by design (author line, decision C3, awaiting the owner's tick).
+- [ ] Owner sign-off of `research/publication/author_review.md` (owner only).
+- [ ] Owner approval for any push or publication recorded (G-PUBLIC; owner only).

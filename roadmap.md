@@ -11,7 +11,7 @@ Effort is a planning estimate in focused development days (five-day target). Sta
 | M3 | Experiments | M2, M1 freeze | P0 | 1 d | done (2026-11-25): 420/420 confirmatory runs ok (J-0009 to J-0011); 11.3 reports written by the coordinator from committed results (owner-approved, D-012; see `progress.md`, "M3 done (coordinator)") | none |
 | M4 | Interpretation | M3 | P0 | 0.75 d | done (2026-11-25): evidence audit, exploratory sensitivity (J-0012), manuscript v1.0 after the second review pass (D-013); 137 tests pass | none (PDFs are M6) |
 | M5 | Interactive experience | M3 results (M4 for labels) | P1 | 0.75 d | done (2026-11-25): static offline page in `demo/` with replay of fitness curves and ancestry, sandbox with animated organisms (illustrative), checker PASS; 146 pytest and 20 vitest pass (D-015) | none |
-| M6 | Release candidate | M4, M5 | P0 | 0.5 d | not started | owner approval for any publication (G-PUBLIC) |
+| M6 | Release candidate | M4, M5 | P0 | 0.5 d | release candidate prepared, awaiting owner review and G-PUBLIC (2026-11-25, D-016) | owner approval for any publication (G-PUBLIC) |
 
 ## M0. Bootstrap and feasibility
 Acceptance: control files of master prompt section 2 exist; hardware, tools, budget, sources and licences audited (`research/protocol.md` Part A); scope, exclusions and fallback stated; lockfile produced. 11.6: registry, manuscript skeleton and experiment protocols initialised; zero-cost toolchain confirmed (pandoc to Typst smoke build, D-003). Gate: the owner can understand the question, the cost (zero) and the exclusions.
@@ -43,6 +43,8 @@ M5 gate check (2026-11-25): offline after the initial load (checker: page and sa
 
 ## M6. Release candidate
 Acceptance: clean clone, locked install, tests, smoke reproduction, demo build, manifest and link verification, secret and licence scan, actual outputs recorded. 11.6: manuscript and report PDFs compiled and visually inspected; references, cross-links, equations, figures and metadata verified; owner review checklist completed. Gate: verified facts only; the owner approves any publication.
+
+M6 check (2026-11-25): clean clone reproduces the tests (146), the smoke matrix (identical on every scientific field) and the demo (A11Y-CHECK PASS, export deterministic); five PDFs built and inspected; references resolved and nine full texts consulted; links, manifests and hashes verified; secret and licence scan recorded; owner review checklist prepared, no box ticked (`research/publication/reproducibility_report.md`, D-016). Status: release candidate prepared, awaiting owner review and G-PUBLIC. M6 is not done until the owner signs off.
 
 ## Cut order if the five-day target is threatened
 1. EXP-003 E = 8000 condition. 2. Optional demo features. 3. Test-set size M from 200 to 100. Never cut: EXP-001 primary matrix, controls, reports, evidence audit.

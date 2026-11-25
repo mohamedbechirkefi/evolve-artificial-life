@@ -34,9 +34,9 @@ No novelty claim is made beyond this reproducible and transparently reported des
 
 # 2. Related work
 
-The literature review is targeted, not systematic (`research/literature_review.md`). For every source cited here only the abstract or landing page was read, so each source supports abstract-level statements only.
+The literature review is targeted, not systematic (`research/literature_review.md`). In M4 only the abstracts or landing pages were read. In M6 (2026-11-25) the free full text of each cited paper (arXiv or the publisher's open-access PDF) was consulted for the passage that supports each citing sentence; the papers were not read cover to cover, and the blog post was read in full. The passages are listed in `research/literature_review.md`.
 
-**Evolutionary search on network weights.** Such et al. (2017) evolve the weights of deep networks with a simple, gradient-free, population-based genetic algorithm and report competitive results on hard deep reinforcement learning tasks. Salimans et al. (2017) present evolution strategies as an alternative to Markov-decision-process-based reinforcement learning that scales with the number of CPUs. The EVO arm of this study follows the general idea of a population-based genetic algorithm on weights; its specific operators (Gaussian mutation, truncation selection, one elite) are this project's design choices, not a replication of either paper.
+**Evolutionary search on network weights.** Such et al. (2017) evolve the weights of deep networks with a simple, gradient-free, population-based genetic algorithm and report competitive results on hard deep reinforcement learning tasks. Salimans et al. (2017) present evolution strategies as an alternative to Markov-decision-process-based reinforcement learning that scales with the number of CPUs. The genetic algorithm of Such et al. uses truncation selection, additive Gaussian mutation, one elite and no crossover (their Section 3). The EVO arm uses the same kinds of operators with this project's own population size, truncation size, mutation strength and elite evaluation; it is not a replication of either paper.
 
 **Random search as a baseline.** Bergstra and Bengio (2012) argue that random search is a natural baseline against which adaptive hyperparameter optimisation methods should be judged. Mania et al. (2018) introduce a random search method for static linear policies in continuous control and report large performance variability across seeds and hyperparameters. The RS arm here is independent sampling from the initial distribution; it is the simplest baseline and is not a replication of the method of Mania et al.
 
@@ -213,7 +213,7 @@ An exploratory re-analysis of the committed results (J-0012, `results/explorator
 
 **Mutation strength.** The frozen sigma 0.1 was kept as the primary setting before the confirmatory runs, although the pilot had shown sigma 0.5 ahead, to avoid tuning on seen data (amendment C.4). The confirmatory sweep reproduced the pilot ordering. The EXP-001 effect size is therefore not an upper bound for this genetic algorithm in this task, and whether sigma 0.5 is near an optimum is not known from three levels.
 
-**Relation to prior work.** The direction agrees with abstract-level reports that simple genetic algorithms are competitive black-box optimisers (Such et al. 2017). The comparison does not bear on the random search method of Mania et al. (2018) for static linear policies: only its abstract was read, and the RS arm here is not a replication of it. The K1 result is in line with the general motivation for procedurally generated training distributions (Cobbe et al. 2019).
+**Relation to prior work.** The direction agrees with reports that simple genetic algorithms are competitive black-box optimisers (Such et al. 2017). The comparison does not bear on the random search method of Mania et al. (2018) for static linear policies: that method updates a policy by steps along random directions (their Algorithm 1), whereas the RS arm here samples independently from the initial distribution. The K1 result is in line with the general motivation for procedurally generated training distributions (Cobbe et al. 2019).
 
 **Practical significance.** Within the task, EVO at E = 2,000 collected about 10.5 of 24 available items per episode against about 4.7 for RS, and about 14.3 at E = 8,000. These are levels in a toy task chosen for reproducibility, not performance targets.
 
@@ -230,7 +230,7 @@ An exploratory re-analysis of the committed results (J-0012, `results/explorator
 - **Statistical.** n = 30 run seeds per arm, percentile bootstrap without small-sample correction; an inconclusive interval is not equivalence. F_train_fixed is one deterministic episode per run.
 - **Budget accounting.** Budgets count policy evaluations; a different accounting such as environment steps or wall-clock could change comparisons with methods that evaluate differently.
 - **Shared machine.** Wall-clock timings were taken under contention and are informational only.
-- **Literature.** The review is targeted and abstract-level; it is not systematic.
+- **Literature.** The review is targeted, not systematic; full texts were consulted only for the passages that support the citing sentences.
 
 # 8. Ethics and responsible research
 
@@ -250,25 +250,25 @@ Funding: none declared [to be confirmed by the owner]. Competing interests: none
 
 # References
 
-Agarwal, R., Schwarzer, M., Castro, P. S., Courville, A., and Bellemare, M. G. (2021). Deep Reinforcement Learning at the Edge of the Statistical Precipice. arXiv:2108.13264. https://arxiv.org/abs/2108.13264 (abstract read).
+Agarwal, R., Schwarzer, M., Castro, P. S., Courville, A., and Bellemare, M. G. (2021). Deep Reinforcement Learning at the Edge of the Statistical Precipice. arXiv:2108.13264. https://arxiv.org/abs/2108.13264 (full text consulted for the cited passage).
 
-Bergstra, J., and Bengio, Y. (2012). Random Search for Hyper-Parameter Optimization. Journal of Machine Learning Research 13(10):281-305. https://www.jmlr.org/papers/v13/bergstra12a.html (abstract read).
+Bergstra, J., and Bengio, Y. (2012). Random Search for Hyper-Parameter Optimization. Journal of Machine Learning Research 13(10):281-305. https://www.jmlr.org/papers/v13/bergstra12a.html (full text consulted for the cited passage).
 
-Cobbe, K., Hesse, C., Hilton, J., and Schulman, J. (2019). Leveraging Procedural Generation to Benchmark Reinforcement Learning. arXiv:1912.01588. https://arxiv.org/abs/1912.01588 (abstract read).
+Cobbe, K., Hesse, C., Hilton, J., and Schulman, J. (2019). Leveraging Procedural Generation to Benchmark Reinforcement Learning. arXiv:1912.01588. https://arxiv.org/abs/1912.01588 (full text consulted for the cited passage).
 
-Colas, C., Sigaud, O., and Oudeyer, P.-Y. (2018). How Many Random Seeds? Statistical Power Analysis in Deep Reinforcement Learning Experiments. arXiv:1806.08295. https://arxiv.org/abs/1806.08295 (abstract read).
+Colas, C., Sigaud, O., and Oudeyer, P.-Y. (2018). How Many Random Seeds? Statistical Power Analysis in Deep Reinforcement Learning Experiments. arXiv:1806.08295. https://arxiv.org/abs/1806.08295 (full text consulted for the cited passage).
 
-Henderson, P., Islam, R., Bachman, P., Pineau, J., Precup, D., and Meger, D. (2017). Deep Reinforcement Learning that Matters. arXiv:1709.06560. https://arxiv.org/abs/1709.06560 (abstract read).
+Henderson, P., Islam, R., Bachman, P., Pineau, J., Precup, D., and Meger, D. (2017). Deep Reinforcement Learning that Matters. arXiv:1709.06560. https://arxiv.org/abs/1709.06560 (full text consulted for the cited passage).
 
 Krakovna, V., Uesato, J., Mikulik, V., Rahtz, M., Everitt, T., Kumar, R., Kenton, Z., Leike, J., and Legg, S. (2020). Specification gaming: the flip side of AI ingenuity. DeepMind blog, 21 April 2020. https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/ (page read).
 
-Lehman, J., Clune, J., Misevic, D., and others (2018). The Surprising Creativity of Digital Evolution: A Collection of Anecdotes from the Evolutionary Computation and Artificial Life Research Communities. arXiv:1803.03453. https://arxiv.org/abs/1803.03453 (abstract read).
+Lehman, J., Clune, J., Misevic, D., and others (2018). The Surprising Creativity of Digital Evolution: A Collection of Anecdotes from the Evolutionary Computation and Artificial Life Research Communities. arXiv:1803.03453. https://arxiv.org/abs/1803.03453 (full text consulted for the cited passage).
 
-Mania, H., Guy, A., and Recht, B. (2018). Simple random search provides a competitive approach to reinforcement learning. arXiv:1803.07055. https://arxiv.org/abs/1803.07055 (abstract read).
+Mania, H., Guy, A., and Recht, B. (2018). Simple random search provides a competitive approach to reinforcement learning. arXiv:1803.07055. https://arxiv.org/abs/1803.07055 (full text consulted for the cited passage).
 
-Salimans, T., Ho, J., Chen, X., Sidor, S., and Sutskever, I. (2017). Evolution Strategies as a Scalable Alternative to Reinforcement Learning. arXiv:1703.03864. https://arxiv.org/abs/1703.03864 (abstract read).
+Salimans, T., Ho, J., Chen, X., Sidor, S., and Sutskever, I. (2017). Evolution Strategies as a Scalable Alternative to Reinforcement Learning. arXiv:1703.03864. https://arxiv.org/abs/1703.03864 (full text consulted for the cited passage).
 
-Such, F. P., Madhavan, V., Conti, E., Lehman, J., Stanley, K. O., and Clune, J. (2017). Deep Neuroevolution: Genetic Algorithms Are a Competitive Alternative for Training Deep Neural Networks for Reinforcement Learning. arXiv:1712.06567. https://arxiv.org/abs/1712.06567 (abstract read).
+Such, F. P., Madhavan, V., Conti, E., Lehman, J., Stanley, K. O., and Clune, J. (2017). Deep Neuroevolution: Genetic Algorithms Are a Competitive Alternative for Training Deep Neural Networks for Reinforcement Learning. arXiv:1712.06567. https://arxiv.org/abs/1712.06567 (full text consulted for the cited passage).
 
 # Supplementary appendix
 

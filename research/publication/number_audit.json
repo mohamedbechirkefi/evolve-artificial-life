@@ -52,17 +52,17 @@
  "raw_check_problems": [],
  "number_scan": {
   "research/experiments/EXP-001/report.md": {
-   "decimal_numbers": 110,
+   "decimal_numbers": 111,
    "unmatched": []
   },
   "research/experiments/EXP-002/report.md": {
-   "decimal_numbers": 163,
+   "decimal_numbers": 164,
    "unmatched": [
     "98.75"
    ]
   },
   "research/experiments/EXP-003/report.md": {
-   "decimal_numbers": 195,
+   "decimal_numbers": 196,
    "unmatched": [
     "98.33"
    ]
@@ -82,7 +82,7 @@
    ]
   },
   "research/claims_register.csv": {
-   "decimal_numbers": 82,
+   "decimal_numbers": 84,
    "unmatched": []
   },
   "research/limitations.md": {

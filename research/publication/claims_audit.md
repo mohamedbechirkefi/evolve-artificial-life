@@ -71,3 +71,10 @@ No numerical result changed in this audit, and no frozen file, config, seed or v
 | Advantage holds at E = 500 and 8,000 | C-007, C-008, C-015 | confirmatory; trend descriptive only | budget confounded with P and G |
 | Advantage depends on resampled training | C-009, C-010 | confirmatory inconclusive result plus overfitting estimate | K = 1 versus K = 5 only |
 | No exploit behind the advantage | C-014 | audit of stay-in-place and replay | other exploit routes not enumerated |
+
+## M6 reference check (2026-11-25)
+
+- Every in-text citation of the manuscript (10 author-year citations) resolves to an entry of `research/paper/references.bib`, and every bib entry (10) is cited in the manuscript body and listed in its reference list.
+- Source labels: read in full 1 (krakovna2020specification, blog post); full text consulted for the cited passage 9 (all other entries, free arXiv or JMLR open-access PDFs, page or section recorded in `research/literature_review.md`, M6 section and in the `status` column of `research/claims_register.csv`); abstract only 0; unverified 0. Two uncited, unverified sources stay out of the bibliography.
+- Every cited claim was confirmed by its passage. Two passages say more than the abstracts did: Such et al. (Section 3) name the operators, and Cobbe et al. (pp. 3-5) describe a train and held-out level split. The M4 sentences that said the abstracts did not describe these were updated in the manuscript (Section 2, Discussion, limitations), the three experiment reports (version 1.2, section 3) and `research/limitations.md` item 20. No number changed; no claim was strengthened beyond the passages.
+- The frozen protocols keep their original wording.

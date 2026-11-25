@@ -8,7 +8,7 @@
 | Experiment | EXP-003 |
 | Status | **Confirmatory, complete** (180 of 180 planned runs, 0 failed, 0 retried). Robustness hypothesis **not supported** (one condition inconclusive); not contradicted. |
 | Date of runs | 2026-11-24T23:40:48Z to 2026-11-24T23:47:47Z (UTC; 2026-11-25 local time) |
-| Report version | 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
+| Report version | 1.2 (M6, 2026-11-25: section 3 citation wording updated after the full texts were consulted; no number changed). 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
 | Authorship | Mohamed Bechir Kefi (approved C3, no affiliation). An AI system was used as a research and development assistant; it is not an author. |
 | Protocol | `research/experiments/EXP-003/protocol.md` v1.0, SHA-256 4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a; main protocol SHA-256 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85 |
 | Config | `experiments/configs/EXP-003.json`, file SHA-256 5ed71f8434acaefd82a8bfe8e414d84782e3b87771bee3946d464075aca253b8, canonical hash 81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542 |
@@ -27,7 +27,7 @@
 
 ## 3. Rationale and literature
 
-Procedurally generated environments are used to measure generalisation in reinforcement learning (Cobbe et al. 2019, arXiv:1912.01588); the abstract, the only part read, does not describe a train and test level split, so the split used here is this project's design (wording corrected in the M4 evidence audit, 2026-11-25). Conclusions from point estimates over few runs can change under interval estimation (Agarwal et al. 2021, arXiv:2108.13264); seed counts must be justified (Colas et al. 2018, arXiv:1806.08295). Gap: whether a selection advantage at one budget and training design survives other budgets and a fixed training environment, at the run level with paired seeds.
+Procedurally generated environments are used to measure generalisation in reinforcement learning (Cobbe et al. 2019, arXiv:1912.01588); the full text (consulted in M6, 2026-11-25) trains agents on a fixed set of levels and measures performance on held-out levels, and the disjoint training and test seed pools used here follow that general idea with this project's own split. Conclusions from point estimates over few runs can change under interval estimation (Agarwal et al. 2021, arXiv:2108.13264); seed counts must be justified (Colas et al. 2018, arXiv:1806.08295). Gap: whether a selection advantage at one budget and training design survives other budgets and a fixed training environment, at the run level with paired seeds.
 
 ## 4. Hypotheses and operational definitions
 

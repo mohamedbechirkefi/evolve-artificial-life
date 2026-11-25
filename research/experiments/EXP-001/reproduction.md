@@ -3,7 +3,7 @@
 
 Simulation only, no external data. From the repository root, with the frozen files unchanged (`research/freeze.json`) and the code at the provenance revision 5d39c9bf1eae7356b1fa837642e02e4bde68e186:
 
-1. `/Users/bechir/research/labs/.tools/py/bin/uv sync --frozen --all-groups --all-extras`
+1. `uv sync --frozen --all-groups --all-extras` (uv 0.9.5; in the development environment the binary is `../.tools/py/bin/uv`, relative to the repository root)
 2. `.venv/bin/python -m pytest -q` (all tests must pass)
 3. `./scripts/run_confirmatory.sh EXP-001 2` into an empty `results/confirmatory/EXP-001`
 4. `PYTHONPATH=src .venv/bin/python -m evolve report --results results/confirmatory/EXP-001`

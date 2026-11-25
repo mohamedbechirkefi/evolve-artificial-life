@@ -7,13 +7,15 @@ Supplement to the manuscript `research/paper/manuscript.md` (draft v1.0, 2026-11
 
 All confirmatory runs used code revision 5d39c9bf1eae7356b1fa837642e02e4bde68e186 with a clean tree, run seeds 0 to 29 and root seed 20261124.
 
-| Experiment | Condition | E | P x G | K | Arms | Runs planned | Runs ok | Failed, retried, dropped | Run ids |
-|---|---|---|---|---|---|---|---|---|---|
-| EXP-001 | main | 2,000 | 50 x 40 | 5 | RS, NOSEL, EVO | 90 | 90 | 0, 0, 0 | `EXP-001.main.<arm>.s0000` to `.s0029` |
-| EXP-002 | main | 2,000 | 50 x 40 | 5 | EVO, NOSEL, SELONLY, EVO-sigma0.02, EVO-sigma0.5 | 150 | 150 | 0, 0, 0 | `EXP-002.main.<arm>.s0000` to `.s0029` |
-| EXP-003 | E500 | 500 | 25 x 20 | 5 | RS, EVO | 60 | 60 | 0, 0, 0 | `EXP-003.E500.<arm>.s0000` to `.s0029` |
-| EXP-003 | E8000 | 8,000 | 100 x 80 | 5 | RS, EVO | 60 | 60 | 0, 0, 0 | `EXP-003.E8000.<arm>.s0000` to `.s0029` |
-| EXP-003 | K1 | 2,000 | 50 x 40 | 1 (fixed) | RS, EVO | 60 | 60 | 0, 0, 0 | `EXP-003.K1.<arm>.s0000` to `.s0029` |
+| Experiment | Condition | E | P x G | K | Arms | Runs planned | Runs ok | Failed, retried, dropped |
+|---|---|---|---|---|---|---|---|---|
+| EXP-001 | main | 2,000 | 50 x 40 | 5 | RS, NOSEL, EVO | 90 | 90 | 0, 0, 0 |
+| EXP-002 | main | 2,000 | 50 x 40 | 5 | EVO, NOSEL, SELONLY, EVO-sigma0.02, EVO-sigma0.5 | 150 | 150 | 0, 0, 0 |
+| EXP-003 | E500 | 500 | 25 x 20 | 5 | RS, EVO | 60 | 60 | 0, 0, 0 |
+| EXP-003 | E8000 | 8,000 | 100 x 80 | 5 | RS, EVO | 60 | 60 | 0, 0, 0 |
+| EXP-003 | K1 | 2,000 | 50 x 40 | 1 (fixed) | RS, EVO | 60 | 60 | 0, 0, 0 |
+
+Run ids have the form `EXP-NNN.<condition>.<arm>.sNNNN`, with seeds `s0000` to `s0029` in every row (for example `EXP-001.main.<arm>.s0000` to `.s0029` and `EXP-003.E500.<arm>.s0000` to `.s0029`).
 
 The 60 EVO and NOSEL runs of EXP-002 have metrics identical to the EXP-001 runs with the same seeds (60 of 60, checked by `scripts/audit_numbers.py`).
 
@@ -39,15 +41,25 @@ Descriptive contrasts not shown in the manuscript tables (EVO minus RS, n = 30 p
 
 ## S3. Configurations and hashes
 
-| File | SHA-256 (file bytes, `research/freeze.json`) | Canonical config hash |
-|---|---|---|
-| `research/protocol.md` v1.0 | 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85 | n/a |
-| `research/experiments/EXP-001/protocol.md` | 21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f | n/a |
-| `research/experiments/EXP-002/protocol.md` | 40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4 | n/a |
-| `research/experiments/EXP-003/protocol.md` | 4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a | n/a |
-| `experiments/configs/EXP-001.json` | aaaf6e09d7dbe223ae29e890f4ec74ec0d50219608594ce3b5aa78634999fdae | accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239 |
-| `experiments/configs/EXP-002.json` | 21c40e42e10e6fd482dfb813f65fbe1e3cdb6aa5492752005cdbaeb8e54d9248 | e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4 |
-| `experiments/configs/EXP-003.json` | 5ed71f8434acaefd82a8bfe8e414d84782e3b87771bee3946d464075aca253b8 | 81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542 |
+SHA-256 of the file bytes as recorded in `research/freeze.json`, and, for configs, the canonical config hash:
+
+- `research/protocol.md` v1.0\
+  file SHA-256: 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85
+- `research/experiments/EXP-001/protocol.md`\
+  file SHA-256: 21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f
+- `research/experiments/EXP-002/protocol.md`\
+  file SHA-256: 40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4
+- `research/experiments/EXP-003/protocol.md`\
+  file SHA-256: 4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a
+- `experiments/configs/EXP-001.json`\
+  file SHA-256: aaaf6e09d7dbe223ae29e890f4ec74ec0d50219608594ce3b5aa78634999fdae\
+  canonical config hash: accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239
+- `experiments/configs/EXP-002.json`\
+  file SHA-256: 21c40e42e10e6fd482dfb813f65fbe1e3cdb6aa5492752005cdbaeb8e54d9248\
+  canonical config hash: e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4
+- `experiments/configs/EXP-003.json`\
+  file SHA-256: 5ed71f8434acaefd82a8bfe8e414d84782e3b87771bee3946d464075aca253b8\
+  canonical config hash: 81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542
 
 Data manifest: `data/manifest.json` (synthetic environments only, D-002), SHA-256 0d1dad1989d1a6d8013a974902d831b570e9f121a622acd782367d501a230f99.
 
@@ -78,7 +90,7 @@ Elite re-evaluation (EXP-002): 39 of 2,000 evaluations (1.95 percent) in every p
 | EXP-002 | `research/experiments/EXP-002/report.md` | `research/experiments/EXP-002/reproduction.md` | confirmatory, complete; H1a and H1b supported as estimates; sigma 0.5 contradicting result for the setting |
 | EXP-003 | `research/experiments/EXP-003/report.md` | `research/experiments/EXP-003/reproduction.md` | confirmatory, complete; robustness not supported, not contradicted (K1 inconclusive) |
 
-Report PDFs are not yet built (M6).
+Report PDFs: `research/experiments/EXP-NNN/report.pdf`, built with `scripts/build_pdfs.py` and inspected page by page in M6 (2026-11-25).
 
 ## S6. Deviations, owner decisions and exploratory work
 

@@ -13,6 +13,7 @@ import csv
 import json
 import math
 import os
+import re
 import subprocess
 from collections import defaultdict
 from pathlib import Path
@@ -26,8 +27,11 @@ from .schema import load_result
 from .stats import minimum_detectable_difference, paired_bootstrap, required_pairs, wilcoxon_signed_rank
 
 GENERATOR = "src/evolve/report.py"
-PANDOC = Path("/Users/bechir/research/labs/.tools/pandoc")
-TYPST_PY = Path("/Users/bechir/research/labs/.tools/py/bin/python")
+# Local toolchain (D-003): by default the shared `.tools` folder next to this
+# repository; override with EVOLVE_PANDOC and EVOLVE_TYPST_PYTHON.
+_TOOLS = Path(__file__).resolve().parents[3] / ".tools"
+PANDOC = Path(os.environ.get("EVOLVE_PANDOC", _TOOLS / "pandoc"))
+TYPST_PY = Path(os.environ.get("EVOLVE_TYPST_PYTHON", _TOOLS / "py" / "bin" / "python"))
 
 METRICS = [
     ("f_test", "held-out test fitness (items/episode)"),
@@ -417,17 +421,72 @@ def build_report(results_dir: str | Path, out_dir: str | Path | None = None, pdf
     return manifest
 
 
-def build_pdf(md_path: Path) -> Path:
-    """pandoc Markdown -> Typst -> PDF (typst Python package). Raises on failure."""
-    md_path = Path(md_path)
+def _fallback_title(text: str) -> str | None:
+    """First level-1 heading of a Markdown text without a YAML `title:`; else None."""
+    lines = text.splitlines()
+    if lines and lines[0].strip() == "---":
+        for line in lines[1:]:
+            if line.strip() == "---":
+                break
+            if line.startswith("title:"):
+                return None
+    for line in lines:
+        if line.startswith("# "):
+            return line[2:].strip()
+    return None
+
+
+_TYPST_PREAMBLE = (
+    "// evolve.report layout rules (M6): tables are set ragged-right in a smaller size,\n"
+    "// and a 'Table N.' or 'TAB-N.' caption paragraph stays on the page of its table.\n"
+    "#show table: set par(justify: false)\n"
+    "#show table: set text(size: 0.88em, hyphenate: true)\n"
+)
+
+
+def _typst_layout(typ_text: str) -> str:
+    """Layout fixes on pandoc's Typst output: content-sized table columns instead of
+    equal fixed percentages, smaller unjustified table text, and table captions
+    written as a bold 'Table N.' paragraph kept with the following table."""
+    typ_text = re.sub(r"columns: \(((?:[\d.]+%,? ?)+)\)",
+                      lambda m: f"columns: {m.group(1).count('%')}", typ_text)
+    chunks = typ_text.split("\n\n")
+    for i, chunk in enumerate(chunks):
+        if i + 1 >= len(chunks) or not chunks[i + 1].startswith("#figure("):
+            continue
+        lines = chunk.split("\n")
+        for j, line in enumerate(lines):
+            if line.startswith(("#strong[Table ", "#strong[TAB-")):
+                caption = "\n".join(lines[j:])
+                chunks[i] = "\n".join(lines[:j] + [f"#block(sticky: true)[{caption}]"])
+                break
+    return _TYPST_PREAMBLE + "\n\n".join(chunks)
+
+
+def build_pdf(md_path: Path, root: Path | None = None) -> Path:
+    """pandoc Markdown -> Typst -> PDF (typst Python package). Raises on failure.
+
+    `root` is the Typst project root (default: the Markdown file's folder). It must
+    contain every image the document references, for example `research/` for the
+    manuscript, whose figures live under `research/experiments/`."""
+    md_path = Path(md_path).resolve()
+    root = Path(root).resolve() if root is not None else md_path.parent
     if not PANDOC.exists() or not TYPST_PY.exists():
         raise EvolveError("pandoc or the typst Python environment is not available")
     typ = md_path.with_suffix(".typ")
     pdf = md_path.with_suffix(".pdf")
     subprocess.run([str(PANDOC), md_path.name, "-f", "markdown", "-t", "typst", "-s",
                     "-V", "mainfont=Libertinus Serif", "-o", typ.name], cwd=md_path.parent, check=True)
+    typ.write_text(_typst_layout(typ.read_text(encoding="utf-8")), encoding="utf-8")
+    title = _fallback_title(md_path.read_text(encoding="utf-8"))
+    if title is not None:
+        # No YAML title: set the PDF title metadata from the first level-1 heading,
+        # without adding a second visible title block.
+        escaped = title.replace("\\", "\\\\").replace('"', '\\"')
+        with typ.open("a", encoding="utf-8") as fh:
+            fh.write(f'\n#set document(title: "{escaped}")\n')
     code = "import sys, typst; typst.compile(sys.argv[1], output=sys.argv[2], root=sys.argv[3])"
-    subprocess.run([str(TYPST_PY), "-c", code, str(typ), str(pdf), str(md_path.parent)], check=True,
+    subprocess.run([str(TYPST_PY), "-c", code, str(typ), str(pdf), str(root)], check=True,
                    env={k: v for k, v in os.environ.items() if k != "PYTHONPATH"})
     if not pdf.exists() or pdf.stat().st_size == 0:
         raise EvolveError("PDF was not produced")

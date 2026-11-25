@@ -5,7 +5,7 @@
 
 **Why it matters.** Simple genetic algorithms and random search are both used as black-box methods for finding neural-network policies, and comparisons between them depend on budgets, seeds and evaluation details. A claim that selection helps needs an equal budget, a control that removes selection, held-out evaluation and run-level uncertainty.
 
-**Status (M5, 2026-11-25).** Independent research manuscript / preprint draft, not peer-reviewed. Simulation study. The protocol v1.0 was frozen by the owner before any confirmatory run (`research/freeze.json`); all 420 planned confirmatory runs completed. Manuscript v1.0 (`research/paper/manuscript.md`) is written; the owner approved its funding, competing-interest and AI-use wording on 2026-11-25 (D-014). The owner's title approval of 2026-11-25 named other projects, not EVOLVE, so the manuscript title awaits the owner's decision, and the owner's full-text review of the manuscript is pending (M6). PDFs are built in M6. All results are simulations of a synthetic grid world; improved task fitness is not general intelligence and not evidence about biological evolution.
+**Status (M6, 2026-11-25).** Independent research manuscript / preprint draft, not peer-reviewed. Simulation study. The protocol v1.0 was frozen by the owner before any confirmatory run (`research/freeze.json`); all 420 planned confirmatory runs completed. Manuscript v1.0 (`research/paper/manuscript.md`) is written; the owner approved its funding, competing-interest and AI-use wording on 2026-11-25 (D-014). The owner's title approval of 2026-11-25 named other projects, not EVOLVE, so the manuscript title awaits the owner's decision, and the owner's full-text review of the manuscript is pending. M6 prepared a release candidate (version 0.1.0-rc1) for the owner's review: the manuscript, supplementary and report PDFs are built and inspected, and a clean clone reproduces the tests, the smoke run and the demo (`research/publication/reproducibility_report.md`). Nothing is published. All results are simulations of a synthetic grid world; improved task fitness is not general intelligence and not evidence about biological evolution.
 
 ![The EVOLVE demo page: the overview with three findings of equal weight (EVO minus RS 5.791, 95 percent CI [4.644, 6.844], supported; EVO minus EVO-sigma0.5 -1.776, CI [-2.519, -1.082], a contradicting result for the frozen sigma; K1 EVO minus RS 0.751, CI [-0.533, 1.998], inconclusive), each with its interval on a shared axis.](docs/demo.png)
 
@@ -32,7 +32,7 @@ Exploratory work (pilot J-0004, M4 re-analysis J-0012) is labelled as such in `r
 
 ## Navigation
 
-- Manuscript: `research/paper/manuscript.md` (with `supplementary.md`); claims register `research/claims_register.csv`; evidence audit `research/publication/claims_audit.md`; artifact manifest `research/publication/artifact_manifest.json`.
+- Manuscript: `research/paper/manuscript.md` and `manuscript.pdf` (with `supplementary.md` and `supplementary.pdf`); report PDFs `research/experiments/EXP-00N/report.pdf` (built by `scripts/build_pdfs.py`); claims register `research/claims_register.csv`; evidence audit `research/publication/claims_audit.md`; artifact manifest `research/publication/artifact_manifest.json`.
 - Control files: `master_prompt.md` (authority), `CLAUDE.md`, `roadmap.md`, `progress.md`, `research/decision_log.md`.
 - Demo: `demo/` (static page; see below). Articles: `articles/medium.md`, `articles/linkedin.md` (drafts).
 
