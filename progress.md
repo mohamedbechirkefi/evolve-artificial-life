@@ -325,3 +325,7 @@ See `research/publication/author_review.md`, section "Prepared for the owner (M6
 ### Next action
 
 The owner's review and sign-off. No push.
+
+### Addendum: fresh-clone re-check after commit 5ac2e19
+
+Fresh clone of 5ac2e19: 158 tests passed; links 0 broken; `scripts/build_pdfs.py` (with `EVOLVE_PANDOC` and `EVOLVE_TYPST_PYTHON` set, since the clone has no `.tools` folder next to it) rebuilt the five PDFs at the committed sizes, text identical, timestamps different; smoke via `./scripts/evolve smoke` identical on every scientific field (`git_dirty` True only because the rebuilt PDFs were in the tree); demo `npm ci`, 20 tests, build, "A11Y-CHECK PASS"; re-export left `git status` clean. Clones deleted. Recorded in `research/publication/reproducibility_report.md` section 6.

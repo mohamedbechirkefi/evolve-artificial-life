@@ -67,3 +67,17 @@ Every page of all five PDFs was rendered to PNG at 60 ppi (table pages also at 1
 - Absolute home-directory paths: 19 lines in 9 files before M6. Removed from `src/evolve/report.py` (2), `scripts/evolve` (1) and the three `reproduction.md` files (3). Kept: `research/protocol.md` (3, frozen file whose hash is in `research/freeze.json`), `CLAUDE.md` (7, the local toolchain instructions for sessions), `progress.md` (2) and `research/decision_log.md` (1), both append-only; a note is appended to each.
 - Licences: `research/publication/dependency_licences.md`; no dependency flagged.
 - SPDX headers: every text file added since M0 carries the header, except the raw `results/confirmatory/EXP-00N/run.log` files (raw outputs, not edited) and `demo/.npmrc`, which received the header in M6. JSON and CSV files are covered by `NOTICE.md`.
+
+## 6. Re-check in a fresh clone after the fixes (commit 5ac2e19)
+
+| Step | Actual output |
+|---|---|
+| `uv sync --frozen --all-groups --all-extras` | 17 packages installed |
+| `.venv/bin/python -m pytest -q` | "158 passed in 8.25s" |
+| `.venv/bin/python scripts/check_links.py` | "29 relative links checked; 0 broken" |
+| `EVOLVE_PANDOC=... EVOLVE_TYPST_PYTHON=... .venv/bin/python scripts/build_pdfs.py` (the clone has no `.tools` folder next to it, so the two variables point to the shared toolchain) | five PDFs built with the same byte sizes as committed (395884, 100435, 308729, 339922, 444490); the rebuilt manuscript has the same page count (17) and identical extracted text on every page; only the creation timestamps differ, so the PDFs are not byte-reproducible |
+| `UV=<shared uv> ./scripts/evolve smoke --out <scratch>/smoke2 --workers 2` | 6 runs; `contrasts_f_test.json` byte-identical; `summary.csv` identical apart from wall time; `metrics.csv` identical apart from wall time, peak RSS, revision, result path and `git_dirty` (True, because the rebuilt PDFs were in the working tree when the smoke ran) |
+| Demo: `npm ci --prefer-offline`, `npm test`, `npm run build`, `node tools/a11y_check.mjs dist` (after restoring the committed PDFs) | "added 53 packages"; "Tests 20 passed (20)"; built; "A11Y-CHECK PASS" |
+| `scripts/export_demo_data.py`, `scripts/export_sandbox_fixture.py`, `git status --short` | "wrote demo/public/data/results.json (1040940 bytes)", "wrote demo/src/engine.fixture.json (28987 bytes)"; 0 status lines |
+
+Both clones and the smoke outputs were deleted at the end of the session.
