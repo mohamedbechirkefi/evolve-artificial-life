@@ -10,7 +10,7 @@ Effort is a planning estimate in focused development days (five-day target). Sta
 | M2 | Core implementation | M1 drafts (freeze not required to implement) | P0 | 1 d | done (2026-11-24); amended for the freeze (schema 1.1.0, freeze guard); 131 tests pass | none |
 | M3 | Experiments | M2, M1 freeze | P0 | 1 d | done (2026-11-25): 420/420 confirmatory runs ok (J-0009 to J-0011); 11.3 reports written by the coordinator from committed results (owner-approved, D-012; see `progress.md`, "M3 done (coordinator)") | none |
 | M4 | Interpretation | M3 | P0 | 0.75 d | done (2026-11-25): evidence audit, exploratory sensitivity (J-0012), manuscript v1.0 after the second review pass (D-013); 137 tests pass | none (PDFs are M6) |
-| M5 | Interactive experience | M3 results (M4 for labels) | P1 | 0.75 d | not started | none |
+| M5 | Interactive experience | M3 results (M4 for labels) | P1 | 0.75 d | done (2026-11-25): static offline page in `demo/` with replay of fitness curves and ancestry, sandbox with animated organisms (illustrative), checker PASS; 146 pytest and 20 vitest pass (D-015) | none |
 | M6 | Release candidate | M4, M5 | P0 | 0.5 d | not started | owner approval for any publication (G-PUBLIC) |
 
 ## M0. Bootstrap and feasibility
@@ -38,6 +38,8 @@ M4 gate check (2026-11-25): every numerical claim maps to a result id, config ha
 
 ## M5. Interactive experience
 Acceptance: static page with animated organisms, ancestry and fitness curves with replay; measured results distinguished from sandbox results; accessibility checks. 11.6: demo, paper, reports and articles use identical verified results, labels and scope. Gate: offline after initial load, responsive, keyboard usable, no fabricated data, no runtime service.
+
+M5 gate check (2026-11-25): offline after the initial load (checker: page and sandbox work with the network off; no request leaves the local origin), responsive (no horizontal scroll at 360 px; desktop and mobile screenshots inspected), keyboard usable (27 of 27 focusable elements reached, 12 of 12 sandbox controls after a run, visible focus), no fabricated data (every number exported from committed results; `tests/test_demo_export.py` checks reproducibility and verbatim manuscript text), no runtime service (static files only). Gate holds; M5 done (D-015). The sandbox is labelled "illustrative, not the research engine".
 
 ## M6. Release candidate
 Acceptance: clean clone, locked install, tests, smoke reproduction, demo build, manifest and link verification, secret and licence scan, actual outputs recorded. 11.6: manuscript and report PDFs compiled and visually inspected; references, cross-links, equations, figures and metadata verified; owner review checklist completed. Gate: verified facts only; the owner approves any publication.

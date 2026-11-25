@@ -220,3 +220,73 @@ Every numerical claim maps to a result id, config hash and figure or table, and 
 ### Next action
 
 M5, with the placeholders above put to the owner.
+
+## 2026-11-25: Session M5 (interactive experience)
+
+Authority: the owner, 2026-11-25, "Next" (`labs/_shared/owner-approvals-2026-11-25d.md`), stack TypeScript, React and Vite from the shared template (D-015). Brief: `labs/_shared/M5-brief.md`.
+
+### Starting state
+
+HEAD 878859a, clean tree; M4 done; 137 pytest tests passing.
+
+### Decisions
+
+D-015 (decision log): exported results file and its documented exceptions; three findings of equal weight, including the sigma result (D-012); replay of fitness curves and ancestry from committed traces; sandbox labelled "illustrative, not the research engine" with an exact port of the environment and policy checked at zero tolerance; checker extended with a sandbox-output step; author-review box unticked; the EVOLVE title is not covered by the owner's title approval.
+
+### Commands and actual outputs
+
+- `../.tools/py/bin/uv sync --frozen --all-groups --all-extras`: "Audited 17 packages".
+- `.venv/bin/python scripts/export_demo_data.py`: "wrote demo/public/data/results.json (1040882 bytes)"; `--check`: "results.json up to date".
+- `.venv/bin/python scripts/export_sandbox_fixture.py`: "wrote demo/src/engine.fixture.json (28987 bytes)"; `--check`: "fixture up to date". A first version with only random policies and a tiny search produced episodes eating at most one item; it was replaced by a hand-built food seeker and noisy variants (scores 0 to 16) before any test used it.
+- `cd demo && npm ci --prefer-offline` (template copied without node_modules, its `.npmrc` kept): "added 53 packages".
+- `npm test`: "Test Files 2 passed (2); Tests 20 passed (20)" (13 validator tests, 7 engine tests including the 24-episode fixture comparison with zero mismatches).
+- `npm run build`: tsc and vite build succeed; dist/index.html 0.77 kB, sandbox worker 5.03 kB, CSS 9.88 kB, JS 262.90 kB (82.52 kB gzip).
+- First checker run: "FAIL keyboard reaches every focusable element: 23 reached of 27". Cause: five identical scrollable table regions shared the checker's element key (same tag, text start and index). Fixed by giving each region an id; then 27 of 27.
+- Final `node tools/a11y_check.mjs dist --screenshots <scratchpad>/evolve/shots` (exit 0):
+
+```
+PASS results render (no fail-closed panel): 5 experiment panels
+PASS text contrast, light scheme (WCAG AA)
+PASS text contrast, dark scheme (WCAG AA)
+PASS keyboard reaches every focusable element: 27 reached of 27
+PASS visible focus indicator
+PASS no horizontal page scroll at 360 px: overflow 0px
+PASS reduced motion: no running animations: 0 running
+PASS no request leaves the local origin
+PASS offline after first load: results stay, sandbox runs: Sandbox output (seed 1, illustrative): mean score on 50 sandbox test layouts, RS
+PASS sandbox result view rendered
+PASS no horizontal page scroll at 360 px with sandbox output: overflow 0px
+PASS text contrast with sandbox output, light scheme (WCAG AA)
+PASS text contrast with sandbox output, dark scheme (WCAG AA)
+PASS keyboard reaches every sandbox control after a run: 12 reached of 12
+PASS visible focus indicator on sandbox controls
+A11Y-CHECK PASS
+```
+
+- Checker against a copy of dist with a malformed `results.json` (bad replay trace): "FAIL results render (no fail-closed panel): 0 experiment panels", "A11Y-CHECK FAIL (2)".
+- Screenshots inspected (desktop light, desktop dark, mobile 360 px, sandbox output). Fixed after inspection: legend swatches inherited the chart frame style; chart text too small, raised and enlarged again at narrow widths; the y-axis label crowded the tick labels on mobile (margins widened, label smaller); ancestry note said "darker dots" although dots are light in the dark scheme ("more opaque").
+- `.venv/bin/python -m pytest -q`: "146 passed" (137 before, plus 9 in `tests/test_demo_export.py`).
+- Text checks: every decimal in README, CITATION abstract, both articles and demo/README appears in the manuscript; no em dash; `grep -rn REPLACE demo/ --exclude-dir=node_modules`: no match; no e-mail address in new files.
+
+### Changed files
+
+New: `scripts/export_demo_data.py`, `scripts/export_sandbox_fixture.py`, `tests/test_demo_export.py`, `demo/` (package files, `src/` with App, Lab, Sandbox, charts, engine, worker, results validator and tests, `tools/a11y_check.mjs`, `public/data/results.json`), `docs/demo.png` (147 kB), `articles/medium.md`, `articles/linkedin.md`. Changed: README.md, CITATION.cff, CONTRIBUTING.md (demo commands appended), articles/README.md, demo/README.md, research/publication/author_review.md, roadmap.md, research/decision_log.md, research/experiment_journal.jsonl (J-0014, J-0015), progress.md.
+
+### Owner placeholders and items for the owner
+
+1. Manuscript title: not covered by the owner's title approval of 2026-11-25 (that list names other projects). Approve or revise.
+2. Funding: "none declared [to be confirmed by the owner]".
+3. Competing interests: "none declared [to be confirmed by the owner]".
+4. Public repository URL and demo URL: placeholders (G-PUBLIC).
+5. Author line and affiliation: the recorded decision C3 ("Mohamed Bechir Kefi", no affiliation) is used; its checklist box was unticked because an agent had ticked it, and waits for the owner.
+6. Full-text owner review of the manuscript and the articles: M6.
+
+### Outstanding risks
+
+- The sandbox does not reproduce research runs (different random generator); it is labelled as such. Animated organisms exist only in the sandbox, because committed results do not store policy parameters.
+- `results.json` is 1.04 MB because it holds per-run traces for all 30 seeds of five arms, so that no seed is cherry-picked for the replay.
+- The checker needs Google Chrome; the M6 clean clone must record whether it is available.
+
+### Next action
+
+M6 (release candidate), after the owner's answers to the items above. No push.

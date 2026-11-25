@@ -1,34 +1,65 @@
 <!-- SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0 -->
 # EVOLVE
 
-**Question.** Can simple inherited policies improve performance under selection, and how robust is that improvement?
+**Question.** Within a fixed budget of policy evaluations, does evolutionary selection with inherited, mutated policies find foraging policies with higher fitness on held-out grid environments than independent random search, and does any advantage survive changes in budget, mutation strength and training-set size?
 
-**Status: M2 (core implementation), 2026-11-24.** The simulation engine, search arms, metrics, result schema, runner, report generator and tests exist. Only exploratory smoke and pilot runs have been executed (on a separate exploratory test pool); no finding exists. The protocol v1.0 was frozen by the owner on 2026-11-24 (`research/freeze.json`); no confirmatory run has been executed yet. All future results will be simulations in a synthetic grid world; improved task fitness is not general intelligence and not evidence about biological evolution.
+**Why it matters.** Simple genetic algorithms and random search are both used as black-box methods for finding neural-network policies, and comparisons between them depend on budgets, seeds and evaluation details. A claim that selection helps needs an equal budget, a control that removes selection, held-out evaluation and run-level uncertainty.
 
-## What is planned
+**Status (M5, 2026-11-25).** Independent research manuscript / preprint draft, not peer-reviewed. Simulation study. The protocol v1.0 was frozen by the owner before any confirmatory run (`research/freeze.json`); all 420 planned confirmatory runs completed. Manuscript v1.0 (`research/paper/manuscript.md`) is written; the owner approved its funding, competing-interest and AI-use wording on 2026-11-25 (D-014). The owner's title approval of 2026-11-25 named other projects, not EVOLVE, so the manuscript title awaits the owner's decision, and the owner's full-text review of the manuscript is pending (M6). PDFs are built in M6. All results are simulations of a synthetic grid world; improved task fitness is not general intelligence and not evidence about biological evolution.
 
-A small foraging grid world, agents with a small neural policy, and a paired comparison at equal evaluation budget of random search (primary baseline), a no-selection mutation control and evolutionary selection, with mutation and selection ablations and robustness checks. See `research/protocol.md`.
+![The EVOLVE demo page: the overview with three findings of equal weight (EVO minus RS 5.791, 95 percent CI [4.644, 6.844], supported; EVO minus EVO-sigma0.5 -1.776, CI [-2.519, -1.082], a contradicting result for the frozen sigma; K1 EVO minus RS 0.751, CI [-0.533, 1.998], inconclusive), each with its interval on a shared axis.](docs/demo.png)
+
+## Key findings (verified; numbers identical to the manuscript)
+
+All in food items per episode on 200 held-out layouts, mean paired difference over n = 30 run seeds with a 95 percent percentile bootstrap interval.
+
+- **Primary (EXP-001, supported under the frozen rule).** At 2,000 evaluations, EVO exceeded RS by 5.791, CI [4.644, 6.844] (C-001).
+- **Against an assumption (EXP-002).** The frozen sigma 0.1 was not the best setting tested: EVO minus EVO-sigma0.5 was -1.776, CI [-2.519, -1.082], so sigma 0.5 exceeded it by 1.776. The owner classified this as a contradicting result under EXP-002's rule, a finding against EXP-002's assumption about the setting; H1 of EXP-001 stands (D-012, C-006).
+- **Ablations (EXP-002).** Removing mutation (EVO minus SELONLY 8.297, CI [7.608, 8.956]) or selection (EVO minus NOSEL 8.046, CI [7.173, 8.874]) lowered held-out fitness by about 8 items.
+- **Sensitivity (EXP-003).** The advantage held at E = 500 (2.368, CI [1.627, 3.128]) and E = 8,000 (8.374, CI [7.418, 9.287]), but with one fixed training environment it was inconclusive (0.751, CI [-0.533, 1.998]) while EVO overfit that environment more than RS. The result is specific to resampled training.
+
+What this does not show: that population-based selection beats local search methods in general (no arm isolates single-lineage local search), anything about other environments or architectures, or anything about biological evolution. See `research/limitations.md`.
 
 ## Experiments
 
-| ID | Title | Status |
-|---|---|---|
-| EXP-001 | Evolutionary selection vs random search at equal evaluations | frozen (owner-approved 2026-11-24), not yet run |
-| EXP-002 | Ablations of mutation and selection | frozen (owner-approved 2026-11-24), not yet run |
-| EXP-003 | Robustness to budget and training-set size | frozen (owner-approved 2026-11-24), not yet run |
+| ID | Title | Status | Report |
+|---|---|---|---|
+| EXP-001 | Evolutionary selection vs random search at equal evaluations | confirmatory, 90/90 runs ok; H1 supported | `research/experiments/EXP-001/report.md` |
+| EXP-002 | Ablations of mutation and selection | confirmatory, 150/150 runs ok; H1a and H1b supported (estimates); sigma 0.5 above the frozen sigma 0.1 (contradicting result for the setting) | `research/experiments/EXP-002/report.md` |
+| EXP-003 | Robustness to budget and training-set size | confirmatory, 180/180 runs ok; robustness not supported and not contradicted (K1 inconclusive) | `research/experiments/EXP-003/report.md` |
+
+Exploratory work (pilot J-0004, M4 re-analysis J-0012) is labelled as such in `results/exploratory/` and never replaces a frozen verdict.
 
 ## Navigation
 
-`master_prompt.md` (authority), `CLAUDE.md` (session rules), `roadmap.md`, `progress.md`, `research/` (protocol, registry, claims, literature, limitations, paper, experiments, publication checklists), `data/manifest.json`.
+- Manuscript: `research/paper/manuscript.md` (with `supplementary.md`); claims register `research/claims_register.csv`; evidence audit `research/publication/claims_audit.md`; artifact manifest `research/publication/artifact_manifest.json`.
+- Control files: `master_prompt.md` (authority), `CLAUDE.md`, `roadmap.md`, `progress.md`, `research/decision_log.md`.
+- Demo: `demo/` (static page; see below). Articles: `articles/medium.md`, `articles/linkedin.md` (drafts).
 
-## Quick start
+## Demo quick start
+
+The page shows the published results with their intervals, a replay of the committed runs (fitness curves and ancestry, generation by generation) and a sandbox in which visitors evolve and watch their own organisms. It runs offline after the first load, sends nothing anywhere and collects nothing. Node 22 or later:
+
+    cd demo && npm ci && npm run build && npm run preview
+
+`npm test` runs the vitest suite (results validator and the sandbox port against a Python fixture). `node tools/a11y_check.mjs dist` runs the offline and accessibility check (needs Google Chrome). The page's data file is regenerated with `.venv/bin/python scripts/export_demo_data.py`.
+
+Demo URL: [placeholder, not published; release requires the owner's approval].
+
+## Quick start (research code)
 
     uv sync
     ./scripts/evolve test            # pytest suite
     ./scripts/evolve smoke           # exploratory smoke matrix and report (results/exploratory/)
     ./scripts/evolve report --results <dir> [--pdf]
 
-`./scripts/evolve run --config experiments/configs/EXP-001.json` runs only while every hash in `research/freeze.json` matches; it refuses an edited protocol or config.
+## Full reproduction
+
+`./scripts/evolve run --config experiments/configs/EXP-NNN.json` reruns a confirmatory matrix; it runs only while every hash in `research/freeze.json` matches and refuses an edited protocol or config. Then `./scripts/evolve report --results results/confirmatory/EXP-NNN` and `.venv/bin/python scripts/analyse_frozen.py EXP-NNN`. `scripts/audit_numbers.py` re-checks every reported number against the raw run files.
+
+## Architecture
+
+`src/evolve/`: environment, policy, search arms, metrics, seeds, runner, schema, report generator and CLI (NumPy). `scripts/`: frozen analysis, audits, manifest builder, demo export. `demo/`: TypeScript, React and Vite static page with hand-written SVG charts and a Web Worker sandbox.
 
 ## Data
 
@@ -40,4 +71,4 @@ EVOLVE Source-Available Non-Commercial Research License v1.0 (`LicenseRef-EVOLVE
 
 ## Citation
 
-See `CITATION.cff`.
+See `CITATION.cff`. Repository URL: [placeholder, not published; release requires the owner's approval].
