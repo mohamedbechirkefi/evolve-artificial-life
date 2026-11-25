@@ -116,3 +116,11 @@ Append-only. Each entry: id, date, decision, decided by, rationale, alternatives
 - **Manuscript.** Synthesised to 11.4 as v0.9, challenged by `research/publication/review_pass_2.md`, revised to v1.0 (nine changes, listed there). Supplementary file completed. `artifact_manifest.json` built by `scripts/build_artifact_manifest.py`.
 - **Verdicts.** Unchanged: EXP-001 H1 supported; EXP-002 H1a and H1b supported as estimates, sigma 0.5 contradicting result for the setting (D-012); EXP-003 robustness not supported and not contradicted. The interpretation is narrowed: the result compares this genetic algorithm with independent sampling under resampled training, and no arm isolates single-lineage local search (limitations 15 to 21).
 - **Not done:** manuscript and report PDFs (M6); no push.
+
+
+## D-014 (2026-11-25): Funding, competing-interest and AI-use statements approved by the owner (post-M4 item 2)
+
+- **Date:** 2026-11-25
+- **Decided by:** the owner: owner, 2026-11-25, "Approve all" (post-M4), item 2 (`/Users/bechir/research/labs/_shared/owner-approvals-2026-11-25c.md`): "The wording drafted in each manuscript is approved. Where a draft still has a placeholder that needs a fact only the owner knows, it stays a placeholder. M5 lists any such placeholder for the owner." Recorded by the AI assistant under the coordinator brief `/Users/bechir/research/labs/_shared/POST-M4-brief.md`.
+- **Decision:** the funding, competing-interest and AI-use wording in manuscript section 11 (`research/paper/manuscript.md` as of commit `6ca17dd`) is owner-approved. No wording was changed. Placeholders that need a fact only the owner knows stay as placeholders and are listed in `progress.md` under "Owner placeholders for M5".
+- **Consequences:** no change to the manuscript, protocols, configs, seeds or results; no computation; `research/freeze.json` untouched. The unticked boxes in `research/publication/author_review.md` are left for the owner.
