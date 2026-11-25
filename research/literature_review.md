@@ -26,3 +26,17 @@ Method: targeted web searches and direct retrieval of arXiv abstract pages and p
 ## Positioning (provisional)
 
 Known: genetic algorithms and random search are both competitive black-box policy search methods, and evaluation with few seeds is unreliable. Narrow contribution proposed: a small, fully reproducible, preregistered paired comparison of selection, no-selection drift and random search at equal evaluation budget in one grid world, with held-out and shifted test sets, mutation and selection ablations, and a sensitivity analysis designed to be able to overturn the main reading. No novelty claim is made beyond this reproducible, transparently reported design.
+
+## M4 re-check (2026-11-25, evidence audit)
+
+Every verified source above was re-opened on 2026-11-25 (arXiv abstract pages, the JMLR landing page and the DeepMind blog post), and each citing sentence in the reports and the manuscript was compared with what the abstract states. All sources remain abstract-level (the blog post was read in full). Findings:
+
+| Key | Abstract states | Wording corrected |
+|---|---|---|
+| such2017deep | a simple, gradient-free, population-based genetic algorithm evolves DNN weights and is competitive on hard deep RL tasks | The abstract does not name Gaussian mutation or truncation selection. EXP-001 and EXP-002 reports now say these operators are this project's choice. The "reference design" row above should be read in that sense. |
+| mania2018simple | a random search method for static, linear policies in continuous control; large variability across seeds and hyperparameters | The abstract does not describe the method as local or as using a step rule. The EXP-001 report and limitation 12 no longer say so. |
+| cobbe2019procgen | procedurally generated environments to measure sample efficiency and generalisation | The abstract does not describe a train and test level split. The EXP-003 report now says the split is this project's design. The "Motivates disjoint seed pools" row above is a motivation, not a statement of the source. |
+| henderson2017matters | difficulty of reproduction from environment randomness and variance intrinsic to the methods; call for significance metrics and stricter reporting | The abstract does not mention seeds by name; the EXP-002 report now paraphrases the abstract. |
+| salimans2017evolution, bergstra2012random, lehman2018surprising, krakovna2020specification, colas2018seeds, agarwal2021precipice | as in the table above | none needed |
+
+The frozen EXP protocols (sections 3) keep their original wording, which cannot change after the freeze; the corrections are recorded here and in `research/publication/claims_audit.md`.

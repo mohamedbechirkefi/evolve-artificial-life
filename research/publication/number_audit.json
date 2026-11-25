@@ -1,0 +1,93 @@
+{
+ "schema": "evolve.number_audit",
+ "schema_version": "1.0.0",
+ "generator": "scripts/audit_numbers.py",
+ "experiments": {
+  "EXP-001": {
+   "n_runs": 90,
+   "cells": {
+    "main/EVO": 30,
+    "main/NOSEL": 30,
+    "main/RS": 30
+   },
+   "sha256_mismatches": 0,
+   "revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "summary_values_checked": 105,
+   "analysis_values_checked": 36
+  },
+  "EXP-002": {
+   "n_runs": 150,
+   "cells": {
+    "main/EVO": 30,
+    "main/EVO-sigma0.02": 30,
+    "main/EVO-sigma0.5": 30,
+    "main/NOSEL": 30,
+    "main/SELONLY": 30
+   },
+   "sha256_mismatches": 0,
+   "revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "summary_values_checked": 175,
+   "analysis_values_checked": 24
+  },
+  "EXP-003": {
+   "n_runs": 180,
+   "cells": {
+    "E500/EVO": 30,
+    "E500/RS": 30,
+    "E8000/EVO": 30,
+    "E8000/RS": 30,
+    "K1/EVO": 30,
+    "K1/RS": 30
+   },
+   "sha256_mismatches": 0,
+   "revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "summary_values_checked": 226,
+   "analysis_values_checked": 54
+  }
+ },
+ "exp001_exp002_shared_runs": {
+  "shared": 60,
+  "identical_metrics": 60
+ },
+ "raw_check_problems": [],
+ "number_scan": {
+  "research/experiments/EXP-001/report.md": {
+   "decimal_numbers": 110,
+   "unmatched": []
+  },
+  "research/experiments/EXP-002/report.md": {
+   "decimal_numbers": 163,
+   "unmatched": [
+    "98.75"
+   ]
+  },
+  "research/experiments/EXP-003/report.md": {
+   "decimal_numbers": 195,
+   "unmatched": [
+    "98.33"
+   ]
+  },
+  "research/paper/manuscript.md": {
+   "decimal_numbers": 185,
+   "unmatched": [
+    "98.33",
+    "98.75"
+   ]
+  },
+  "research/paper/supplementary.md": {
+   "decimal_numbers": 96,
+   "unmatched": [
+    "98.33",
+    "98.75"
+   ]
+  },
+  "research/claims_register.csv": {
+   "decimal_numbers": 82,
+   "unmatched": []
+  },
+  "research/limitations.md": {
+   "decimal_numbers": 11,
+   "unmatched": []
+  }
+ }
+}

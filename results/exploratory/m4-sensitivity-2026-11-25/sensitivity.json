@@ -1,0 +1,339 @@
+{
+ "schema": "evolve.m4_sensitivity",
+ "schema_version": "1.0.0",
+ "label": "exploratory (M4); does not change or replace any frozen verdict",
+ "generated_utc": "2026-11-25T01:19:40.345438Z",
+ "generator": "scripts/m4_sensitivity.py",
+ "inputs": [
+  "results/confirmatory/EXP-001/analysis/analysis.json",
+  "results/confirmatory/EXP-002/analysis/analysis.json",
+  "results/confirmatory/EXP-003/analysis/analysis.json",
+  "results/confirmatory/EXP-002/runs/*.json"
+ ],
+ "input_code_revisions": [
+  "5d39c9bf1eae7356b1fa837642e02e4bde68e186"
+ ],
+ "bootstrap_resamples": 10000,
+ "bootstrap_seed": 0,
+ "environment": {
+  "git_revision": "52f67335efdacaf34474cc15fae768a6957e7b4d",
+  "git_dirty": false,
+  "engine_version": "evolve-engine/0.2.0",
+  "python_version": "3.12.1",
+  "numpy_version": "2.5.4",
+  "os": "Darwin 24.3.0 (macOS-15.3.1-arm64-arm-64bit)",
+  "machine": "arm64",
+  "cpu": "Apple M1 Pro"
+ },
+ "contrast_checks": [
+  {
+   "experiment_id": "EXP-001",
+   "condition": "main",
+   "contrast": "EVO - RS",
+   "metric": "f_test",
+   "n_pairs": 30,
+   "mean_diff": 5.791333333333333,
+   "frozen_ci_95": [
+    4.643633333333334,
+    6.844012499999999
+   ],
+   "frozen_reading": "interval above 0",
+   "frozen_verdict_of_record": "supported",
+   "family_size": 1,
+   "bonferroni_level": 0.95,
+   "bonferroni_ci": [
+    4.643633333333334,
+    6.844012499999999
+   ],
+   "bonferroni_reading": "interval above 0",
+   "t_ci_95": [
+    4.620535743477936,
+    6.96213092318873
+   ],
+   "t_reading": "interval above 0",
+   "leave_one_out_mean_range": [
+    5.627586206896552,
+    6.157586206896553
+   ],
+   "leave_one_out_subsets_with_changed_reading": 0
+  },
+  {
+   "experiment_id": "EXP-002",
+   "condition": "main",
+   "contrast": "EVO - SELONLY",
+   "metric": "f_test",
+   "n_pairs": 30,
+   "mean_diff": 8.296666666666669,
+   "frozen_ci_95": [
+    7.607820833333333,
+    8.956012500000002
+   ],
+   "frozen_reading": "interval above 0",
+   "frozen_verdict_of_record": null,
+   "family_size": 4,
+   "bonferroni_level": 0.9875,
+   "bonferroni_ci": [
+    7.400997916666666,
+    9.120930208333336
+   ],
+   "bonferroni_reading": "interval above 0",
+   "t_ci_95": [
+    7.570662940066821,
+    9.022670393266516
+   ],
+   "t_reading": "interval above 0",
+   "leave_one_out_mean_range": [
+    8.168448275862069,
+    8.473793103448276
+   ],
+   "leave_one_out_subsets_with_changed_reading": 0
+  },
+  {
+   "experiment_id": "EXP-002",
+   "condition": "main",
+   "contrast": "EVO - NOSEL",
+   "metric": "f_test",
+   "n_pairs": 30,
+   "mean_diff": 8.046166666666668,
+   "frozen_ci_95": [
+    7.1728208333333345,
+    8.8742125
+   ],
+   "frozen_reading": "interval above 0",
+   "frozen_verdict_of_record": null,
+   "family_size": 4,
+   "bonferroni_level": 0.9875,
+   "bonferroni_ci": [
+    6.9469812499999986,
+    9.069436458333335
+   ],
+   "bonferroni_reading": "interval above 0",
+   "t_ci_95": [
+    7.143771865143671,
+    8.948561468189665
+   ],
+   "t_reading": "interval above 0",
+   "leave_one_out_mean_range": [
+    7.884482758620691,
+    8.241724137931033
+   ],
+   "leave_one_out_subsets_with_changed_reading": 0
+  },
+  {
+   "experiment_id": "EXP-002",
+   "condition": "main",
+   "contrast": "EVO - EVO-sigma0.02",
+   "metric": "f_test",
+   "n_pairs": 30,
+   "mean_diff": 6.749166666666667,
+   "frozen_ci_95": [
+    5.9816625000000005,
+    7.513170833333333
+   ],
+   "frozen_reading": "interval above 0",
+   "frozen_verdict_of_record": null,
+   "family_size": 4,
+   "bonferroni_level": 0.9875,
+   "bonferroni_ci": [
+    5.768491666666666,
+    7.679500000000001
+   ],
+   "bonferroni_reading": "interval above 0",
+   "t_ci_95": [
+    5.925299923595964,
+    7.573033409737371
+   ],
+   "t_reading": "interval above 0",
+   "leave_one_out_mean_range": [
+    6.5762068965517235,
+    6.9239655172413785
+   ],
+   "leave_one_out_subsets_with_changed_reading": 0
+  },
+  {
+   "experiment_id": "EXP-002",
+   "condition": "main",
+   "contrast": "EVO - EVO-sigma0.5",
+   "metric": "f_test",
+   "n_pairs": 30,
+   "mean_diff": -1.7758333333333332,
+   "frozen_ci_95": [
+    -2.5191749999999997,
+    -1.081804166666667
+   ],
+   "frozen_reading": "interval at or below 0",
+   "frozen_verdict_of_record": null,
+   "family_size": 4,
+   "bonferroni_level": 0.9875,
+   "bonferroni_ci": [
+    -2.7056750000000007,
+    -0.9320760416666661
+   ],
+   "bonferroni_reading": "interval at or below 0",
+   "t_ci_95": [
+    -2.537547756463093,
+    -1.0141189102035733
+   ],
+   "t_reading": "interval at or below 0",
+   "leave_one_out_mean_range": [
+    -1.882758620689655,
+    -1.5948275862068966
+   ],
+   "leave_one_out_subsets_with_changed_reading": 0
+  },
+  {
+   "experiment_id": "EXP-003",
+   "condition": "E500",
+   "contrast": "EVO - RS",
+   "metric": "f_test",
+   "n_pairs": 30,
+   "mean_diff": 2.367666666666666,
+   "frozen_ci_95": [
+    1.6266166666666668,
+    3.1275041666666663
+   ],
+   "frozen_reading": "interval above 0",
+   "frozen_verdict_of_record": "supported",
+   "family_size": 3,
+   "bonferroni_level": 0.9833333333333333,
+   "bonferroni_ci": [
+    1.470066666666668,
+    3.319183333333331
+   ],
+   "bonferroni_reading": "interval above 0",
+   "t_ci_95": [
+    1.5726848694614315,
+    3.162648463871901
+   ],
+   "t_reading": "interval above 0",
+   "leave_one_out_mean_range": [
+    2.2236206896551725,
+    2.519310344827586
+   ],
+   "leave_one_out_subsets_with_changed_reading": 0
+  },
+  {
+   "experiment_id": "EXP-003",
+   "condition": "E8000",
+   "contrast": "EVO - RS",
+   "metric": "f_test",
+   "n_pairs": 30,
+   "mean_diff": 8.373666666666667,
+   "frozen_ci_95": [
+    7.417970833333333,
+    9.286837499999999
+   ],
+   "frozen_reading": "interval above 0",
+   "frozen_verdict_of_record": "supported",
+   "family_size": 3,
+   "bonferroni_level": 0.9833333333333333,
+   "bonferroni_ci": [
+    7.200379166666668,
+    9.493008333333334
+   ],
+   "bonferroni_reading": "interval above 0",
+   "t_ci_95": [
+    7.357281094981722,
+    9.390052238351611
+   ],
+   "t_reading": "interval above 0",
+   "leave_one_out_mean_range": [
+    8.184310344827585,
+    8.581896551724137
+   ],
+   "leave_one_out_subsets_with_changed_reading": 0
+  },
+  {
+   "experiment_id": "EXP-003",
+   "condition": "K1",
+   "contrast": "EVO - RS",
+   "metric": "f_test",
+   "n_pairs": 30,
+   "mean_diff": 0.7508333333333332,
+   "frozen_ci_95": [
+    -0.5326875,
+    1.9978833333333323
+   ],
+   "frozen_reading": "interval contains 0",
+   "frozen_verdict_of_record": "inconclusive",
+   "family_size": 3,
+   "bonferroni_level": 0.9833333333333333,
+   "bonferroni_ci": [
+    -0.7791166666666665,
+    2.2975791666666647
+   ],
+   "bonferroni_reading": "interval contains 0",
+   "t_ci_95": [
+    -0.5818933304710687,
+    2.083559997137735
+   ],
+   "t_reading": "interval contains 0",
+   "leave_one_out_mean_range": [
+    0.475,
+    1.0632758620689655
+   ],
+   "leave_one_out_subsets_with_changed_reading": 0
+  }
+ ],
+ "k1_without_seed_13": {
+  "condition": "K1",
+  "contrast": "EVO - RS",
+  "metric": "f_test",
+  "excluded_seed": 13,
+  "diff_at_seed_13": 0.0,
+  "n_pairs": 29,
+  "mean_diff": 0.7767241379310345,
+  "ci_95": [
+   -0.5437068965517233,
+   2.052530172413791
+  ],
+  "reading": "interval contains 0"
+ },
+ "elite_audit": [
+  {
+   "experiment_id": "EXP-002",
+   "arm": "EVO",
+   "n_runs": 30,
+   "elite_reevaluations_per_run": 39,
+   "evaluations_per_run": 2000,
+   "elite_share_of_budget": 0.0195,
+   "runs_whose_returned_policy_is_an_elite_reevaluation": 2
+  },
+  {
+   "experiment_id": "EXP-002",
+   "arm": "EVO-sigma0.02",
+   "n_runs": 30,
+   "elite_reevaluations_per_run": 39,
+   "evaluations_per_run": 2000,
+   "elite_share_of_budget": 0.0195,
+   "runs_whose_returned_policy_is_an_elite_reevaluation": 0
+  },
+  {
+   "experiment_id": "EXP-002",
+   "arm": "EVO-sigma0.5",
+   "n_runs": 30,
+   "elite_reevaluations_per_run": 39,
+   "evaluations_per_run": 2000,
+   "elite_share_of_budget": 0.0195,
+   "runs_whose_returned_policy_is_an_elite_reevaluation": 4
+  },
+  {
+   "experiment_id": "EXP-002",
+   "arm": "NOSEL",
+   "n_runs": 30,
+   "elite_reevaluations_per_run": 39,
+   "evaluations_per_run": 2000,
+   "elite_share_of_budget": 0.0195,
+   "runs_whose_returned_policy_is_an_elite_reevaluation": 0
+  },
+  {
+   "experiment_id": "EXP-002",
+   "arm": "SELONLY",
+   "n_runs": 30,
+   "elite_reevaluations_per_run": 39,
+   "evaluations_per_run": 2000,
+   "elite_share_of_budget": 0.0195,
+   "runs_whose_returned_policy_is_an_elite_reevaluation": 1
+  }
+ ]
+}

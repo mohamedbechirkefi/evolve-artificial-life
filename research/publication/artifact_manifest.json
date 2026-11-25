@@ -1,7 +1,821 @@
 {
-  "schema_version": "0.1",
-  "updated": "2026-11-24",
-  "status": "empty: no quantitative figure, table or claim exists yet",
-  "fields_per_entry": ["artifact_id", "kind", "experiment_id", "run_ids", "metric_definition", "result_path", "generator_script", "config_or_protocol_hash", "code_revision"],
-  "artifacts": []
+ "schema_version": "1.0",
+ "updated": "2026-11-25",
+ "status": "M4: every table, figure and claim of the manuscript, supplementary file and experiment reports is mapped",
+ "generator": "scripts/build_artifact_manifest.py",
+ "repository_head_when_built": "52f67335efdacaf34474cc15fae768a6957e7b4d",
+ "number_audit": "research/publication/number_audit.json (scripts/audit_numbers.py)",
+ "fields_per_entry": [
+  "artifact_id",
+  "kind",
+  "experiment_id",
+  "run_ids",
+  "metric_definition",
+  "result_path",
+  "result_sha256",
+  "generator_script",
+  "config_or_protocol_hash",
+  "code_revision",
+  "used_in"
+ ],
+ "artifacts": [
+  {
+   "artifact_id": "EXP-001/TAB-1",
+   "kind": "table",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.<condition>.<arm>.s0000-s0029 (90 runs)",
+   "metric_definition": "per-arm mean, SD, min and max over 30 run seeds of F_test, F_train_fresh, F_shift, generalisation gap, adaptation AUC, best training fitness, F_train_fixed, overfit_drop, diversity and stay fraction",
+   "result_path": "results/confirmatory/EXP-001/report/summary.csv",
+   "result_sha256": "44cb85a3fee77af33289ee2831d7887cc3254d2b7c2f862e92e5f456f5653d8c",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-001`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-001/report.md section 8"
+   ]
+  },
+  {
+   "artifact_id": "EXP-001/TAB-2",
+   "kind": "table",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.<condition>.<arm>.s0000-s0029 (90 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-001/analysis/analysis.json",
+   "result_sha256": "079b919862f43b46939b27be43a81f69e25d263a62158cd32e46332892a97c24",
+   "generator_script": "scripts/analyse_frozen.py EXP-001",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-001/report.md section 8"
+   ]
+  },
+  {
+   "artifact_id": "EXP-001/FIG-1",
+   "kind": "figure",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.<condition>.<arm>.s0000-s0029 (90 runs)",
+   "metric_definition": "F_test = mean food items consumed per 100-step episode over the 200 fixed confirmatory test environments (items per episode) per run seed (strip plot)",
+   "result_path": "results/confirmatory/EXP-001/report/figures/FIG-1_f_test_by_arm.svg",
+   "result_sha256": "53e59bcb311a5d59c7da1649b2fb828365f6adca50a75f931d9bcdc7b2a11988",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-001`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-001/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-001/FIG-2",
+   "kind": "figure",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.<condition>.<arm>.s0000-s0029 (90 runs)",
+   "metric_definition": "best-so-far training fitness (mean of K training episodes) against evaluations",
+   "result_path": "results/confirmatory/EXP-001/report/figures/FIG-2_adaptation.svg",
+   "result_sha256": "f7938908d82eb7ae9abcae233bcd928174b0cfed416595ef11f6f37ff74e456b",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-001`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-001/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-001/FIG-3",
+   "kind": "figure",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.<condition>.<arm>.s0000-s0029 (90 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-001/analysis/FIG-3_paired_differences.svg",
+   "result_sha256": "6b5e420448b2ed2f94f57ee2bdb4b185f3a09b2e633d5a8629b6242d5d263b70",
+   "generator_script": "scripts/analyse_frozen.py EXP-001",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-001/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-001/per-run-metrics",
+   "kind": "table",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.<condition>.<arm>.s0000-s0029 (90 runs)",
+   "metric_definition": "per-run metrics of every arm and seed",
+   "result_path": "results/confirmatory/EXP-001/report/metrics.csv",
+   "result_sha256": "80a9e695e93e373f2e73f1ebcfe69cc11d44a3305f3643263717f8e2b7b8441f",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-001`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-001/metrics.csv (byte-identical copy)",
+    "supplementary S2"
+   ]
+  },
+  {
+   "artifact_id": "EXP-002/TAB-1",
+   "kind": "table",
+   "experiment_id": "EXP-002",
+   "run_ids": "EXP-002.<condition>.<arm>.s0000-s0029 (150 runs)",
+   "metric_definition": "per-arm mean, SD, min and max over 30 run seeds of F_test, F_train_fresh, F_shift, generalisation gap, adaptation AUC, best training fitness, F_train_fixed, overfit_drop, diversity and stay fraction",
+   "result_path": "results/confirmatory/EXP-002/report/summary.csv",
+   "result_sha256": "31f61e59e912a2a1c0997abcfec90e6df9d921f25a6d35198b1b8bdace241e45",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-002`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+    "experiment_protocol_sha256": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-002/report.md section 8"
+   ]
+  },
+  {
+   "artifact_id": "EXP-002/TAB-2",
+   "kind": "table",
+   "experiment_id": "EXP-002",
+   "run_ids": "EXP-002.<condition>.<arm>.s0000-s0029 (150 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-002/analysis/analysis.json",
+   "result_sha256": "d37873fbf646d3d1e8ccdfa5e16967878b725df3f4d5eefbd0fd337fa77befb5",
+   "generator_script": "scripts/analyse_frozen.py EXP-002",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+    "experiment_protocol_sha256": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-002/report.md section 8"
+   ]
+  },
+  {
+   "artifact_id": "EXP-002/FIG-1",
+   "kind": "figure",
+   "experiment_id": "EXP-002",
+   "run_ids": "EXP-002.<condition>.<arm>.s0000-s0029 (150 runs)",
+   "metric_definition": "F_test = mean food items consumed per 100-step episode over the 200 fixed confirmatory test environments (items per episode) per run seed (strip plot)",
+   "result_path": "results/confirmatory/EXP-002/report/figures/FIG-1_f_test_by_arm.svg",
+   "result_sha256": "5e8f3dc253d34625fd21f91226a5cda1d8e62f9f4c4b778922caf555541cd091",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-002`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+    "experiment_protocol_sha256": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-002/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-002/FIG-2",
+   "kind": "figure",
+   "experiment_id": "EXP-002",
+   "run_ids": "EXP-002.<condition>.<arm>.s0000-s0029 (150 runs)",
+   "metric_definition": "best-so-far training fitness (mean of K training episodes) against evaluations",
+   "result_path": "results/confirmatory/EXP-002/report/figures/FIG-2_adaptation.svg",
+   "result_sha256": "7373ab61299ae5a709b27e0bae73de33bf637e774d2a5c639efeeeb14e2421b5",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-002`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+    "experiment_protocol_sha256": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-002/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-002/FIG-3",
+   "kind": "figure",
+   "experiment_id": "EXP-002",
+   "run_ids": "EXP-002.<condition>.<arm>.s0000-s0029 (150 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-002/analysis/FIG-3_paired_differences.svg",
+   "result_sha256": "0ac20b0fc0e4c258d9d42abb2679da4b5dbabfbdb619518b82fbee6f508b8a87",
+   "generator_script": "scripts/analyse_frozen.py EXP-002",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+    "experiment_protocol_sha256": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-002/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-002/per-run-metrics",
+   "kind": "table",
+   "experiment_id": "EXP-002",
+   "run_ids": "EXP-002.<condition>.<arm>.s0000-s0029 (150 runs)",
+   "metric_definition": "per-run metrics of every arm and seed",
+   "result_path": "results/confirmatory/EXP-002/report/metrics.csv",
+   "result_sha256": "5c968fbe782ba2b34e8f5972b5c0c329650459c298c18eb77eab5ef5fc31bbfa",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-002`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+    "experiment_protocol_sha256": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-002/metrics.csv (byte-identical copy)",
+    "supplementary S2"
+   ]
+  },
+  {
+   "artifact_id": "EXP-003/TAB-1",
+   "kind": "table",
+   "experiment_id": "EXP-003",
+   "run_ids": "EXP-003.<condition>.<arm>.s0000-s0029 (180 runs)",
+   "metric_definition": "per-arm mean, SD, min and max over 30 run seeds of F_test, F_train_fresh, F_shift, generalisation gap, adaptation AUC, best training fitness, F_train_fixed, overfit_drop, diversity and stay fraction",
+   "result_path": "results/confirmatory/EXP-003/report/summary.csv",
+   "result_sha256": "b752b67b105d248983b58431ccd78032d128fb8532076f8312568b05b035f678",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-003`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+    "experiment_protocol_sha256": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-003/report.md section 8"
+   ]
+  },
+  {
+   "artifact_id": "EXP-003/TAB-2",
+   "kind": "table",
+   "experiment_id": "EXP-003",
+   "run_ids": "EXP-003.<condition>.<arm>.s0000-s0029 (180 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-003/analysis/analysis.json",
+   "result_sha256": "f6fbf6c983a2724702d1e8e071a3bce2909c726f2c29173855399f96081ce287",
+   "generator_script": "scripts/analyse_frozen.py EXP-003",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+    "experiment_protocol_sha256": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-003/report.md section 8"
+   ]
+  },
+  {
+   "artifact_id": "EXP-003/FIG-1",
+   "kind": "figure",
+   "experiment_id": "EXP-003",
+   "run_ids": "EXP-003.<condition>.<arm>.s0000-s0029 (180 runs)",
+   "metric_definition": "F_test = mean food items consumed per 100-step episode over the 200 fixed confirmatory test environments (items per episode) per run seed (strip plot)",
+   "result_path": "results/confirmatory/EXP-003/report/figures/FIG-1_f_test_by_arm.svg",
+   "result_sha256": "d66c4a8b8a3f09a68b07df185b59a594564dc9142e444460762ffad4a31fad32",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-003`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+    "experiment_protocol_sha256": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-003/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-003/FIG-2",
+   "kind": "figure",
+   "experiment_id": "EXP-003",
+   "run_ids": "EXP-003.<condition>.<arm>.s0000-s0029 (180 runs)",
+   "metric_definition": "best-so-far training fitness (mean of K training episodes) against evaluations",
+   "result_path": "results/confirmatory/EXP-003/report/figures/FIG-2_adaptation.svg",
+   "result_sha256": "bddc44280e25f576cdd2df827dac125b31aa1c1b5ef8bd6ac823f36a1c0dbcae",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-003`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+    "experiment_protocol_sha256": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-003/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-003/FIG-3",
+   "kind": "figure",
+   "experiment_id": "EXP-003",
+   "run_ids": "EXP-003.<condition>.<arm>.s0000-s0029 (180 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-003/analysis/FIG-3_paired_differences.svg",
+   "result_sha256": "807114a2fe10148986ddd2134311b17b3104a941f53938a111bd782b261ccc09",
+   "generator_script": "scripts/analyse_frozen.py EXP-003",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+    "experiment_protocol_sha256": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-003/report.md (copy in figures/)"
+   ]
+  },
+  {
+   "artifact_id": "EXP-003/per-run-metrics",
+   "kind": "table",
+   "experiment_id": "EXP-003",
+   "run_ids": "EXP-003.<condition>.<arm>.s0000-s0029 (180 runs)",
+   "metric_definition": "per-run metrics of every arm and seed",
+   "result_path": "results/confirmatory/EXP-003/report/metrics.csv",
+   "result_sha256": "d3ee634ebf8c0aa5b6c3b1774845ee6ab35a3551bac128908fcfa2cf4ec42186",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-003`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+    "experiment_protocol_sha256": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/experiments/EXP-003/metrics.csv (byte-identical copy)",
+    "supplementary S2"
+   ]
+  },
+  {
+   "artifact_id": "MS/Table-1",
+   "kind": "table",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.<condition>.<arm>.s0000-s0029 (90 runs)",
+   "metric_definition": "per-arm mean, SD, min and max over 30 run seeds of F_test, F_train_fresh, F_shift, generalisation gap, adaptation AUC, best training fitness, F_train_fixed, overfit_drop, diversity and stay fraction",
+   "result_path": "results/confirmatory/EXP-001/report/summary.csv",
+   "result_sha256": "44cb85a3fee77af33289ee2831d7887cc3254d2b7c2f862e92e5f456f5653d8c",
+   "generator_script": "src/evolve/report.py via `evolve report --results results/confirmatory/EXP-001`",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/manuscript.md section 5.1"
+   ]
+  },
+  {
+   "artifact_id": "MS/Table-2",
+   "kind": "table",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.main.{RS,NOSEL,EVO}.s0000-s0029",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-001/analysis/analysis.json",
+   "result_sha256": "079b919862f43b46939b27be43a81f69e25d263a62158cd32e46332892a97c24",
+   "generator_script": "scripts/analyse_frozen.py EXP-001",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/manuscript.md section 5.1"
+   ]
+  },
+  {
+   "artifact_id": "MS/Figure-1",
+   "kind": "figure",
+   "experiment_id": "EXP-001",
+   "run_ids": "EXP-001.<condition>.<arm>.s0000-s0029 (90 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-001/analysis/FIG-3_paired_differences.svg",
+   "result_sha256": "6b5e420448b2ed2f94f57ee2bdb4b185f3a09b2e633d5a8629b6242d5d263b70",
+   "generator_script": "scripts/analyse_frozen.py EXP-001",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/manuscript.md section 5.1"
+   ]
+  },
+  {
+   "artifact_id": "MS/Table-3",
+   "kind": "table",
+   "experiment_id": "EXP-002",
+   "run_ids": "EXP-002.<condition>.<arm>.s0000-s0029 (150 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness); arm means from summary.csv",
+   "result_path": "results/confirmatory/EXP-002/analysis/analysis.json",
+   "result_sha256": "d37873fbf646d3d1e8ccdfa5e16967878b725df3f4d5eefbd0fd337fa77befb5",
+   "generator_script": "scripts/analyse_frozen.py EXP-002",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+    "experiment_protocol_sha256": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/manuscript.md section 5.2"
+   ]
+  },
+  {
+   "artifact_id": "MS/Figure-2",
+   "kind": "figure",
+   "experiment_id": "EXP-002",
+   "run_ids": "EXP-002.<condition>.<arm>.s0000-s0029 (150 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-002/analysis/FIG-3_paired_differences.svg",
+   "result_sha256": "0ac20b0fc0e4c258d9d42abb2679da4b5dbabfbdb619518b82fbee6f508b8a87",
+   "generator_script": "scripts/analyse_frozen.py EXP-002",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+    "experiment_protocol_sha256": "40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/manuscript.md section 5.2"
+   ]
+  },
+  {
+   "artifact_id": "MS/Table-4",
+   "kind": "table",
+   "experiment_id": "EXP-003",
+   "run_ids": "EXP-003.<condition>.<arm>.s0000-s0029 (180 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness); arm means from summary.csv; E2000 row from EXP-001",
+   "result_path": "results/confirmatory/EXP-003/analysis/analysis.json",
+   "result_sha256": "f6fbf6c983a2724702d1e8e071a3bce2909c726f2c29173855399f96081ce287",
+   "generator_script": "scripts/analyse_frozen.py EXP-003",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+    "experiment_protocol_sha256": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/manuscript.md section 5.3"
+   ]
+  },
+  {
+   "artifact_id": "MS/Figure-3",
+   "kind": "figure",
+   "experiment_id": "EXP-003",
+   "run_ids": "EXP-003.<condition>.<arm>.s0000-s0029 (180 runs)",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-003/analysis/FIG-3_paired_differences.svg",
+   "result_sha256": "807114a2fe10148986ddd2134311b17b3104a941f53938a111bd782b261ccc09",
+   "generator_script": "scripts/analyse_frozen.py EXP-003",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+    "experiment_protocol_sha256": "4e4d36f307a2c68ffd74ede9de6d8fa311f83b3348d68a50529ba1499cc7e76a",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/manuscript.md section 5.3"
+   ]
+  },
+  {
+   "artifact_id": "MS/Table-5",
+   "kind": "table",
+   "experiment_id": "EXP-001;EXP-002;EXP-003",
+   "run_ids": "all registered contrasts",
+   "metric_definition": "paired difference per run seed of F_test (treatment minus comparator); mean with 95 percent percentile bootstrap CI over run seeds, 10,000 resamples, seed 0; d_z; Wilcoxon signed-rank (robustness)",
+   "result_path": "results/confirmatory/EXP-001/analysis/analysis.json (and EXP-002, EXP-003)",
+   "result_sha256": "079b919862f43b46939b27be43a81f69e25d263a62158cd32e46332892a97c24",
+   "generator_script": "scripts/analyse_frozen.py",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": {
+     "EXP-001": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+     "EXP-002": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+     "EXP-003": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542"
+    },
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/manuscript.md section 6"
+   ]
+  },
+  {
+   "artifact_id": "SUP/S4",
+   "kind": "table (exploratory)",
+   "experiment_id": "EXP-001;EXP-002;EXP-003",
+   "run_ids": "registered F_test contrasts of all three experiments",
+   "metric_definition": "EXPLORATORY: Bonferroni-level and Student t intervals, leave-one-seed-out readings, K1 without seed 13, elite re-evaluation counts",
+   "result_path": "results/exploratory/m4-sensitivity-2026-11-25/sensitivity.json",
+   "result_sha256": "f57d6cff3a28b182e7b72340173661cf3762f84d4251f3f55d732fcd4079f15a",
+   "generator_script": "scripts/m4_sensitivity.py",
+   "config_or_protocol_hash": {
+    "config_canonical_hash": {
+     "EXP-001": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+     "EXP-002": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+     "EXP-003": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542"
+    },
+    "experiment_protocol_sha256": "21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f",
+    "main_protocol_sha256": "3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85"
+   },
+   "code_revision": "5d39c9bf1eae7356b1fa837642e02e4bde68e186",
+   "used_in": [
+    "research/paper/supplementary.md S4",
+    "research/paper/manuscript.md section 5.5",
+    "EXP-002 and EXP-003 reports section 9"
+   ]
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C-001",
+   "type": "result (confirmatory primary)",
+   "result_id": "EXP-001.main.{EVO,RS}.s0000-s0029",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+   "figure_or_table": "Manuscript Table 2, Table 5, Figure 1; EXP-001 TAB-2, FIG-3",
+   "section": "Abstract; 5.1; 6; 9",
+   "evidence_path_or_source": "results/confirmatory/EXP-001/analysis/analysis.json (EXP-001 main EVO - RS f_test; run ids EXP-001.main.{EVO,RS}.s0000-s0029)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-002",
+   "type": "result (confirmatory secondary)",
+   "result_id": "EXP-001.main.{NOSEL,RS}.s0000-s0029",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+   "figure_or_table": "Manuscript Table 2, Table 5; EXP-001 TAB-2, FIG-3",
+   "section": "5.1; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-001/analysis/analysis.json (EXP-001 main NOSEL - RS f_test)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-003",
+   "type": "result (confirmatory secondary)",
+   "result_id": "EXP-002.main.{EVO,NOSEL}.s0000-s0029 (identical to EXP-001 runs)",
+   "config_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+   "figure_or_table": "Manuscript Table 2, Table 3, Figure 2; EXP-002 TAB-2, FIG-3",
+   "section": "5.1; 5.2; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-002/analysis/analysis.json (EXP-002 main EVO - NOSEL f_test)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-004",
+   "type": "result (confirmatory secondary)",
+   "result_id": "EXP-002.main.{EVO,SELONLY}.s0000-s0029",
+   "config_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+   "figure_or_table": "Manuscript Table 3, Table 5, Figure 2; EXP-002 TAB-2",
+   "section": "Abstract; 5.2; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-002/analysis/analysis.json (EXP-002 main EVO - SELONLY f_test)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-005",
+   "type": "result (confirmatory secondary)",
+   "result_id": "EXP-002.main.{EVO,EVO-sigma0.02}.s0000-s0029",
+   "config_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+   "figure_or_table": "Manuscript Table 3, Table 5; EXP-002 TAB-2",
+   "section": "5.2; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-002/analysis/analysis.json (EXP-002 main EVO - EVO-sigma0.02 f_test)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-006",
+   "type": "result (confirmatory secondary; contradicting result under EXP-002's rule)",
+   "result_id": "EXP-002.main.{EVO,EVO-sigma0.5}.s0000-s0029",
+   "config_hash": "e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4",
+   "figure_or_table": "Manuscript Table 3, Table 5, Figure 2; EXP-002 TAB-2",
+   "section": "Abstract; 5.2; 6; 7",
+   "evidence_path_or_source": "results/confirmatory/EXP-002/analysis/analysis.json (EXP-002 main EVO - EVO-sigma0.5 f_test)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-007",
+   "type": "result (confirmatory)",
+   "result_id": "EXP-003.E500.{EVO,RS}.s0000-s0029",
+   "config_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Manuscript Table 4, Table 5, Figure 3; EXP-003 TAB-2",
+   "section": "Abstract; 5.3; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-003/analysis/analysis.json (EXP-003 E500 EVO - RS f_test)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-008",
+   "type": "result (confirmatory)",
+   "result_id": "EXP-003.E8000.{EVO,RS}.s0000-s0029",
+   "config_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Manuscript Table 4, Table 5, Figure 3; EXP-003 TAB-2",
+   "section": "Abstract; 5.3; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-003/analysis/analysis.json (EXP-003 E8000 EVO - RS f_test)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-009",
+   "type": "result (confirmatory)",
+   "result_id": "EXP-003.K1.{EVO,RS}.s0000-s0029",
+   "config_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Manuscript Table 4, Table 5, Figure 3; EXP-003 TAB-2",
+   "section": "Abstract; 5.3; 6; 7; 9",
+   "evidence_path_or_source": "results/confirmatory/EXP-003/analysis/analysis.json (EXP-003 K1 EVO - RS f_test)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-010",
+   "type": "result (confirmatory secondary)",
+   "result_id": "EXP-003.K1.{EVO,RS}.s0000-s0029",
+   "config_hash": "81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Manuscript Table 4, Figure 3; EXP-003 TAB-1, TAB-2",
+   "section": "Abstract; 5.3; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-003/analysis/analysis.json (EXP-003 K1 overfit_drop and f_train_fixed)",
+   "status": "verified against raw results 2026-11-25; re-verified by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-011",
+   "type": "result (confirmatory, descriptive)",
+   "result_id": "EXP-001.main.{EVO,RS}.s0000-s0029",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+   "figure_or_table": "Manuscript Table 2; EXP-001 TAB-2",
+   "section": "5.1",
+   "evidence_path_or_source": "results/confirmatory/EXP-001/analysis/analysis.json (EVO - RS f_shift)",
+   "status": "verified against raw results by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-012",
+   "type": "result (confirmatory, descriptive)",
+   "result_id": "EXP-001.main.{EVO,RS}.s0000-s0029",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239",
+   "figure_or_table": "Manuscript Table 2; EXP-001 TAB-2",
+   "section": "5.1; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-001/analysis/analysis.json (EVO - RS generalisation_gap)",
+   "status": "verified against raw results by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-013",
+   "type": "provenance",
+   "result_id": "all EXP-001 to EXP-003 run ids",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239; e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4; 81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Supplementary S1",
+   "section": "5; S1; S6",
+   "evidence_path_or_source": "results/confirmatory/EXP-00{1,2,3}/matrix_manifest.json and analysis.json status_counts",
+   "status": "verified against raw results by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-014",
+   "type": "result (confirmatory, audit)",
+   "result_id": "all EXP-001 to EXP-003 run ids",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239; e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4; 81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Manuscript Table 1; EXP report degenerate-case checks",
+   "section": "5.4",
+   "evidence_path_or_source": "results/confirmatory/EXP-00{1,2,3}/report/metrics.csv (replay_check_passed, stay_fraction) and report/report.md",
+   "status": "verified against raw results by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-015",
+   "type": "result (confirmatory, cross-condition description)",
+   "result_id": "EXP-003.{E500,E8000}.{EVO,RS}; EXP-001.main.{EVO,RS}",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239; 81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Manuscript Table 4, Figure 3",
+   "section": "5.3",
+   "evidence_path_or_source": "results/confirmatory/EXP-003/analysis/analysis.json; results/confirmatory/EXP-001/analysis/analysis.json",
+   "status": "verified against raw results by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-016",
+   "type": "result (confirmatory, descriptive)",
+   "result_id": "all EXP-001 to EXP-003 run ids",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239; e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4; 81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Manuscript Tables 1, 3, 4; EXP reports TAB-1",
+   "section": "5.1; 5.2; 5.3; 6",
+   "evidence_path_or_source": "results/confirmatory/EXP-00{1,2,3}/report/summary.csv",
+   "status": "verified against raw results by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-017",
+   "type": "result (exploratory, M4 re-analysis)",
+   "result_id": "EXP-001 to EXP-003 registered F_test contrasts; EXP-002 population arms",
+   "config_hash": "accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239; e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4; 81f9f93864d7bca4714d4ebed223a72ec7689467a274f3c7f13fa12e8586b542",
+   "figure_or_table": "Supplementary S4",
+   "section": "5.5; 6; S4",
+   "evidence_path_or_source": "results/exploratory/m4-sensitivity-2026-11-25/sensitivity.json (scripts/m4_sensitivity.py, J-0012)",
+   "status": "verified against raw results by scripts/audit_numbers.py 2026-11-25 (M4)"
+  },
+  {
+   "claim_id": "C-020",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "such2017deep, arXiv:1712.06567; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-021",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "salimans2017evolution, arXiv:1703.03864; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-022",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "bergstra2012random, JMLR 13(10):281-305; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-023",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "mania2018simple, arXiv:1803.07055; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-024",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "henderson2017matters, arXiv:1709.06560; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-025",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "colas2018seeds, arXiv:1806.08295; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-026",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "agarwal2021precipice, arXiv:2108.13264; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-027",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "cobbe2019procgen, arXiv:1912.01588; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-028",
+   "type": "external (abstract-level)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "lehman2018surprising, arXiv:1803.03453; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  },
+  {
+   "claim_id": "C-029",
+   "type": "external (page read)",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "n/a",
+   "section": "Manuscript 1; 2; 6; 8",
+   "evidence_path_or_source": "krakovna2020specification, DeepMind blog 21 April 2020; research/literature_review.md",
+   "status": "abstract or landing page re-opened 2026-11-25 (M4 evidence audit); full text not read"
+  }
+ ]
 }

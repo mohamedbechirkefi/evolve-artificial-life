@@ -8,7 +8,7 @@
 | Experiment | EXP-001 |
 | Status | **Confirmatory, complete** (90 of 90 planned runs, 0 failed, 0 retried) |
 | Date of runs | 2026-11-24T23:33:18Z to 2026-11-24T23:35:03Z (UTC; 2026-11-25 local time) |
-| Report version | 1.0 (M3; written from the committed results after the owner's approval of 2026-11-25, D-012) |
+| Report version | 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
 | Authorship | Mohamed Bechir Kefi (approved C3, no affiliation). An AI system was used as a research and development assistant; it is not an author. |
 | Protocol | `research/experiments/EXP-001/protocol.md` v1.0, SHA-256 21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f; main protocol `research/protocol.md` SHA-256 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85 |
 | Config | `experiments/configs/EXP-001.json`, file SHA-256 aaaf6e09d7dbe223ae29e890f4ec74ec0d50219608594ce3b5aa78634999fdae, canonical hash accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239 |
@@ -27,7 +27,7 @@
 
 ## 3. Rationale and literature
 
-Simple genetic algorithms with Gaussian mutation and truncation selection have trained deep reinforcement learning policies competitively (Such et al. 2017, arXiv:1712.06567), and evolution strategies are a scalable black-box alternative (Salimans et al. 2017, arXiv:1703.03864). Random search is a strong baseline (Bergstra and Bengio 2012, JMLR 13; Mania et al. 2018, arXiv:1803.07055), so an evolutionary method has to be compared with it at equal budget. Results in this area vary with seeds and evaluation details (Henderson et al. 2017, arXiv:1709.06560; Colas et al. 2018, arXiv:1806.08295; Agarwal et al. 2021, arXiv:2108.13264), which motivates paired seeds and interval estimates. Gap addressed: a small, fully reproducible, paired, held-out comparison of selection against random search and a no-selection control in one grid world, with run-level uncertainty. Sources are those verified in `research/literature_review.md`.
+A simple, gradient-free, population-based genetic algorithm has trained deep reinforcement learning policies competitively (Such et al. 2017, arXiv:1712.06567; the Gaussian mutation and truncation selection of the EVO arm are this project's design choices, since only the abstract was read), and evolution strategies are a scalable black-box alternative (Salimans et al. 2017, arXiv:1703.03864). Random search is a strong baseline (Bergstra and Bengio 2012, JMLR 13; Mania et al. 2018, arXiv:1803.07055), so an evolutionary method has to be compared with it at equal budget. Results in this area vary with seeds and evaluation details (Henderson et al. 2017, arXiv:1709.06560; Colas et al. 2018, arXiv:1806.08295; Agarwal et al. 2021, arXiv:2108.13264), which motivates paired seeds and interval estimates. Gap addressed: a small, fully reproducible, paired, held-out comparison of selection against random search and a no-selection control in one grid world, with run-level uncertainty. Sources are those verified in `research/literature_review.md`; only their abstracts or landing pages were read, so they support abstract-level statements only (M4 evidence audit).
 
 ## 4. Hypotheses and operational definitions
 
@@ -116,9 +116,9 @@ Degenerate-case checks (`results/confirmatory/EXP-001/report/report.md`): no ret
 
 **Model-dependent inference.** The pattern is consistent with the protocol's mechanism: fitness is locally correlated in parameter space, so offspring of selected parents concentrate the budget in productive regions. This is an interpretation, not a direct measurement.
 
-**Literature.** The direction agrees with reports that simple genetic algorithms are competitive black-box optimisers (Such et al. 2017). It does not bear on Mania et al. (2018), whose random search is a local method with a step rule, not independent sampling.
+**Literature.** The direction agrees with reports that simple genetic algorithms are competitive black-box optimisers (Such et al. 2017). It does not bear directly on Mania et al. (2018), who introduce a random search method for training static, linear policies in continuous control; only the abstract was read, and it does not describe that method as independent sampling, so the RS arm here is not a replication of it and no comparison is drawn. (Wording corrected in the M4 evidence audit, 2026-11-25: the previous version described that method as a local method with a step rule, which the abstract does not state.)
 
-**Robustness.** The Wilcoxon signed-rank check agrees with the bootstrap (p = 4.3e-06).
+**Robustness.** The Wilcoxon signed-rank check agrees with the bootstrap (p = 4.3e-06). An exploratory M4 re-analysis of the committed results (J-0012, `results/exploratory/m4-sensitivity-2026-11-25/sensitivity.json`; it does not replace the frozen verdict) gives a Student t interval of [4.621, 6.962], and leave-one-seed-out means from 5.628 to 6.158, with no subset changing the reading.
 
 ## 10. Threats to validity
 

@@ -8,8 +8,8 @@ Effort is a planning estimate in focused development days (five-day target). Sta
 | M0 | Bootstrap and feasibility | none | P0 | 0.5 d | done (2026-11-24), pending owner review of scope and cost | none |
 | M1 | Research and preregistration | M0 | P0 | 0.5 d | done (2026-11-24): gate passed, protocol v1.0 frozen by the owner (D-010, `research/freeze.json`) | none |
 | M2 | Core implementation | M1 drafts (freeze not required to implement) | P0 | 1 d | done (2026-11-24); amended for the freeze (schema 1.1.0, freeze guard); 131 tests pass | none |
-| M3 | Experiments | M2, M1 freeze | P0 | 1 d | in progress (2026-11-25): smoke and metric validation done (J-0007, J-0008); frozen matrices complete, 420/420 runs ok (J-0009 to J-0011); analysis, figures, claims C-001 to C-010 done; 11.3 reports not written | 11.3 experiment reports owed (file tool refused the report file; coordinator: do not work around, D-011); owner reading of the EXP-002 sigma clause (D-011) |
-| M4 | Interpretation | M3 | P0 | 0.75 d | not started | none |
+| M3 | Experiments | M2, M1 freeze | P0 | 1 d | done (2026-11-25): 420/420 confirmatory runs ok (J-0009 to J-0011); 11.3 reports written by the coordinator from committed results (owner-approved, D-012; see `progress.md`, "M3 done (coordinator)") | none |
+| M4 | Interpretation | M3 | P0 | 0.75 d | done (2026-11-25): evidence audit, exploratory sensitivity (J-0012), manuscript v1.0 after the second review pass (D-013); 137 tests pass | none (PDFs are M6) |
 | M5 | Interactive experience | M3 results (M4 for labels) | P1 | 0.75 d | not started | none |
 | M6 | Release candidate | M4, M5 | P0 | 0.5 d | not started | owner approval for any publication (G-PUBLIC) |
 
@@ -33,6 +33,8 @@ M3 gate check (2026-11-25): the planned matrix is complete with no failed or dro
 
 ## M4. Interpretation
 Acceptance: confounders inspected; sensitivity analyses (EXP-003, exploit audit) reported; expected versus observed compared; claims register and limitations completed. 11.6: experiment reports and evidence audit finished; cross-experiment synthesis in the manuscript, including contradictory results. Gate: each numerical claim maps to result ID, config and figure; each external claim to a verified source.
+
+M4 gate check (2026-11-25): every numerical claim maps to a result id, config hash and figure or table (`research/claims_register.csv`, `research/publication/artifact_manifest.json`), and every external claim to a source re-opened and marked abstract-level (`research/literature_review.md`). Evidence audit in `research/publication/claims_audit.md`; second review pass in `research/publication/review_pass_2.md`. Gate holds; M4 done (D-013).
 
 ## M5. Interactive experience
 Acceptance: static page with animated organisms, ancestry and fitness curves with replay; measured results distinguished from sandbox results; accessibility checks. 11.6: demo, paper, reports and articles use identical verified results, labels and scope. Gate: offline after initial load, responsive, keyboard usable, no fabricated data, no runtime service.

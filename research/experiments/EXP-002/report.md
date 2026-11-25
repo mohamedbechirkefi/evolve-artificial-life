@@ -8,7 +8,7 @@
 | Experiment | EXP-002 |
 | Status | **Confirmatory (secondary, estimation-focused), complete** (150 of 150 runs as committed, 0 failed, 0 retried). Contains a contradicting result under the protocol's rule (owner's classification, D-012). |
 | Date of runs | 2026-11-24T23:35:03Z to 2026-11-24T23:40:48Z (UTC; 2026-11-25 local time) |
-| Report version | 1.0 (M3; written from the committed results after the owner's approval of 2026-11-25, D-012) |
+| Report version | 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
 | Authorship | Mohamed Bechir Kefi (approved C3, no affiliation). An AI system was used as a research and development assistant; it is not an author. |
 | Protocol | `research/experiments/EXP-002/protocol.md` v1.0, SHA-256 40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4; main protocol SHA-256 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85 |
 | Config | `experiments/configs/EXP-002.json`, file SHA-256 21c40e42e10e6fd482dfb813f65fbe1e3cdb6aa5492752005cdbaeb8e54d9248, canonical hash e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4 |
@@ -27,7 +27,7 @@
 
 ## 3. Rationale and literature
 
-Ablating variation and selection is required by the master prompt (section 10). Gaussian mutation with truncation selection is the reference design of Such et al. (2017, arXiv:1712.06567). Results of simple search methods vary with hyperparameters and seeds (Mania et al. 2018, arXiv:1803.07055; Henderson et al. 2017, arXiv:1709.06560), which motivates the sigma sweep. Gap: separating the contributions of mutation and selection at equal evaluations, on held-out environments, with paired seeds.
+Ablating variation and selection is required by the master prompt (section 10). A simple population-based genetic algorithm on network weights is the reference design of Such et al. (2017, arXiv:1712.06567); its abstract, the only part read, does not specify the mutation or selection operators, so Gaussian mutation with truncation selection is this project's choice (wording corrected in the M4 evidence audit, 2026-11-25). Results of simple search methods vary with hyperparameters and seeds (Mania et al. 2018, arXiv:1803.07055), and reported results in deep reinforcement learning are hard to reproduce because of variance intrinsic to the methods (Henderson et al. 2017, arXiv:1709.06560), which motivates the sigma sweep. Gap: separating the contributions of mutation and selection at equal evaluations, on held-out environments, with paired seeds.
 
 ## 4. Hypotheses and operational definitions
 
@@ -103,6 +103,8 @@ Degenerate-case checks (`results/confirmatory/EXP-002/report/report.md`): no F_t
 **Verdict on the contradicting-result clause.** By the owner's decision (D-012, conservative reading), the EVO minus EVO-sigma0.5 interval lying entirely below 0 is a contradicting result under EXP-002's rule: it is a finding against EXP-002's assumption about the setting (sigma 0.1). It does not bear on H1a or H1b, and H1 of EXP-001 stands.
 
 **Alternatives.** SELONLY can only return one of its 50 generation-0 policies, whereas RS draws 2,000, so SELONLY below RS reflects a smaller effective sample, not harm from selection. Larger sigma explores more widely, as the larger genotypic diversity of EVO-sigma0.5 shows (23.90 against 5.01); sigma 0.5 also did not degrade to random-search performance (F_test 12.296 against 4.728 for RS in EXP-001).
+
+**Exploratory M4 checks (J-0012; not a frozen analysis, no verdict changes).** With a Bonferroni-adjusted 98.75 percent bootstrap interval for the four registered contrasts, every interval keeps its reading: EVO minus EVO-sigma0.5 is [-2.706, -0.932]. Leave-one-seed-out subsets change no reading. Elite re-evaluations are 39 of 2,000 evaluations (1.95 percent) in every population arm, and the returned policy was an elite re-evaluation in 2 of 30 EVO runs, 4 of 30 EVO-sigma0.5 runs, 1 of 30 SELONLY runs and no NOSEL or EVO-sigma0.02 run, so the elite re-evaluation named in protocol section 4 is not a plausible source of the large effects. Source: `results/exploratory/m4-sensitivity-2026-11-25/sensitivity.json`.
 
 **Model-dependent inference.** Selection needs variation to act on, and mutation needs selection to direct it. In this task larger steps than 0.1 were more productive at E = 2,000. Whether sigma 0.5 is near an optimum is not tested (three levels).
 

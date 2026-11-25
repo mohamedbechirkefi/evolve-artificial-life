@@ -161,3 +161,40 @@ New: `scripts/{run_confirmatory.sh, analyse_frozen.py, validate_results.py}`, `t
 ## 2026-11-25: M3 done (coordinator)
 
 The owner approved the experiment reports (owner, 2026-11-25, "approve all recommendations, RIGGED A", item 4). Subagents may not write report files, so the reports were composed by the M3 session from committed results only and written by the coordinator: 3 report(s). The coordinator checked that every decimal number in them appears in a committed file. With the complete matrices (or documented failures) recorded above, the M3 gate holds. M3 is **done**. Next: M4 (interpretation), not started.
+
+## 2026-11-25: Session M4 (interpretation, evidence audit, manuscript)
+
+**Milestone:** M4. **Authority:** owner, 2026-11-25, "Approve all recommendations, push then next" (`labs/_shared/owner-approvals-2026-11-25b.md`, item 5); coordinator brief `labs/_shared/M4-brief.md`. No EVOLVE-specific follow-up in that file. **Next bounded task at start:** confounder inspection, expected versus observed, claims register, evidence audit, manuscript synthesis, second review pass, records.
+
+### Starting state
+`git status`: clean except nothing in this repository (HEAD 52f6733). `.venv/bin/python -m pytest -q`: 135 passed.
+
+### Commands and actual outputs
+- `nice -n 10 .venv/bin/python scripts/m4_sensitivity.py` (new, exploratory, J-0012): 0.8 s; every registered reading unchanged under Bonferroni levels, Student t intervals and leave-one-seed-out; K1 without seed 13: 0.777 [-0.544, 2.053], n = 29; elite re-evaluations 39 of 2,000; returned EVO policy an elite re-evaluation in 2 of 30 runs.
+- `.venv/bin/python scripts/audit_numbers.py` (new, J-0013): EXP-001 90, EXP-002 150, EXP-003 180 runs, 0 SHA-256 mismatches; 105, 175 and 226 summary values and 36, 24 and 54 analysis values recomputed, 0 mismatches; 60/60 shared runs identical; raw problems 0. Final scan: unmatched tokens only 98.75 and 98.33 (Bonferroni level labels).
+- Integer checks (ad-hoc Python on `analysis.json` and `report/metrics.csv`): positive/negative seed counts as printed; stay fraction above 0.5: EXP-001 NOSEL 7, RS 1; EXP-002 NOSEL 7, SELONLY 3; EXP-003 E500 RS 1, K1 EVO 4, K1 RS 2 (18 distinct); zero F_test only `EXP-003.K1.{EVO,RS}.s0013`; replay check passed in 420/420 runs.
+- `cmp` of report figure and metrics copies against the result folders: 18/18 and 3/3 identical.
+- External sources re-opened with a web fetch of the arXiv abstract pages, the JMLR page and the DeepMind post (no download beyond the pages).
+- `.venv/bin/python scripts/build_artifact_manifest.py`: 27 artifacts, 27 claims.
+- Pandoc 3.6.3: `manuscript.tex` regenerated from manuscript v1.0 (SPDX line prepended). No PDF built (M6).
+- Tests after the changes: `.venv/bin/python -m pytest -q`: 137 passed (2 new tests in `tests/test_m4_scripts.py`).
+
+### Findings
+- Confounders: EXP-001 (a) to (e) addressed by NOSEL, the K = 5 gap and K1, the exploit audit, the shared output rule and the predeclaration; (b) excluded for resampled training only. EXP-002: elite re-evaluation argued against (1.95 percent of budget, 2 of 30), not tested; budget dependence of the best sigma not addressed. EXP-003: no sign change in budget; overfitting under K = 1 found.
+- Evidence audit findings A1 to A11 (`research/publication/claims_audit.md`): malformed C-001 row; stale registry status; four report citation sentences beyond the abstracts (Such, Mania, Cobbe, Henderson), corrected in report v1.1 with no number changed; frozen protocols keep the original wording (disclosed).
+- Second review pass (`research/publication/review_pass_2.md`): nine changes from manuscript v0.9 to v1.0, among them a double count (25 corrected to 18 distinct), the missing single-lineage local-search comparator, budget confounded with P and G, a second reading of K1 and pilot-informed predeclarations.
+- No frozen verdict changed.
+
+### Failures
+One scripting error of my own: a first claims-register rewrite raised an exception after opening the file for writing, which emptied it; I restored the committed version with `git show HEAD:research/claims_register.csv` and reran the corrected script. No other file was affected.
+
+### Changed files
+New: `scripts/{m4_sensitivity.py, audit_numbers.py, build_artifact_manifest.py}`, `tests/test_m4_scripts.py`, `results/exploratory/m4-sensitivity-2026-11-25/sensitivity.json`, `research/publication/{review_pass_2.md, number_audit.json}`. Modified: `research/paper/{manuscript.md, manuscript.tex, supplementary.md, figures/README.md}`, `research/experiments/EXP-00{1,2,3}/report.md`, `research/{claims_register.csv, experiment_registry.csv, limitations.md, literature_review.md, decision_log.md, experiment_journal.jsonl}`, `research/publication/{claims_audit.md, artifact_manifest.json}`, `results/README.md`, `roadmap.md`, `progress.md`.
+
+### M4 gate
+Every numerical claim maps to a result id, config hash and figure or table, and every external claim to a source re-opened and marked abstract-level. **M4 done.**
+
+### Outstanding risks and next action
+- The frozen EXP protocols keep three citation sentences that go beyond the abstracts (disclosed, cannot be edited).
+- The owner should review the manuscript's funding and competing-interest placeholders and the AI-assistance statement (`research/publication/author_review.md`).
+- Next: M5 (interactive page) using the same verified numbers, then M6 (PDFs, clean-clone reproduction). Nothing pushed.
