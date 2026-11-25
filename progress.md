@@ -157,3 +157,7 @@ New: `scripts/{run_confirmatory.sh, analyse_frozen.py, validate_results.py}`, `t
 ### Outstanding and next action
 - Owner or coordinator: decide how the 11.3 reports get written (M3 stays in progress until they exist), and the reading of EXP-002's contradicting-result clause for sigma 0.5 (D-011).
 - Then M4: reports and evidence audit, manuscript synthesis including the K1 result and the sigma result.
+
+## 2026-11-25: M3 done (coordinator)
+
+The owner approved the experiment reports (owner, 2026-11-25, "approve all recommendations, RIGGED A", item 4). Subagents may not write report files, so the reports were composed by the M3 session from committed results only and written by the coordinator: 3 report(s). The coordinator checked that every decimal number in them appears in a committed file. With the complete matrices (or documented failures) recorded above, the M3 gate holds. M3 is **done**. Next: M4 (interpretation), not started.
