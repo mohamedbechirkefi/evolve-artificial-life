@@ -40,5 +40,5 @@ Fonts are bundled from Fontsource packages (versions pinned in `package.json`) a
 
 | Family | Package and version | Licence | Used |
 |---|---|---|---|
-| IM Fell English (Igino Marini) | `@fontsource/im-fell-english` 5.3.0 | SIL Open Font License 1.1 | latin 400: headline, section titles, wordmark |
-| Alegreya Sans (Huerta Tipografica) | `@fontsource/alegreya-sans` 5.3.0 | SIL Open Font License 1.1 | latin 400, 500, 700: body, controls, figures |
+| IM Fell English (Igino Marini) | `@fontsource/im-fell-english` 5.3.0 | SIL Open Font License, version 1.1 | latin 400: headline, section titles, wordmark |
+| Alegreya Sans (Huerta Tipografica) | `@fontsource/alegreya-sans` 5.3.0 | SIL Open Font License, version 1.1 | latin 400, 500, 700: body, controls, figures |
