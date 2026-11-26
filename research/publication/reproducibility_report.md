@@ -81,3 +81,14 @@ Every page of all five PDFs was rendered to PNG at 60 ppi (table pages also at 1
 | `scripts/export_demo_data.py`, `scripts/export_sandbox_fixture.py`, `git status --short` | "wrote demo/public/data/results.json (1040940 bytes)", "wrote demo/src/engine.fixture.json (28987 bytes)"; 0 status lines |
 
 Both clones and the smoke outputs were deleted at the end of the session.
+
+## 7. Local home-directory paths after the owner's answers of 2026-11-26 (B9)
+
+The owner chose to scrub absolute home-directory paths from editable files in a new commit, without rewriting history (owner, 2026-11-26, decision sheet, B9). The repository is public since 2026-11-25, so earlier commits keep the paths they had.
+
+- Removed on 2026-11-26: the 7 lines in `CLAUDE.md` (tool paths now relative to the repository, for example `../.tools/py/bin/uv`, and "the research root" in words). Each relative command was tested from the repository root (`../.tools/py/bin/uv --version`: "uv 0.9.5"; `../.tools/pandoc --version`: "pandoc 3.6.3"; `../.tools/py/bin/python -c "import typst"`: ok; `../../helix/.tools/node/bin/node --version`: "v22.23.3").
+- Remaining in tracked text files (`git grep -n "/Users/"`), 6 lines in 3 files, all left by rule:
+  - `research/protocol.md`, 3 lines (tool table): frozen protocol whose SHA-256 is recorded in `research/freeze.json`.
+  - `progress.md`, 2 lines: append-only session log.
+  - `research/decision_log.md`, 1 line (D-014): append-only decision log.
+- Checksummed results, run logs and the committed PDFs contain no such path (pypdf scan in section 3; `git grep` finds none under `results/`).

@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0
 # Licence: EVOLVE Source-Available Non-Commercial Research License v1.0 (custom, see LICENSE).
 # No SPDX license field is given because the licence is not on the SPDX list.
-# repository-code: [placeholder, not published; release requires the owner's approval]
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below. Status: independent research manuscript / preprint draft, not peer-reviewed. Simulation study."
 title: "Evolutionary selection versus independent random search at equal evaluation budgets in a simulated foraging grid: a preregistered paired comparison with ablations and a sensitivity analysis"
@@ -9,5 +8,7 @@ type: software
 authors:
   - family-names: Kefi
     given-names: Mohamed Bechir
+    affiliation: "Independent researcher"
 version: 0.1.0-rc1
+repository-code: "https://github.com/mohamedbechirkefi/evolve-artificial-life"
 abstract: "Simulation study in a synthetic 16 x 16 foraging grid. At an equal budget of 2,000 evaluations, evolutionary selection (EVO) exceeded independent random search (RS) on held-out fitness by 5.791 food items per episode (95 percent paired bootstrap CI [4.644, 6.844], n = 30 run seeds). The frozen mutation strength of 0.1 was not the best tested (sigma 0.5 exceeded it by 1.776), and with one fixed training environment the advantage was inconclusive (0.751, CI [-0.533, 1.998]). Not evidence about biological evolution or general intelligence."

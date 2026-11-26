@@ -11,4 +11,6 @@ Two results cut the other way, and they matter as much. The mutation strength I 
 
 Caveat: a toy simulation with one environment family and an untuned random-search baseline. It says nothing about biological evolution or general intelligence. Independent preprint draft, not peer-reviewed.
 
-Repository: [placeholder, not published]. Interactive demo: [placeholder, not published].
+Mohamed Bechir Kefi, independent researcher.
+
+Repository: https://github.com/mohamedbechirkefi/evolve-artificial-life. Interactive demo: https://evolve-artificial-life.kefimohamedbechir.workers.dev.

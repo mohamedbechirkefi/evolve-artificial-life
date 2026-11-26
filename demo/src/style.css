@@ -166,5 +166,5 @@ svg.organism { width: 100%; height: auto; border: 1px solid var(--line); border-
 .agent { fill: var(--fg); stroke: var(--board); stroke-width: 0.8; }
 
 code { overflow-wrap: anywhere; font-size: 0.88em; }
-footer.site { padding: 1.5rem 0 2.5rem; color: var(--muted); font: 0.9rem/1.5 var(--sans); }
+footer.site { padding: 1.5rem 0 2.5rem; color: var(--muted); font: 0.9rem/1.5 var(--sans); overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

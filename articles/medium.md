@@ -3,6 +3,8 @@
 
 *Draft for Medium. Not published; publication is the owner's decision. Simulation study; the underlying manuscript is an independent preprint draft, not peer-reviewed.*
 
+*By Mohamed Bechir Kefi, independent researcher.*
+
 Nobody tells the small foraging agents in this study what to do. Each one is a tiny neural network that sees a 5 x 5 patch of a 16 x 16 grid and chooses to step forward, turn or stay. Some patches hold food. The question is whether a simple evolutionary process, copying the better networks with small random changes, finds better foragers than simply drawing networks at random, when both get exactly the same number of tries.
 
 ## The question
@@ -40,6 +42,6 @@ This is a toy world chosen for reproducibility. One grid family, one network siz
 
 Every number above is mapped to its result file in the artifact manifest; the frozen protocols, raw runs and analysis script are in the repository. An interactive page lets you replay the committed runs generation by generation and evolve your own organisms in a labelled sandbox.
 
-Repository: [placeholder, not published; release requires the owner's approval]. Demo: [placeholder, not published].
+Repository: https://github.com/mohamedbechirkefi/evolve-artificial-life. Demo: https://evolve-artificial-life.kefimohamedbechir.workers.dev.
 
 *AI assistance: an AI system was used as a research and development assistant for code, analysis and drafting, under the author's direction; it is not an author.*

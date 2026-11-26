@@ -25,3 +25,7 @@ Node 22 or later; Google Chrome for the checker.
     node tools/a11y_check.mjs dist [--screenshots <dir>]
 
 The checker serves `dist/` locally and checks: only same-origin requests, results render, keyboard reach and visible focus, WCAG AA contrast in light and dark schemes, no horizontal scroll at 360 px, no running animation under reduced motion, and that the page and sandbox work with the network switched off. EVOLVE adds the same contrast, overflow and keyboard checks with the sandbox output shown.
+
+## Hosting
+
+The built page (`dist/`) is hosted at https://evolve-artificial-life.kefimohamedbechir.workers.dev as Cloudflare Workers static assets on the free plan, with no Worker script (`wrangler.jsonc` names the assets folder only). The deployment is made by the lab coordinator, not by any script of this repository (owner, 2026-11-26, decision sheet, B2).

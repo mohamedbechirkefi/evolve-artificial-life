@@ -50,7 +50,7 @@ export function App() {
       <footer className="site">
         <div className="wrap">
           <p>Runs offline after the first load. No data about visitors is collected, stored or sent anywhere; the page makes no request to any other host.</p>
-          <p>Repository: [placeholder, not published; release requires the owner's approval]. Demo URL: [placeholder, not published].</p>
+          <p>Mohamed Bechir Kefi, independent researcher. Repository: <a href="https://github.com/mohamedbechirkefi/evolve-artificial-life">https://github.com/mohamedbechirkefi/evolve-artificial-life</a>. Demo: <a href="https://evolve-artificial-life.kefimohamedbechir.workers.dev">https://evolve-artificial-life.kefimohamedbechir.workers.dev</a>.</p>
           <p>Licence: EVOLVE Source-Available Non-Commercial Research License v1.0 (custom, not OSI-approved). An AI system was used as a research and development assistant; it is not an author.</p>
         </div>
       </footer>

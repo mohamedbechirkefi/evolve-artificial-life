@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0 -->
 # Supplementary material
 
-Supplement to the manuscript `research/paper/manuscript.md` (draft v1.0, 2026-11-25). Independent research manuscript / preprint draft, not peer-reviewed. Simulation study. Every number below is taken from a committed result file; the mapping is in `research/publication/artifact_manifest.json`.
+Supplement to the manuscript `research/paper/manuscript.md` (draft v1.0, 2026-11-25). Author: Mohamed Bechir Kefi, independent researcher. Independent research manuscript / preprint draft, not peer-reviewed. Simulation study. Every number below is taken from a committed result file; the mapping is in `research/publication/artifact_manifest.json`.
 
 ## S1. Complete experimental matrix
 

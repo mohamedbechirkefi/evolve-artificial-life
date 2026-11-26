@@ -8,8 +8,8 @@
 | Experiment | EXP-001 |
 | Status | **Confirmatory, complete** (90 of 90 planned runs, 0 failed, 0 retried) |
 | Date of runs | 2026-11-24T23:33:18Z to 2026-11-24T23:35:03Z (UTC; 2026-11-25 local time) |
-| Report version | 1.2 (M6, 2026-11-25: section 3 citation wording updated after the full texts were consulted; no number changed). 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
-| Authorship | Mohamed Bechir Kefi (approved C3, no affiliation). An AI system was used as a research and development assistant; it is not an author. |
+| Report version | 1.3 (2026-11-26: authorship line per the owner's answers; no number changed). 1.2 (M6, 2026-11-25: section 3 citation wording updated after the full texts were consulted; no number changed). 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
+| Authorship | Mohamed Bechir Kefi, independent researcher (owner, 2026-11-26, decision sheet, B3, which replaces the C3 form without affiliation). An AI system was used as a research and development assistant; it is not an author. |
 | Protocol | `research/experiments/EXP-001/protocol.md` v1.0, SHA-256 21e0a7400c4b5b660937e416d6bb7a454c1e3f9f822bd6232f2381586a36253f; main protocol `research/protocol.md` SHA-256 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85 |
 | Config | `experiments/configs/EXP-001.json`, file SHA-256 aaaf6e09d7dbe223ae29e890f4ec74ec0d50219608594ce3b5aa78634999fdae, canonical hash accc5309178ee616b60e2f0f3fc09fb8634202c12ca5fe8a1409cae5436c5239 |
 | Provenance revision | 5d39c9bf1eae7356b1fa837642e02e4bde68e186 (clean tree; `git_dirty` false in every run manifest) |

@@ -329,3 +329,33 @@ The owner's review and sign-off. No push.
 ### Addendum: fresh-clone re-check after commit 5ac2e19
 
 Fresh clone of 5ac2e19: 158 tests passed; links 0 broken; `scripts/build_pdfs.py` (with `EVOLVE_PANDOC` and `EVOLVE_TYPST_PYTHON` set, since the clone has no `.tools` folder next to it) rebuilt the five PDFs at the committed sizes, text identical, timestamps different; smoke via `./scripts/evolve smoke` identical on every scientific field (`git_dirty` True only because the rebuilt PDFs were in the tree); demo `npm ci`, 20 tests, build, "A11Y-CHECK PASS"; re-export left `git status` clean. Clones deleted. Recorded in `research/publication/reproducibility_report.md` section 6.
+
+## 2026-11-26: owner answers to the decision sheet applied
+
+Authority: owner, 2026-11-26, decision sheet. Brief: `labs/_shared/OWNER-ANSWERS-brief.md`. Decision D-017.
+
+### Starting state
+
+HEAD c80be5c, clean tree.
+
+### Commands and actual outputs
+
+- `../.tools/pandoc research/paper/manuscript.md -s -t latex` (SPDX line prepended) into `manuscript.tex`: 11 insertions, 12 deletions (author, repository URL, statements). A structured YAML author (name and affiliation) rendered as `\author{true}` in LaTeX, so the single-line form "Mohamed Bechir Kefi, independent researcher" is used.
+- `.venv/bin/python scripts/export_demo_data.py`: "wrote demo/public/data/results.json (1040940 bytes)"; the only changed field is `sources[2].sha256` (the manuscript). `scripts/export_sandbox_fixture.py`: "wrote demo/src/engine.fixture.json (28987 bytes)", unchanged.
+- `.venv/bin/python -m pytest -q`: "158 passed in 3.69s"; `tests/test_demo_export.py` alone: "9 passed in 0.63s". `scripts/check_links.py`: "29 relative links checked; 0 broken".
+- `.venv/bin/python scripts/build_pdfs.py --keep-typ`: manuscript 396582 bytes (17 pages), supplementary 100422 (4), EXP-001 308775 (10), EXP-002 340094 (8), EXP-003 444680 (8). Rendered to PNG at 70 ppi and inspected: manuscript page 1 (author line) and page 16 (sections 10 and 11), supplementary page 1, EXP-001 page 1 (authorship row). pypdf: author metadata "Mohamed Bechir Kefi, independent researcher"; no "/Users" and no "placeholder" in any of the five PDFs. Typst intermediates deleted.
+- Relative toolchain paths in `CLAUDE.md` tested from the repository root: uv 0.9.5, pandoc 3.6.3, typst import ok, node v22.23.3.
+- Demo (Node from `../../helix/.tools/node/bin`, npm cache in the session scratch folder): `npm test` "Tests 20 passed (20)"; `npm run build` ok (JS 263.17 kB); `node tools/a11y_check.mjs dist`: 15 PASS lines and "A11Y-CHECK PASS" (29 of 29 focusable elements, no request leaves the local origin, no horizontal scroll at 360 px).
+- `git grep -n "/Users/"`: 6 lines remain, in `research/protocol.md` (3, frozen), `progress.md` (2) and `research/decision_log.md` (1), both append-only.
+
+### Changed files
+
+`CITATION.cff`, `CLAUDE.md`, `README.md`, `articles/README.md`, `articles/medium.md`, `articles/linkedin.md`, `demo/README.md`, `demo/wrangler.jsonc` (new), `demo/src/App.tsx`, `demo/src/style.css` (footer wraps long addresses), `demo/public/data/results.json`, `research/paper/manuscript.md`, `.tex`, `.pdf`, `research/paper/supplementary.md`, `.pdf`, the three `report.md` and `report.pdf`, `research/publication/author_review.md`, `release_checklist.md`, `reproducibility_report.md`, `research/decision_log.md`, this file.
+
+### Owner items
+
+B15 articles, B16 full-text review and sign-off (with R-EVOLVE-1), B18 release. No box ticked.
+
+### Next action
+
+The owner's review; push and demo deployment by the coordinator on the owner's word. No push from this session.

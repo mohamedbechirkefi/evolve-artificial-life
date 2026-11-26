@@ -8,8 +8,8 @@
 | Experiment | EXP-002 |
 | Status | **Confirmatory (secondary, estimation-focused), complete** (150 of 150 runs as committed, 0 failed, 0 retried). Contains a contradicting result under the protocol's rule (owner's classification, D-012). |
 | Date of runs | 2026-11-24T23:35:03Z to 2026-11-24T23:40:48Z (UTC; 2026-11-25 local time) |
-| Report version | 1.2 (M6, 2026-11-25: section 3 citation wording updated after the full texts were consulted; no number changed). 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
-| Authorship | Mohamed Bechir Kefi (approved C3, no affiliation). An AI system was used as a research and development assistant; it is not an author. |
+| Report version | 1.3 (2026-11-26: authorship line per the owner's answers; no number changed). 1.2 (M6, 2026-11-25: section 3 citation wording updated after the full texts were consulted; no number changed). 1.1 (M4 evidence audit, 2026-11-25: citation wording corrected to abstract-level statements; no number changed). 1.0 (M3) was written from the committed results after the owner's approval of 2026-11-25, D-012 |
+| Authorship | Mohamed Bechir Kefi, independent researcher (owner, 2026-11-26, decision sheet, B3, which replaces the C3 form without affiliation). An AI system was used as a research and development assistant; it is not an author. |
 | Protocol | `research/experiments/EXP-002/protocol.md` v1.0, SHA-256 40003226ba2ce3fbb3d8aac219a1028aee5a00e7d9dc0381b133aeedb3c419d4; main protocol SHA-256 3543a6fdf886c3c6fa0588344353eeb715e7706800884b165c2fe6378daa1e85 |
 | Config | `experiments/configs/EXP-002.json`, file SHA-256 21c40e42e10e6fd482dfb813f65fbe1e3cdb6aa5492752005cdbaeb8e54d9248, canonical hash e3fba26c8d9fd510df3a3f5f3c0dfca69ad21d5caf137b63eb3f283350c208d4 |
 | Provenance revision | 5d39c9bf1eae7356b1fa837642e02e4bde68e186 (clean tree; the same revision as EXP-001) |

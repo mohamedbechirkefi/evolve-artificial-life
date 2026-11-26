@@ -1,7 +1,7 @@
 ---
 title: "Evolutionary selection versus independent random search at equal evaluation budgets in a simulated foraging grid: a preregistered paired comparison with ablations and a sensitivity analysis"
 subtitle: "Independent research manuscript / preprint draft, not peer-reviewed. Simulation study."
-author: "Mohamed Bechir Kefi"
+author: "Mohamed Bechir Kefi, independent researcher"
 date: "Draft v1.0 (M4 synthesis after the second review pass), 2026-11-25"
 ---
 
@@ -242,11 +242,11 @@ Within this simulation, at an equal budget of 2,000 policy evaluations with five
 
 # 10. Data and code availability
 
-All code, configurations, frozen protocols, raw per-run results and analysis outputs are in this repository: `src/evolve/` (engine), `experiments/configs/` (frozen configs), `research/protocol.md` and `research/experiments/EXP-NNN/` (protocols, reports, copies of tables and figures), `results/confirmatory/EXP-NNN/` (raw runs, manifests, provenance, frozen analysis) and `research/publication/` (artifact manifest, audits). A confirmatory matrix is reproduced with `./scripts/evolve run --config experiments/configs/EXP-NNN.json`, the report with `./scripts/evolve report --results results/confirmatory/EXP-NNN` and the frozen analysis with `.venv/bin/python scripts/analyse_frozen.py EXP-NNN`. Public repository URL: [placeholder, not published; release requires the owner's approval].
+All code, configurations, frozen protocols, raw per-run results and analysis outputs are in this repository: `src/evolve/` (engine), `experiments/configs/` (frozen configs), `research/protocol.md` and `research/experiments/EXP-NNN/` (protocols, reports, copies of tables and figures), `results/confirmatory/EXP-NNN/` (raw runs, manifests, provenance, frozen analysis) and `research/publication/` (artifact manifest, audits). A confirmatory matrix is reproduced with `./scripts/evolve run --config experiments/configs/EXP-NNN.json`, the report with `./scripts/evolve report --results results/confirmatory/EXP-NNN` and the frozen analysis with `.venv/bin/python scripts/analyse_frozen.py EXP-NNN`. Public repository: <https://github.com/mohamedbechirkefi/evolve-artificial-life>.
 
 # 11. Funding, competing interests and AI assistance
 
-Funding: none declared [to be confirmed by the owner]. Competing interests: none declared [to be confirmed by the owner]. AI assistance: an AI system (Claude, Anthropic) was used as a research and development assistant for code, tests, protocol drafting, analysis scripts, reports and this manuscript, under the author's direction. The author approved the protocol freeze, the amendments and every post-run classification (D-010, D-012). Every number was checked against committed result files by a scripted audit (`scripts/audit_numbers.py`). The AI system is not an author, and its review passes are internal quality control, not peer review.
+Funding: No funding was received. Competing interests: The author declares no competing interests. AI assistance: an AI system (Claude, Anthropic) was used as a research and development assistant for code, tests, protocol drafting, analysis scripts, reports and this manuscript, under the author's direction. The author approved the protocol freeze, the amendments and every post-run classification (D-010, D-012). Every number was checked against committed result files by a scripted audit (`scripts/audit_numbers.py`). The AI system is not an author, and its review passes are internal quality control, not peer review.
 
 # References
 
