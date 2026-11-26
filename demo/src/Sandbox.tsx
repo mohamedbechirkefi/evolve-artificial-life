@@ -114,7 +114,7 @@ export function Sandbox() {
             <option value={1}>K = 1 fixed environment</option>
           </select>
         </label>
-        <button type="button" onClick={run} disabled={running}>Run sandbox</button>
+        <button type="button" className="primary" onClick={run} disabled={running}>Run sandbox</button>
         <button type="button" onClick={cancel} disabled={!running}>Cancel</button>
         <button type="button" onClick={reset}>Reset</button>
       </div>

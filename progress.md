@@ -359,3 +359,31 @@ B15 articles, B16 full-text review and sign-off (with R-EVOLVE-1), B18 release. 
 ### Next action
 
 The owner's review; push and demo deployment by the coordinator on the owner's word. No push from this session.
+
+## 2026-11-26: demo brand identity, motion and UI redesign (owner request)
+
+Authority: owner, 2026-11-26 ("each website unique and branded, animations, transitions, premium UI/UX"). Brief: `labs/_shared/DEMO-BRAND-brief.md`. No number, result, exported data, fixture, test or test expectation changed.
+
+### What changed
+
+- `demo/DESIGN.md` (new): plan and its review against the generated-page tells. Direction: the petri dish and the field notebook (pale green computation paper, blue-black ink, agar plate, one stain per arm: crystal violet EVO, safranin RS, methylene blue NOSEL).
+- Fonts (Fontsource, `npm_config_before=2026-11-12`, `--save-exact`): `@fontsource/im-fell-english` 5.3.0 (latin 400) and `@fontsource/alegreya-sans` 5.3.0 (latin 400, 500, 700), both OFL 1.1. IM Fell has old-style figures only, so every h3 (ids, sigma values) is set in Alegreya Sans with lining figures.
+- Brand files in `demo/public/brand/`: mark, lockup (wordmark drawn as paths from IM Fell English with fontTools), light variants, favicon SVG and 32 px PNG, Open Graph image 1200 x 630. `svg_audit.py`: mark 100/100, no issues; lockup 92/100 with one warning (940 anchors, from the inked outlines of IM Fell; kept deliberately).
+- `demo/index.html`: title, description, theme colour, icons, Open Graph tags.
+- `demo/src/Hero.tsx` (new): hero plate stack, labelled "Illustration, not study data", no number. `demo/src/motion.tsx` (new): sliding section underline and once-only chart draw-in. `App.tsx`: sticky bar with the mark, hero with the question and a one-sentence answer built from the EXP-001 and EXP-003 headline estimates in `results.json`, the three findings as rows on one shared axis, footer with repository, manuscript, labs index, licence, AI-use and font credits. `charts.tsx`: series wrapped in a `<g class="series">` for the draw-in. `Sandbox.tsx`: Run button gets the primary style (text unchanged). `style.css` rewritten.
+- No test markup had to be adapted.
+
+### Commands and actual outputs
+
+- `npm test`: "Test Files 2 passed (2)", "Tests 20 passed (20)".
+- `npm run build`: built; JS 269.54 kB (gzip 84.72 kB), CSS 15.68 kB (gzip 4.47 kB), four woff2 files 131.5 kB in total.
+- `node tools/a11y_check.mjs dist`: 15 PASS lines, "A11Y-CHECK PASS" (32 of 32 focusable elements reached; 12 of 12 sandbox controls after a run).
+- `.venv/bin/python -m pytest tests/test_demo_export.py -q`: "9 passed".
+- Bytes a visitor loads at rest (uncompressed): about 1.49 MB, of which `data/results.json` is 1,040,940 bytes (unchanged); the previous page was about 1.33 MB uncompressed. `og.png` (136,881 bytes) is fetched only by link previews.
+- Screenshots (headless Chrome, 1440 px desktop and a 390 px iframe) reviewed in two critique passes; fixes: old-style figures in headings (EXP-001 read as "EXP-oor"), plate labels crossing the rim, pill badges wrapping on phones, row headers too narrow, the italic display font dropped to save 58 kB, a fade mask added to the scrolling phone navigation.
+
+- Follow-up in the same session: the section underline observed only direct children of `main`, so it never saw the result sections mounted inside the wrapper; the observer now watches the subtree. Re-run after the fix: `npm test` 20 passed, build ok, "A11Y-CHECK PASS".
+
+### Next action
+
+The coordinator pushes and deploys on the owner's word. No push from this session.

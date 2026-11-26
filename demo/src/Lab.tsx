@@ -4,6 +4,7 @@
 // generation by generation. Every value comes from results.json.
 import { useEffect, useRef, useState } from "react";
 import { AncestryChart, ARM_STYLE, CurvesChart } from "./charts";
+import { Reveal } from "./motion";
 import type { Results } from "./results";
 
 export function Lab({ r }: { r: Results }) {
@@ -88,6 +89,7 @@ export function Lab({ r }: { r: Results }) {
       <div className="lab-grid">
         <div>
           <h3>Fitness curves, EXP-001 arms</h3>
+          <Reveal>
           <CurvesChart
             title="Best-so-far training fitness against evaluations for RS, NOSEL and EVO in EXP-001: EVO rises far above RS, NOSEL stays lowest."
             series={toSeries(exp1)}
@@ -95,9 +97,11 @@ export function Lab({ r }: { r: Results }) {
             cursor={cursor}
             extra={inPanel1 ? [seedLine] : []}
           />
+          </Reveal>
         </div>
         <div>
           <h3>Fitness curves, mutation strength (EXP-002)</h3>
+          <Reveal>
           <CurvesChart
             title="Best-so-far training fitness for sigma 0, 0.02, 0.1 and 0.5 in EXP-002: sigma 0.5 ends highest, above the frozen sigma 0.1."
             series={toSeries(exp2)}
@@ -105,6 +109,7 @@ export function Lab({ r }: { r: Results }) {
             cursor={cursor}
             extra={inPanel1 ? [] : [seedLine]}
           />
+          </Reveal>
         </div>
       </div>
       <p className="note">

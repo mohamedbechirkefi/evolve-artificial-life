@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: LicenseRef-EVOLVE-NC-Research-1.0 -->
 # demo/
 
-Static offline research page for EVOLVE (M5): TypeScript, React and Vite from the shared lab template, versions pinned in `package-lock.json`, charts hand-written in SVG, no chart library, no font, image or script from any other host, no analytics and nothing collected from visitors.
+Static offline research page for EVOLVE (M5): TypeScript, React and Vite from the shared lab template, versions pinned in `package-lock.json`, charts hand-written in SVG, no chart library, no font, image or script from any other host, no analytics and nothing collected from visitors. Its brand, typography and motion (owner request of 2026-11-26) are planned in `DESIGN.md`: the petri dish and the field notebook.
 
 ## What it shows
 
@@ -29,3 +29,16 @@ The checker serves `dist/` locally and checks: only same-origin requests, result
 ## Hosting
 
 The built page (`dist/`) is hosted at https://evolve-artificial-life.kefimohamedbechir.workers.dev as Cloudflare Workers static assets on the free plan, with no Worker script (`wrangler.jsonc` names the assets folder only). The deployment is made by the lab coordinator, not by any script of this repository (owner, 2026-11-26, decision sheet, B2).
+
+## Brand files
+
+`public/brand/`: `evolve-mark.svg` (the mark: a culture plate holding a selected lineage), `evolve-lockup.svg` (mark and wordmark, the wordmark drawn as paths from IM Fell English), `-light` variants of both for dark backgrounds, `favicon.svg`, `favicon-32.png` and `og.png` (1200 x 630, rendered from an HTML page with headless Chrome). The hero's plate stack is an illustration drawn from a fixed pseudo-random sequence and is labelled "Illustration, not study data".
+
+## Third-party notes
+
+Fonts are bundled from Fontsource packages (versions pinned in `package.json`) and served from this site:
+
+| Family | Package and version | Licence | Used |
+|---|---|---|---|
+| IM Fell English (Igino Marini) | `@fontsource/im-fell-english` 5.3.0 | SIL Open Font License 1.1 | latin 400: headline, section titles, wordmark |
+| Alegreya Sans (Huerta Tipografica) | `@fontsource/alegreya-sans` 5.3.0 | SIL Open Font License 1.1 | latin 400, 500, 700: body, controls, figures |

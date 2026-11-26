@@ -122,6 +122,7 @@ export function CurvesChart(props: {
           <text x={26} y={(M.t + H - M.b) / 2} textAnchor="middle" className="axis-label" transform={`rotate(-90 26 ${(M.t + H - M.b) / 2})`}>
             {props.yLabel ?? "best-so-far training fitness"}
           </text>
+          <g className="series">
           {series.map((s) => s.q25 && <path key={s.arm + "b"} d={band(s)} className="band" style={{ fill: ARM_STYLE[s.arm]?.color }} />)}
           {series.map((s) => (
             <path key={s.arm} d={path(s.x, s.median)} className="line" style={{ stroke: ARM_STYLE[s.arm]?.color, strokeDasharray: ARM_STYLE[s.arm]?.dash }} />
@@ -129,6 +130,7 @@ export function CurvesChart(props: {
           {extra.map((s) => (
             <path key={"x" + s.arm} d={path(s.x, s.y)} className="line seed" style={{ stroke: ARM_STYLE[s.arm]?.color }} />
           ))}
+          </g>
           {cursor !== undefined && <line x1={sx(cursor)} x2={sx(cursor)} y1={M.t} y2={H - M.b} className="cursor" />}
           {hover !== null && <line x1={sx(hover)} x2={sx(hover)} y1={M.t} y2={H - M.b} className="crosshair" />}
           <rect x={M.l} y={M.t} width={W - M.l - M.r} height={H - M.t - M.b} fill="transparent" />

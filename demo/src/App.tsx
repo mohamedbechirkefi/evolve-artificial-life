@@ -4,6 +4,8 @@ import { AxisStrip, domainOf, IntervalStrip, KIND_LABEL } from "./charts";
 import { Lab } from "./Lab";
 import { fmtEstimate, fmtInterval, loadResults, ResultsError, type Estimate, type Results } from "./results";
 import { Sandbox } from "./Sandbox";
+import { PlateStack } from "./Hero";
+import { SectionNav } from "./motion";
 
 type State = { kind: "loading" } | { kind: "error"; message: string } | { kind: "ready"; results: Results };
 
@@ -18,44 +20,79 @@ export function App() {
       );
   }, []);
 
+  const answer = state.kind === "ready" ? headlineOf(state.results, "EXP-001") : null;
+  const k1 = state.kind === "ready" ? headlineOf(state.results, "EXP-003") : null;
+
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <header className="site">
-        <div className="wrap">
-          <p className="kicker">EVOLVE · a simulation study · preprint draft, not peer-reviewed</p>
-          <h1>Does selection beat random search at an equal budget, and how robust is it?</h1>
-          <p className="dek">Inherited, mutated policies under selection in a simulated foraging grid. Simulation only: not evidence about biological evolution or general intelligence.</p>
-          <nav aria-label="Sections">
-            <a href="#overview">Overview</a>
-            <a href="#lab">Replay</a>
-            <a href="#sandbox">Sandbox</a>
-            <a href="#results">Results</a>
-            <a href="#assumptions">Assumptions</a>
-            <a href="#method">Method and limitations</a>
-          </nav>
+      <header className="bar">
+        <div className="bar-in">
+          <a className="brand" href="#top" aria-label="EVOLVE, back to the top">
+            <img src="./brand/evolve-mark.svg" alt="" width="30" height="30" />
+            <span className="wordmark">Evolve</span>
+          </a>
+          <SectionNav />
         </div>
       </header>
-      <main id="main" className="wrap">
-        {state.kind === "loading" && <p role="status">Loading the published results.</p>}
-        {state.kind === "error" && (
-          <div role="alert" className="panel error">
-            <h2>Results unavailable</h2>
-            <p>The published results file failed validation, so no numbers are shown.</p>
-            <p><code>{state.message}</code></p>
+      <main id="main">
+        <div className="hero" id="top">
+          <div className="wrap hero-grid">
+            <div className="hero-text">
+              <p className="hero-status">EVOLVE, a simulation study. Preprint draft, not peer-reviewed.</p>
+              <h1>Does selection beat random search at an equal budget, and how robust is it?</h1>
+              {answer && k1 ? (
+                <p className="answer">
+                  In this simulation, yes at the frozen setting: at 2,000 evaluations EVO minus RS was{" "}
+                  <span className="fig">{fmtEstimate(answer)}</span> {answer.unit} on held-out layouts (95% CI{" "}
+                  <span className="fig">{fmtInterval(answer)}</span>, {answer.n_pairs} paired run seeds). With one fixed training
+                  environment the advantage was inconclusive (<span className="fig">{fmtEstimate(k1)}</span>, CI{" "}
+                  <span className="fig">{fmtInterval(k1)}</span>).
+                </p>
+              ) : null}
+              <p className="dek">Inherited, mutated policies under selection in a simulated foraging grid. Simulation only: not evidence about biological evolution or general intelligence.</p>
+              <p className="byline">Mohamed Bechir Kefi, independent researcher</p>
+            </div>
+            <PlateStack />
           </div>
-        )}
-        {state.kind === "ready" ? <Published r={state.results} /> : <Sandbox />}
+        </div>
+        <div className="wrap">
+          {state.kind === "loading" && <p role="status">Loading the published results.</p>}
+          {state.kind === "error" && (
+            <div role="alert" className="panel error">
+              <h2>Results unavailable</h2>
+              <p>The published results file failed validation, so no numbers are shown.</p>
+              <p><code>{state.message}</code></p>
+            </div>
+          )}
+          {state.kind === "ready" ? <Published r={state.results} /> : <Sandbox />}
+        </div>
       </main>
       <footer className="site">
-        <div className="wrap">
-          <p>Runs offline after the first load. No data about visitors is collected, stored or sent anywhere; the page makes no request to any other host.</p>
-          <p>Mohamed Bechir Kefi, independent researcher. Repository: <a href="https://github.com/mohamedbechirkefi/evolve-artificial-life">https://github.com/mohamedbechirkefi/evolve-artificial-life</a>. Demo: <a href="https://evolve-artificial-life.kefimohamedbechir.workers.dev">https://evolve-artificial-life.kefimohamedbechir.workers.dev</a>.</p>
-          <p>Licence: EVOLVE Source-Available Non-Commercial Research License v1.0 (custom, not OSI-approved). An AI system was used as a research and development assistant; it is not an author.</p>
+        <div className="wrap foot-grid">
+          <div className="foot-brand">
+            <img src="./brand/evolve-lockup.svg" alt="EVOLVE" width="132" height="40" />
+            <p>Mohamed Bechir Kefi, independent researcher.</p>
+          </div>
+          <ul className="foot-links">
+            <li><a href="https://github.com/mohamedbechirkefi/evolve-artificial-life">Repository on GitHub</a></li>
+            <li><a href="https://github.com/mohamedbechirkefi/evolve-artificial-life/blob/main/research/paper/manuscript.md">Manuscript (preprint draft)</a></li>
+            <li><a href="https://labs.kefimohamedbechir.workers.dev">All lab studies</a></li>
+            <li><a href="https://evolve-artificial-life.kefimohamedbechir.workers.dev">This demo: evolve-artificial-life.kefimohamedbechir.workers.dev</a></li>
+          </ul>
+          <div className="foot-notes">
+            <p>Runs offline after the first load. No data about visitors is collected, stored or sent anywhere; the page makes no request to any other host.</p>
+            <p>Licence: EVOLVE Source-Available Non-Commercial Research License v1.0 (custom, not OSI-approved). An AI system was used as a research and development assistant; it is not an author.</p>
+            <p>Type: IM Fell English (Igino Marini) and Alegreya Sans (Huerta Tipogr&aacute;fica), both under the SIL Open Font License 1.1, served from this site.</p>
+          </div>
         </div>
       </footer>
     </>
   );
+}
+
+function headlineOf(r: Results, id: string): Estimate | null {
+  return r.experiments.find((e) => e.id === id)?.estimates.find((x) => x.headline) ?? null;
 }
 
 const HEADLINE_TEXT: Record<string, { title: string; plain: string }> = {
@@ -77,15 +114,18 @@ function Headline({ id, e, domain }: { id: string; e: Estimate; domain: [number,
   const t = HEADLINE_TEXT[id];
   return (
     <article className={`finding kind-${e.kind}`} aria-labelledby={`hl-${id}`}>
-      <p className="finding-kind">{KIND_LABEL[e.kind]} · {id}</p>
-      <h3 id={`hl-${id}`}>{t.title}</h3>
-      <p className="big">
-        <span className="num">{fmtEstimate(e)}</span> <span className="ci">95% CI {fmtInterval(e)}</span>
-      </p>
-      <p className="meta">{e.label}; {e.unit}; n = {e.n_pairs} paired run seeds</p>
-      <IntervalStrip e={e} domain={domain} />
-      <AxisStrip domain={domain} />
-      <p>{t.plain}</p>
+      <div className="finding-text">
+        <p className="finding-kind"><span className={`tag kind-${e.kind}`}>{KIND_LABEL[e.kind]}</span> {id}</p>
+        <h3 id={`hl-${id}`}>{t.title}</h3>
+        <p className="big">
+          <span className="num">{fmtEstimate(e)}</span> <span className="ci">95% CI {fmtInterval(e)}</span>
+        </p>
+        <p className="meta">{e.label}; {e.unit}; n = {e.n_pairs} paired run seeds</p>
+        <p className="plain">{t.plain}</p>
+      </div>
+      <div className="finding-strip">
+        <IntervalStrip e={e} domain={domain} />
+      </div>
     </article>
   );
 }
@@ -99,7 +139,7 @@ function Published({ r }: { r: Results }) {
   return (
     <>
       <section id="overview" aria-labelledby="h-overview">
-        <h2 id="h-overview">Overview</h2>
+        <h2 id="h-overview">Three findings on one plate</h2>
         <p className="status-label">{r.status_label}</p>
         <p className="question">{r.question}</p>
         <p>
@@ -110,6 +150,10 @@ function Published({ r }: { r: Results }) {
         </p>
         <div className="findings">
           {headlines.map(({ id, x }) => <Headline key={id} id={id} e={x} domain={domain} />)}
+          <div className="findings-axis" aria-hidden="true">
+            <span className="axis-note">difference in held-out food items per episode; dashed line: no difference</span>
+            <AxisStrip domain={domain} />
+          </div>
         </div>
         <p className="note">
           Intervals: 95 percent percentile bootstrap over run seeds (10,000 resamples). Filled point: the interval excludes 0; hollow
